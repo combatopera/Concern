@@ -1,0 +1,19 @@
+import sys, re, subprocess, os
+
+indent = re.compile(r'^\s+')
+
+def main():
+    onebasedrow, = sys.argv[1:]
+    start = int(onebasedrow) - 1
+    end = start + 1
+    lines = sys.stdin.read().splitlines()
+    while indent.search(lines[start]) is not None:
+        start -= 1
+    n = len(lines)
+    while end < n and indent.search(lines[end]) is not None:
+        end += 1
+    text = ''.join(lines[start:end]) + os.linesep
+    subprocess.check_call(['screen', '-S', $"$(sessionName), '-p', $"$(tidal windowName), '-X', 'stuff', text])
+
+if '__main__' == __name__:
+    main()

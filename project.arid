@@ -1,0 +1,2 @@
+projects += aridity
+pyversions += 3

@@ -1,0 +1,34 @@
+tidalstudio
+    tidal
+        height = 10
+        windowName = tidal
+        channels
+            * port = 57120
+            1 n = 1
+            2 n = 2
+            3 n = 3
+            4 n = 4
+            5 n = 5
+            6 n = 6
+            7 n = 7
+            8 n = 8
+            9 n = 9
+    sessionName = tidalstudio
+    synths
+        * windowName = synth
+        * env = $fork()
+        sc
+            executable = sclang
+            stdin = SuperDirt.start(path: $scstr($(samplesDir)$(/)*))$(EOL)
+            windowName = SuperDirt
+            samplesDir = $toSamplesDir($(samples))
+    sendKey = `
+    synthCommand = bash -c $.(while true; do
+        $join$map($(env) k v $(k)=$(v)$.( ))$(executable)
+        echo "Synth exited with status: $'($)?" >&2
+        read -p 'Press enter to restart it.' || break
+    done)
+vimrc
+    systemPath = /usr/share/vim/vimrc
+    userPath = ~/.vimrc
+. $(~)$(/).settings.arid

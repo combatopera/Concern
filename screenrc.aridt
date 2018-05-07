@@ -1,0 +1,14 @@
+vbell off
+split
+focus
+resize $(tidal height)
+screen ghci -XOverloadedStrings $"(-i$(tidal home)) -ghci-script $(BootTidal)
+title $(tidal windowName)
+focus
+$join$map(
+    $(synths)
+    $.[screen $join($map($,(synthCommand) w $"$(w)) $.( ))
+title $(windowName)
+$try($.[stuff $"$(stdin)
+] $.[])])screen vim -u $(vimrcPath) $join($map($,(vimArgs) a $"$(a)) $.( ))
+title vim

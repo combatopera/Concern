@@ -1,0 +1,15 @@
+:set prompt ""
+:load Sound.Tidal.Context
+
+(cps, getNow) <- bpsUtils
+
+$join$map(
+    $(channels)
+    $.[(d$(n),t$(n)) <- superDirtSetters getNow $(port) $(n)
+])
+
+let bps x = cps (x/2)
+let hush = mapM_ ($'($) silence) [$join($map($(channels) d$(n)) ,)]
+let solo = (>>) hush
+
+:set prompt "tidal> "
