@@ -3,17 +3,20 @@
 import tempfile, subprocess, os, sys, aridity
 from aridimpl.model import Function, Text
 
-def main():
-    studiodir = os.path.dirname(os.path.realpath(__file__))
-    args = sys.argv[1:]
+studiodir = os.path.dirname(os.path.realpath(__file__))
+
+def projectconfpath(args):
     projectconfname = 'studioproject.arid'
     if args:
         projectdir, = args
-        projectconf = os.path.join(os.path.abspath(projectdir), projectconfname)
+        return os.path.join(os.path.abspath(projectdir), projectconfname)
     elif os.path.exists(projectconfname):
-        projectconf = os.path.abspath(projectconfname)
+        return os.path.abspath(projectconfname)
     else:
-        projectconf = os.path.join(studiodir, projectconfname)
+        return os.path.join(studiodir, projectconfname)
+
+def main():
+    projectconf = projectconfpath(sys.argv[1:])
     configdir = os.path.join(os.path.expanduser('~'), '.tidalstudio')
     os.makedirs(configdir, exist_ok = True)
     with tempfile.TemporaryDirectory(dir = configdir) as tempdir:
