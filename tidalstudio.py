@@ -14,7 +14,6 @@ def main():
         projectconf = os.path.abspath(projectconfname)
     else:
         projectconf = os.path.join(studiodir, projectconfname)
-    tidaldir = os.path.dirname(studiodir)
     configdir = os.path.join(os.path.expanduser('~'), '.tidalstudio')
     os.makedirs(configdir, exist_ok = True)
     with tempfile.TemporaryDirectory(dir = configdir) as tempdir:
@@ -39,7 +38,6 @@ def main():
             printf("cd %s", studiodir)
             printf('. tidalstudio.arid')
             printf('tidalstudio')
-            printf("\ttidal home = %s", tidaldir)
             printf("\tvimrcPath = %s", vimrc)
             printf("\tBootTidal = %s", boottidal)
             printf("\tsendblock = %s", sendblock)
