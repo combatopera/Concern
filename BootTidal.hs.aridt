@@ -1,7 +1,8 @@
+:set -XOverloadedStrings
 :set prompt ""
 :load Sound.Tidal.Context
 
-(cps, getNow) <- bpsUtils
+(cps, nudger, getNow) <- cpsUtils'
 
 $join$map(
     $(channels)
