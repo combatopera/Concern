@@ -1,7 +1,6 @@
 #!/usr/bin/env pyven
 
 import tempfile, subprocess, os, sys, aridity
-from aridimpl.model import Function, Text
 
 studiodir = os.path.dirname(os.path.realpath(__file__))
 
@@ -24,17 +23,6 @@ def main():
         sendblock = os.path.join(tempdir, 'sendblock.py')
         screenrc = os.path.join(tempdir, 'screenrc')
         context = aridity.Context()
-        def tosamplesdir(context, samples):
-            samplesdir = os.path.join(tempdir, 'Dirt-Samples')
-            os.mkdir(samplesdir)
-            for name, paths in samples.resolve(context).unravel().items():
-                if not hasattr(paths, 'items'): continue # TODO: This is a hack.
-                path = os.path.join(samplesdir, name)
-                os.mkdir(path)
-                for target in paths:
-                    os.symlink(target, os.path.join(path, os.path.basename(target)))
-            return Text(samplesdir)
-        context['tidalstudio', 'toSamplesDir'] = Function(tosamplesdir)
         with aridity.Repl(context) as repl:
             printf = repl.printf
             printf("cd %s", studiodir)
