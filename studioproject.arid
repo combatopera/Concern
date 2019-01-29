@@ -1,1 +1,1 @@
-vimArgs = $/($(tidal home) tutorial tutorial.md)
+vimArgs = $/($(foxdot home) FoxDot demo)
