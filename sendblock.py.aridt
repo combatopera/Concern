@@ -1,4 +1,4 @@
-import sys, subprocess, os
+import sys, os
 
 def main():
     onebasedrow, = sys.argv[1:]
@@ -12,7 +12,8 @@ def main():
     while last + 1 < n and lines[last + 1]:
         last += 1
     text = ''.join(l + os.linesep for l in lines[first:last + 1] + ['']) # End with a blank line.
-    subprocess.check_call(['screen', '-S', $"$(sessionName), '-p', $"$(foxdot windowName), '-X', 'stuff', text])
+    argv = 'screen', '-S', $"$(sessionName), '-p', $"$(foxdot windowName), '-X', 'stuff', text
+    os.execvp(argv[0], argv)
 
 if '__main__' == __name__:
     main()
