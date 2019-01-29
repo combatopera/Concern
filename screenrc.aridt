@@ -2,7 +2,7 @@ vbell off
 split
 focus
 resize $(tidal height)
-screen env $"(PYTHONPATH=$(FoxDot home)) python3 -m FoxDot --pipe
+screen env $"(PYTHONPATH=$(foxdot home)) python3 -m FoxDot --pipe
 title $(tidal windowName)
 focus
 $join$map(
