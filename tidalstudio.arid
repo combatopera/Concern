@@ -1,7 +1,7 @@
 tidalstudio
-    tidal
+    foxdot
         height = 10
-        windowName = tidal
+        windowName = foxdot
     sessionName = tidalstudio
     synths
         * windowName = synth
