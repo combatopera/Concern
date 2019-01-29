@@ -1,18 +1,17 @@
-import sys, re, subprocess, os
-
-indent = re.compile(r'^\s+')
+import sys, subprocess, os
 
 def main():
     onebasedrow, = sys.argv[1:]
-    start = int(onebasedrow) - 1
-    end = start + 1
+    first = last = int(onebasedrow) - 1
     lines = sys.stdin.read().splitlines()
-    while indent.search(lines[start]) is not None:
-        start -= 1
+    if not lines[first]:
+        return
+    while 0 <= first - 1 and lines[first - 1]:
+        first -= 1
     n = len(lines)
-    while end < n and indent.search(lines[end]) is not None:
-        end += 1
-    text = ''.join(lines[start:end]) + os.linesep
+    while last + 1 < n and lines[last + 1]:
+        last += 1
+    text = ''.join(l + os.linesep for l in lines[first:last + 1] + ['']) # End with a blank line.
     subprocess.check_call(['screen', '-S', $"$(sessionName), '-p', $"$(foxdot windowName), '-X', 'stuff', text])
 
 if '__main__' == __name__:
