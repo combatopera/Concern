@@ -2,7 +2,7 @@ vbell off
 split
 focus
 resize $(tidal height)
-screen ghci $"(-i$(tidal home)) -ghci-script $(BootTidal)
+screen $"$(FoxDot executable)
 title $(tidal windowName)
 focus
 $join$map(
