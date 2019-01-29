@@ -17,11 +17,6 @@ tidalstudio
     synths
         * windowName = synth
         * env = $fork()
-        sc
-            executable = sclang
-            stdin = SuperDirt.start(path: $scstr($(samplesDir)$(/)*))$(EOL)
-            windowName = SuperDirt
-            samplesDir = $toSamplesDir($(samples))
     sendKey = `
     synthCommand = bash -c $.(while true; do
         $join$map($(env) k v $(k)=$(v)$.( ))$(executable)

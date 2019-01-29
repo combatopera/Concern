@@ -1,2 +1,1 @@
 vimArgs = $/($(tidal home) tutorial tutorial.md)
-synths sc samplesDir = $/($(~) .local share SuperCollider downloaded-quarks Dirt-Samples)
