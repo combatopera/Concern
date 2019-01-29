@@ -1,4 +1,3 @@
 source $(vimrc systemPath)
-autocmd BufRead,BufNewFile *.tidal setfiletype haskell.tidal
 nnoremap $(sendKey) :exec 'silent w !python3 -S $(sendblock)' line('.')<CR>
 source $(vimrc userPath)
