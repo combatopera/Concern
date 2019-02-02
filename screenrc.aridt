@@ -1,14 +1,14 @@
 vbell off
 split
-focus
-resize $(foxdot height)
-screen env $"(PYTHONPATH=$(foxdot home)) python3 -m FoxDot --no-startup --pipe
-title $(foxdot windowName)
-focus
 $join$map(
     $(synths)
     $.[screen $join($map($,(synthCommand) w $"$(w)) $.( ))
 title $(windowName)
 $try($.[stuff $"$(stdin)
-] $.[])])screen vim -u $(vimrcPath) $join($map($,(vimArgs) a $"$(a)) $.( ))
+] $.[])])focus
+resize $(foxdot height)
+screen env $"(PYTHONPATH=$(foxdot home)) python3 -m FoxDot --no-startup --pipe
+title $(foxdot windowName)
+focus
+screen vim -u $(vimrcPath) $join($map($,(vimArgs) a $"$(a)) $.( ))
 title vim
