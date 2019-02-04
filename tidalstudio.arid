@@ -12,6 +12,7 @@ tidalstudio
         echo "Synth exited with status: $'($)?" >&2
         read -p 'Press enter to restart it.' || break
     done)
+    vimArgs = $/($(foxdot home) FoxDot demo)
 vimrc
     systemPath = /usr/share/vim/vimrc
     userPath = ~/.vimrc
