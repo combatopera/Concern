@@ -7,9 +7,10 @@ def main():
     configdir = Path.home() / '.tidalstudio'
     configdir.mkdir(parents = True, exist_ok = True)
     with tempfile.TemporaryDirectory(dir = configdir) as tempdir:
-        vimrc = os.path.join(tempdir, 'vimrc')
-        sendblock = os.path.join(tempdir, 'sendblock.py')
-        screenrc = os.path.join(tempdir, 'screenrc')
+        tempdir = Path(tempdir)
+        vimrc = tempdir / 'vimrc'
+        sendblock = tempdir / 'sendblock.py'
+        screenrc = tempdir / 'screenrc'
         context = aridity.Context()
         with aridity.Repl(context) as repl:
             printf = repl.printf
