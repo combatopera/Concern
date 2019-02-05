@@ -19,6 +19,11 @@ def main():
             printf('tidalstudio')
             printf("\tvimrcPath = %s", vimrc)
             printf("\tsendblock = %s", sendblock)
+            args = sys.argv[1:]
+            if args:
+                printf('\tvimArgs := $list()')
+                for arg in args:
+                    printf("\tvimArgs += %s", arg)
             printf("redirect %s", vimrc)
             printf('tidalstudio < vimrc.aridt')
             printf("redirect %s", sendblock)
