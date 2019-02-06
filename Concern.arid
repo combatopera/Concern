@@ -18,7 +18,7 @@
 Concern
     foxdot
         size = 40
-        windowName = foxdot
+        windowName = FoxDot
     sessionName = Concern
     synths
         * windowName = synth

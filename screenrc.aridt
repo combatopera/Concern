@@ -11,4 +11,4 @@ screen env $"(PYTHONPATH=$(foxdot home)) python3 -m FoxDot --no-startup --pipe
 title $(foxdot windowName)
 focus
 screen vim -u $(vimrcPath) $join($map($(vimArgs) a $"$(a)) $.( ))
-title vim
+title Vim
