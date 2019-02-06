@@ -1,12 +1,12 @@
 vbell off
-split
+split -v
 $join$map(
     $(synths)
     $.[screen $join($map($,(synthCommand) w $"$(w)) $.( ))
 title $(windowName)
 $try($.[stuff $"$(stdin)
 ] $.[])])focus
-resize $(foxdot height)
+resize $(foxdot size)
 screen env $"(PYTHONPATH=$(foxdot home)) python3 -m FoxDot --no-startup --pipe
 title $(foxdot windowName)
 focus
