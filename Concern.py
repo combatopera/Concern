@@ -4,7 +4,7 @@ from pathlib import Path
 import tempfile, subprocess, os, sys, aridity
 
 def main():
-    configdir = Path.home() / '.tidalstudio'
+    configdir = Path.home() / '.Concern'
     configdir.mkdir(parents = True, exist_ok = True)
     with tempfile.TemporaryDirectory(dir = configdir) as tempdir:
         tempdir = Path(tempdir)
@@ -15,8 +15,8 @@ def main():
         with aridity.Repl(context) as repl:
             printf = repl.printf
             printf("cd %s", Path(__file__).resolve().parent)
-            printf('. tidalstudio.arid')
-            printf('tidalstudio')
+            printf('. Concern.arid')
+            printf('Concern')
             printf("\tvimrcPath = %s", vimrc)
             printf("\tsendblock = %s", sendblock)
             args = sys.argv[1:]
@@ -25,14 +25,14 @@ def main():
                 for arg in args:
                     printf("\tvimArgs += %s", arg)
             printf("redirect %s", vimrc)
-            printf('tidalstudio < vimrc.aridt')
+            printf('Concern < vimrc.aridt')
             printf("redirect %s", sendblock)
             printf('" = $(pystr)')
-            printf('tidalstudio < sendblock.py.aridt')
+            printf('Concern < sendblock.py.aridt')
             printf("redirect %s", screenrc)
             printf('" = $(screenstr)')
-            printf('tidalstudio < screenrc.aridt')
-        subprocess.check_call(['screen', '-S', context.resolved('tidalstudio', 'sessionName').value, '-c', screenrc])
+            printf('Concern < screenrc.aridt')
+        subprocess.check_call(['screen', '-S', context.resolved('Concern', 'sessionName').value, '-c', screenrc])
 
 if '__main__' == __name__:
     main()

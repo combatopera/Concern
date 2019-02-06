@@ -1,8 +1,8 @@
-tidalstudio
+Concern
     foxdot
         height = 10
         windowName = foxdot
-    sessionName = tidalstudio
+    sessionName = Concern
     synths
         * windowName = synth
         * env = $fork()
