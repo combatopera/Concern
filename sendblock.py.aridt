@@ -1,5 +1,7 @@
 import sys, os, itertools
 
+pilcrow = '\xb6'
+
 def main():
     onebasedrow, = sys.argv[1:]
     first = last = int(onebasedrow) - 1
@@ -12,7 +14,7 @@ def main():
     while last + 1 < n and lines[last + 1]:
         last += 1
     text = ''.join(l + os.linesep
-            for l in itertools.chain(lines[first:last + 1], [''])) # End with a blank line.
+            for l in itertools.chain(lines[first:last], [lines[last] + pilcrow]))
     argv = 'screen', '-S', $"$(sessionName), '-p', $"$(foxdot windowName), '-X', 'stuff', text
     os.execvp(argv[0], argv)
 
