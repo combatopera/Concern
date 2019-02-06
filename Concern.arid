@@ -21,9 +21,8 @@ Concern
         windowName = FoxDot
         home = $/($(~) projects FoxDot)
     sessionName = Concern
+    env = $fork()
     synths
-        * windowName = synth
-        * env = $fork()
         pym2149
             executable = $/($(~) projects pym2149 foxdot2jack.py)
             windowName = pym2149
