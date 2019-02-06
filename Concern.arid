@@ -19,12 +19,12 @@ Concern
     foxdot
         size = 40
         windowName = FoxDot
-        home = $/($(~) projects FoxDot)
+        home = $/($(cwd) .. FoxDot)
     sessionName = Concern
     env = $fork()
     synths
         pym2149
-            executable = $/($(~) projects pym2149 foxdot2jack.py)
+            executable = $/($(cwd) .. pym2149 foxdot2jack.py)
             windowName = pym2149
     sendKey = `
     synthCommand = bash -c $.(while true; do
