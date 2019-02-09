@@ -15,6 +15,7 @@ def main():
         last += 1
     text = ''.join(l + os.linesep
             for l in itertools.chain(lines[first:last], [lines[last] + pilcrow]))
+    # TODO LATER: Support more than one session.
     argv = 'screen', '-S', $"$(sessionName), '-p', $"$(foxdot windowName), '-X', 'stuff', text
     os.execvp(argv[0], argv)
 
