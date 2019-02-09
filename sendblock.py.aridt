@@ -1,7 +1,8 @@
 import sys, re, itertools, os
 
 indent = re.compile(r'^\s+')
-pilcrow = '\xb6'
+eol = os.linesep
+lasteol = '\xb6' + eol # Pilcrow.
 
 def main():
     onebasedrow, = sys.argv[1:]
@@ -9,17 +10,16 @@ def main():
     end = start + 1
     lines = sys.stdin.read().splitlines()
     if not lines[start]:
-        text = '# Nothing to send.' + pilcrow + os.linesep
+        text = '# Nothing to send.'
     else:
         while 0 <= start - 1 and indent.search(lines[start]) is not None:
             start -= 1
         n = len(lines)
         while end < n and indent.search(lines[end]) is not None:
             end += 1
-        text = ''.join(l + os.linesep
-                for l in itertools.chain(lines[start:end - 1], [lines[end - 1] + pilcrow]))
+        text = eol.join(lines[start:end])
     # TODO LATER: Support more than one session.
-    argv = 'screen', '-S', $"$(sessionName), '-p', $"$(foxdot windowName), '-X', 'stuff', text
+    argv = 'screen', '-S', $"$(sessionName), '-p', $"$(foxdot windowName), '-X', 'stuff', text + lasteol
     os.execvp(argv[0], argv)
 
 if '__main__' == __name__:
