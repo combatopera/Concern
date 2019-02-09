@@ -1,20 +1,23 @@
-import sys, os, itertools
+import sys, re, itertools, os
 
+indent = re.compile(r'^\s+')
 pilcrow = '\xb6'
 
 def main():
     onebasedrow, = sys.argv[1:]
-    first = last = int(onebasedrow) - 1
+    start = int(onebasedrow) - 1
+    end = start + 1
     lines = sys.stdin.read().splitlines()
-    if not lines[first]:
-        return
-    while 0 <= first - 1 and lines[first - 1]:
-        first -= 1
-    n = len(lines)
-    while last + 1 < n and lines[last + 1]:
-        last += 1
-    text = ''.join(l + os.linesep
-            for l in itertools.chain(lines[first:last], [lines[last] + pilcrow]))
+    if not lines[start]:
+        text = '# Nothing to send.' + pilcrow + os.linesep
+    else:
+        while 0 <= start - 1 and indent.search(lines[start]) is not None:
+            start -= 1
+        n = len(lines)
+        while end < n and indent.search(lines[end]) is not None:
+            end += 1
+        text = ''.join(l + os.linesep
+                for l in itertools.chain(lines[start:end - 1], [lines[end - 1] + pilcrow]))
     # TODO LATER: Support more than one session.
     argv = 'screen', '-S', $"$(sessionName), '-p', $"$(foxdot windowName), '-X', 'stuff', text
     os.execvp(argv[0], argv)
