@@ -31,6 +31,7 @@ class with
 
 something else
 \t
+ \t
 last'''
 
 def seq(first, last):
@@ -48,5 +49,6 @@ class TestGetBlock(unittest.TestCase):
             self.assertEqual(clazz, getblock(text, r))
         self.assertEqual('# Nothing to send.\xb6\n', getblock(text, 11))
         self.assertEqual('something else\xb6\n', getblock(text, 12))
-        self.assertEqual('# Nothing to send.\xb6\n', getblock(text, 13))
-        self.assertEqual('last\xb6\n', getblock(text, 14))
+        for r in seq(13, 14):
+            self.assertEqual('# Nothing to send.\xb6\n', getblock(text, r))
+        self.assertEqual('last\xb6\n', getblock(text, 15))
