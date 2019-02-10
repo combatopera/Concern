@@ -15,10 +15,10 @@
 # You should have received a copy of the GNU General Public License
 # along with Concern.  If not, see <http://www.gnu.org/licenses/>.
 
-import re, os
+import re
 
 indent = re.compile(r'^\s+')
-eol = os.linesep
+eol = '\n' # FoxDot uses API so anything is fine.
 lasteol = '\xb6' + eol # Pilcrow.
 
 def getblock(text, onebasedrow):
