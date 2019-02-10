@@ -17,21 +17,30 @@
 
 import re
 
-indent = re.compile(r'^\s+')
+toplevel = re.compile(r'^\S')
+anytext = re.compile(r'\S')
 eol = '\n' # FoxDot uses API so anything is fine.
 lasteol = '\xb6' + eol # Pilcrow.
 
+def istoplevel(line):
+    return toplevel.search(line) is not None
+
+def hastext(line):
+    return anytext.search(line) is not None
+
 def getblock(text, onebasedrow):
-    start = onebasedrow - 1
-    end = start + 1
     lines = text.splitlines()
-    if not lines[start]:
-        text = '# Nothing to send.'
-    else:
-        while 0 <= start - 1 and indent.search(lines[start]) is not None:
-            start -= 1
-        n = len(lines)
-        while end < n and indent.search(lines[end]) is not None:
-            end += 1
-        text = eol.join(lines[start:end])
-    return text + lasteol
+    max = len(lines) - 1
+    first = last = onebasedrow - 1
+    while last < max and not hastext(lines[last]):
+        if istoplevel(lines[last + 1]):
+            return '# Nothing to send.' + lasteol
+        last += 1
+    while last < max and not istoplevel(lines[last + 1]):
+        last += 1
+    while first and not istoplevel(lines[first]):
+        first -= 1
+    lines = [l for l in lines[first:last + 1] if hastext(l)]
+    if not lines:
+        lines = '# Nothing to send.',
+    return eol.join(lines) + lasteol
