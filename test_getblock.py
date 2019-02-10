@@ -53,3 +53,4 @@ class TestGetBlock(unittest.TestCase):
         for _ in range(2):
             self.assertEqual('# Nothing to send.\xb6\n', block())
         self.assertEqual('last\xb6\n', block())
+        self.assertRaises(IndexError, block)
