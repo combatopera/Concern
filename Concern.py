@@ -18,12 +18,13 @@
 # along with Concern.  If not, see <http://www.gnu.org/licenses/>.
 
 from pathlib import Path
-import tempfile, subprocess, sys, aridity
+import tempfile, subprocess, sys, aridity, shutil
 
 def main():
     configdir = Path.home() / '.Concern'
     configdir.mkdir(parents = True, exist_ok = True)
     with tempfile.TemporaryDirectory(dir = configdir) as tempdir:
+        projectdir = Path(__file__).resolve().parent
         tempdir = Path(tempdir)
         vimrc = tempdir / 'vimrc'
         sendblock = tempdir / 'sendblock.py'
@@ -31,7 +32,7 @@ def main():
         context = aridity.Context()
         with aridity.Repl(context) as repl:
             printf = repl.printf
-            printf("cd %s", Path(__file__).resolve().parent)
+            printf("cd %s", projectdir)
             printf('. Concern.arid')
             printf('Concern')
             printf("\tvimrcPath = %s", vimrc)
@@ -49,6 +50,7 @@ def main():
             printf("redirect %s", screenrc)
             printf('" = $(screenstr)')
             printf('Concern < screenrc.aridt')
+        shutil.copy2(projectdir / 'getblock.py', tempdir)
         subprocess.check_call(['screen', '-S', context.resolved('Concern', 'sessionName').value, '-c', screenrc])
 
 if '__main__' == __name__:
