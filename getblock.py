@@ -40,7 +40,4 @@ def getblock(text, onebasedrow):
         last += 1
     while first and not istoplevel(lines[first]):
         first -= 1
-    lines = [l for l in lines[first:last + 1] if hastext(l)]
-    if not lines:
-        lines = '# Nothing to send.',
-    return eol.join(lines) + lasteol
+    return eol.join(l for l in lines[first:last + 1] if hastext(l)) + lasteol
