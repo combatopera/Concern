@@ -34,21 +34,22 @@ something else
  \t
 last'''
 
-def seq(first, last):
-    return range(first, last + 1)
-
 class TestGetBlock(unittest.TestCase):
 
     def test_works(self):
-        self.assertEqual('# Nothing to send.\xb6\n', getblock(text, 1))
-        self.assertEqual('hello\xb6\n', getblock(text, 2))
-        for r in seq(3, 4):
-            self.assertEqual('function with\n indented block\xb6\n', getblock(text, r))
-        clazz = 'class with\n  block after blank\n  \tand its own indented block\n  and back again after a wrong blank\xb6\n'
-        for r in seq(5, 10):
-            self.assertEqual(clazz, getblock(text, r))
-        self.assertEqual('# Nothing to send.\xb6\n', getblock(text, 11))
-        self.assertEqual('something else\xb6\n', getblock(text, 12))
-        for r in seq(13, 14):
-            self.assertEqual('# Nothing to send.\xb6\n', getblock(text, r))
-        self.assertEqual('last\xb6\n', getblock(text, 15))
+        r = 0
+        def block():
+            nonlocal r
+            r += 1
+            return getblock(text, r)
+        self.assertEqual('# Nothing to send.\xb6\n', block())
+        self.assertEqual('hello\xb6\n', block())
+        for _ in range(2):
+            self.assertEqual('function with\n indented block\xb6\n', block())
+        for _ in range(6):
+            self.assertEqual('class with\n  block after blank\n  \tand its own indented block\n  and back again after a wrong blank\xb6\n', block())
+        self.assertEqual('# Nothing to send.\xb6\n', block())
+        self.assertEqual('something else\xb6\n', block())
+        for _ in range(2):
+            self.assertEqual('# Nothing to send.\xb6\n', block())
+        self.assertEqual('last\xb6\n', block())
