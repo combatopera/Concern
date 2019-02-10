@@ -28,7 +28,10 @@ class with
   \tand its own indented block
 \t
   and back again after a wrong blank
-something else'''
+
+something else
+\t
+last'''
 
 def seq(first, last):
     return range(first, last + 1)
@@ -41,6 +44,8 @@ class TestGetBlock(unittest.TestCase):
         for r in seq(3, 4):
             self.assertEqual('function with\n indented block\xb6\n', getblock(text, r))
         clazz = 'class with\n  block after blank\n  \tand its own indented block\n  and back again after a wrong blank\xb6\n'
-        for r in seq(5, 10):
+        for r in seq(5, 11):
             self.assertEqual(clazz, getblock(text, r))
-        self.assertEqual('something else\xb6\n', getblock(text, 11))
+        self.assertEqual('something else\xb6\n', getblock(text, 12))
+        self.assertEqual('# Nothing to send.\xb6\n', getblock(text, 13))
+        self.assertEqual('last\xb6\n', getblock(text, 14))
