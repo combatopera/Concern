@@ -24,10 +24,10 @@ function with
  indented block
 class with
 
-\tblock after blank
-\t and its own indented block
-
-\tand back again after a blank
+  block after blank
+  \tand its own indented block
+\t
+  and back again after a wrong blank
 something else'''
 
 class TestGetBlock(unittest.TestCase):
