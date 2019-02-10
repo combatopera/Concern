@@ -1,14 +1,13 @@
-import sys, re, os
+import re, os
 
 indent = re.compile(r'^\s+')
 eol = os.linesep
 lasteol = '\xb6' + eol # Pilcrow.
 
-def getblock():
-    onebasedrow, = sys.argv[1:]
-    start = int(onebasedrow) - 1
+def getblock(text, onebasedrow):
+    start = onebasedrow - 1
     end = start + 1
-    lines = sys.stdin.read().splitlines()
+    lines = text.splitlines()
     if not lines[start]:
         text = '# Nothing to send.'
     else:
