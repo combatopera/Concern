@@ -1,3 +1,4 @@
 source $(vimrc systemPath)
-nnoremap $(sendKey) :exec 'silent w !python3 -S $(sendblock)' line('.')<CR><CR>
+nnoremap <silent> $(sendKey foxdot) :exe 'sil w !python3 -S $(sendblock foxdot)' line('.')<CR>
+nnoremap <silent> $(sendKey sclang) :exe 'sil w !python3 -S $(sendblock sclang)' line('.')<CR>
 source $(vimrc userPath)

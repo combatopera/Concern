@@ -26,7 +26,9 @@ Concern
         pym2149
             executable = $/($(cwd) .. pym2149 foxdot2jack.py)
             windowName = pym2149
-    sendKey = `
+    sendKey
+        foxdot = <Bslash>
+        sclang = <Bar>
     synthCommand = bash -c $.(while true; do
         $join$map($(env) k v $(k)=$(v)$.( ))$(executable)
         echo "Synth exited with status: $'($)?" >&2

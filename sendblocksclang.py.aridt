@@ -1,0 +1,11 @@
+from getblock import getblock
+import sys, socket
+
+def main():
+    onebasedrow, = sys.argv[1:]
+    block = getblock(sys.stdin.read(), int(onebasedrow))
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # XXX: Close it?
+    sock.sendto(block.encode(), ('localhost', 57120))
+
+if '__main__' == __name__:
+    main()
