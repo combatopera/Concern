@@ -1,9 +1,9 @@
 from getblock import readblock
-import socket
+import socket, osctrl
 
 def main():
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # XXX: Close it?
-    sock.sendto(readblock().encode(), ('localhost', 57120))
+    sock.sendto(osctrl.Message('/foxdot', [readblock('')]).ser(), ('localhost', 57120))
 
 if '__main__' == __name__:
     main()

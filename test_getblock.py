@@ -41,7 +41,7 @@ class TestGetBlock(unittest.TestCase):
         def block():
             nonlocal r
             r += 1
-            return getblock(text, r)
+            return getblock(text, r, '\xb6')
         self.assertEqual('# Nothing to send.\xb6\n', block())
         self.assertEqual('hello\xb6\n', block())
         for _ in range(2):
