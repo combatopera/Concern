@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Concern.  If not, see <http://www.gnu.org/licenses/>.
 
-import re
+import re, sys
 
 toplevel = re.compile(r'^\S')
 anytext = re.compile(r'\S')
@@ -41,3 +41,7 @@ def getblock(text, onebasedrow):
     while first and not istoplevel(lines[first]):
         first -= 1
     return eol.join(l for l in lines[first:last + 1] if hastext(l)) + lasteol
+
+def readblock():
+    onebasedrow, = sys.argv[1:]
+    return getblock(sys.stdin.read(), int(onebasedrow))

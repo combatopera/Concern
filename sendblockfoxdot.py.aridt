@@ -1,11 +1,9 @@
-from getblock import getblock
-import os, sys
+from getblock import readblock
+import os
 
 def main():
-    onebasedrow, = sys.argv[1:]
-    block = getblock(sys.stdin.read(), int(onebasedrow))
     # TODO LATER: Support more than one session.
-    argv = 'screen', '-S', $"$(sessionName), '-p', $"$(foxdot windowName), '-X', 'stuff', block
+    argv = 'screen', '-S', $"$(sessionName), '-p', $"$(foxdot windowName), '-X', 'stuff', readblock()
     os.execvp(argv[0], argv)
 
 if '__main__' == __name__:
