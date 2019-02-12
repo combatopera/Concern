@@ -20,6 +20,7 @@ import re, sys
 toplevel = re.compile(r'^\S')
 anytext = re.compile(r'\S')
 eol = '\n' # FoxDot uses API so anything is fine.
+pilcrow = '\xb6'
 
 def istoplevel(line):
     return toplevel.search(line) is not None
@@ -41,6 +42,6 @@ def getblock(text, onebasedrow, pilcrow):
         first -= 1
     return eol.join(l for l in lines[first:last + 1] if hastext(l)) + pilcrow + eol
 
-def readblock(pilcrow = '\xb6'):
+def readblock(pilcrow = pilcrow):
     onebasedrow, = sys.argv[1:]
     return getblock(sys.stdin.read(), int(onebasedrow), pilcrow)
