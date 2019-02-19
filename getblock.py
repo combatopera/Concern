@@ -33,8 +33,6 @@ def getblock(text, first, last, pilcrow):
     max = len(lines) - 1
     first -= 1
     last -= 1
-    if last > max:
-        raise IndexError
     i = first
     while i < max and not hastext(lines[i]):
         if i >= last and istoplevel(lines[i + 1]):
@@ -46,6 +44,7 @@ def getblock(text, first, last, pilcrow):
         first += 1
     while first and not istoplevel(lines[first]):
         first -= 1
+    lines[last] # Check for out of range.
     return eol.join(l for l in lines[first:last + 1] if hastext(l)) + pilcrow + eol
 
 def readblock(pilcrow = pilcrow):
