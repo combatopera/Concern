@@ -56,7 +56,30 @@ class TestGetBlock(unittest.TestCase):
         self.assertRaises(IndexError, block)
 
     def test_visual(self):
-        self.assertEqual('# Nothing to send.\n', getblock(text, 13, 14, ''))
-        self.assertEqual('something else\nlast\n', getblock(text, 12, 15, ''))
-        self.assertEqual('something else\n', getblock(text, 12, 14, ''))
-        self.assertEqual('last\n', getblock(text, 13, 15, ''))
+        def block():
+            nonlocal last
+            last += 1
+            return getblock(text, first, last, '')
+        first = last = 10
+        self.assertEqual('class with\n  block after blank\n  \tand its own indented block\n  and back again after a wrong blank\n', block())
+        for _ in range(3):
+            self.assertEqual('class with\n  block after blank\n  \tand its own indented block\n  and back again after a wrong blank\nsomething else\n', block())
+        self.assertEqual('class with\n  block after blank\n  \tand its own indented block\n  and back again after a wrong blank\nsomething else\nlast\n', block())
+        self.assertRaises(IndexError, block)
+        first = last = 11
+        for _ in range(3):
+            self.assertEqual('something else\n', block())
+        self.assertEqual('something else\nlast\n', block())
+        self.assertRaises(IndexError, block)
+        first = last = 12
+        for _ in range(2):
+            self.assertEqual('something else\n', block())
+        self.assertEqual('something else\nlast\n', block())
+        self.assertRaises(IndexError, block)
+        first = last = 13
+        self.assertEqual('# Nothing to send.\n', block())
+        self.assertEqual('last\n', block())
+        self.assertRaises(IndexError, block)
+        first = last = 14
+        self.assertEqual('last\n', block())
+        self.assertRaises(IndexError, block)

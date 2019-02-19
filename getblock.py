@@ -33,6 +33,8 @@ def getblock(text, first, last, pilcrow):
     max = len(lines) - 1
     first -= 1
     last -= 1
+    if last > max:
+        raise IndexError
     i = first
     while i < max and not hastext(lines[i]):
         if i >= last and istoplevel(lines[i + 1]):
