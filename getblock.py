@@ -33,10 +33,11 @@ def getblock(text, first, last, pilcrow):
     max = len(lines) - 1
     first -= 1
     last -= 1
-    while last < max and not hastext(lines[last]):
-        if istoplevel(lines[last + 1]):
+    i = first
+    while i < max and not hastext(lines[i]):
+        if i >= last and istoplevel(lines[i + 1]):
             return '# Nothing to send.' + pilcrow + eol
-        last += 1
+        i += 1
     while last < max and not istoplevel(lines[last + 1]):
         last += 1
     while first and not istoplevel(lines[first]):
