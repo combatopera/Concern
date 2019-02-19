@@ -28,10 +28,11 @@ def istoplevel(line):
 def hastext(line):
     return anytext.search(line) is not None
 
-def getblock(text, onebasedrow, pilcrow):
+def getblock(text, first, last, pilcrow):
     lines = text.splitlines()
     max = len(lines) - 1
-    first = last = onebasedrow - 1
+    first -= 1
+    last -= 1
     while last < max and not hastext(lines[last]):
         if istoplevel(lines[last + 1]):
             return '# Nothing to send.' + pilcrow + eol
@@ -43,5 +44,4 @@ def getblock(text, onebasedrow, pilcrow):
     return eol.join(l for l in lines[first:last + 1] if hastext(l)) + pilcrow + eol
 
 def readblock(pilcrow = pilcrow):
-    onebasedrow, = sys.argv[1:]
-    return getblock(sys.stdin.read(), int(onebasedrow), pilcrow)
+    return getblock(sys.stdin.read(), *map(int, sys.argv[1:]), pilcrow)

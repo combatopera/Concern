@@ -41,7 +41,7 @@ class TestGetBlock(unittest.TestCase):
         def block():
             nonlocal r
             r += 1
-            return getblock(text, r, '\xb6')
+            return getblock(text, r, r, '\xb6')
         self.assertEqual('# Nothing to send.\xb6\n', block())
         self.assertEqual('hello\xb6\n', block())
         for _ in range(2):
@@ -54,3 +54,9 @@ class TestGetBlock(unittest.TestCase):
             self.assertEqual('# Nothing to send.\xb6\n', block())
         self.assertEqual('last\xb6\n', block())
         self.assertRaises(IndexError, block)
+
+    def test_visual(self):
+        self.assertEqual('# Nothing to send.\n', getblock(text, 13, 14, ''))
+        self.assertEqual('something else\nlast\n', getblock(text, 12, 15, ''))
+        self.assertEqual('something else\n', getblock(text, 12, 14, ''))
+        self.assertEqual('last\n', getblock(text, 13, 15, ''))
