@@ -1,6 +1,9 @@
-import os
+import subprocess
+
+# TODO LATER: Support more than one session.
+argv = 'screen', '-S', $"$(sessionName), '-p', $"$(foxdot windowName), '-X', 'stuff'
+limit = 756
 
 def stuff(text):
-    # TODO LATER: Support more than one session.
-    argv = 'screen', '-S', $"$(sessionName), '-p', $"$(foxdot windowName), '-X', 'stuff', text
-    os.execvp(argv[0], argv)
+    for start in range(0, len(text), limit):
+        subprocess.check_call(argv + (text[start:start + limit],))
