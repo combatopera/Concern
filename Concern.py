@@ -48,14 +48,13 @@ def main():
             printf("redirect %s", vimrc)
             printf('Concern < vimrc.aridt')
             printf('" = $(pystr)')
-            printf("redirect %s", sendblockfoxdot)
-            printf('Concern < sendblockfoxdot.py.aridt')
-            printf("redirect %s", sendblocksclang)
-            printf('Concern < sendblocksclang.py.aridt')
+            printf("redirect %s", tempdir / 'stufftext.py')
+            printf('Concern < stufftext.py.aridt')
             printf('" = $(screenstr)')
             printf("redirect %s", screenrc)
             printf('Concern < screenrc.aridt')
-        shutil.copy2(projectdir / 'getblock.py', tempdir)
+        for path in tempdir / 'getblock.py', sendblockfoxdot, sendblocksclang:
+            shutil.copy2(projectdir / path.name, path)
         subprocess.check_call(['screen', '-S', context.resolved('Concern', 'sessionName').value, '-c', screenrc])
 
 if '__main__' == __name__:

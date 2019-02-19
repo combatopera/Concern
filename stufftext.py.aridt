@@ -1,0 +1,6 @@
+import os
+
+def stuff(text):
+    # TODO LATER: Support more than one session.
+    argv = 'screen', '-S', $"$(sessionName), '-p', $"$(foxdot windowName), '-X', 'stuff', text
+    os.execvp(argv[0], argv)

@@ -1,14 +1,13 @@
 from getblock import readblock, pilcrow, eol
 from pym2149 import osctrl
-import socket, os
+from stufftext import stuff
+import socket
 
 def main():
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # XXX: Close it?
     sock.sendto(osctrl.Message('/foxdot', [readblock('')]).ser(), ('localhost', 57120))
     text, _ = sock.recvfrom(1024)
-    text = eol.join(text.decode('utf_8').splitlines()) + pilcrow + eol
-    argv = 'screen', '-S', $"$(sessionName), '-p', $"$(foxdot windowName), '-X', 'stuff', text
-    os.execvp(argv[0], argv)
+    stuff(eol.join(text.decode('utf_8').splitlines()) + pilcrow + eol)
 
 if '__main__' == __name__:
     main()
