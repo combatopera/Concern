@@ -40,6 +40,8 @@ def getblock(text, first, last, pilcrow):
         i += 1
     while last < max and not istoplevel(lines[last + 1]):
         last += 1
+    while first < last and not hastext(lines[first]):
+        first += 1
     while first and not istoplevel(lines[first]):
         first -= 1
     return eol.join(l for l in lines[first:last + 1] if hastext(l)) + pilcrow + eol
