@@ -37,6 +37,9 @@ Concern
         foxdot = <Bslash>
         sclang = <Bar>
     vimArgs += $/($(foxdot home) FoxDot demo)
+    vim
+        windowName = Vim
+        shellCommand = vim -u $shstr$(vimrcPath) $join($map($(vimArgs) a $shstr$(a)) $.( ))
 
 vimrc
     systemPath = /usr/share/vim/vimrc

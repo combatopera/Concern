@@ -10,5 +10,5 @@ resize $(foxdot size)
 screen $join($map($,(foxdot command) w $"$(w)) $.( ))
 title $(foxdot windowName)
 focus
-screen vim -u $(vimrcPath) $join($map($(vimArgs) a $"$(a)) $.( ))
-title Vim
+screen $join($map($,(vim command) w $"$(w)) $.( ))
+title $(vim windowName)
