@@ -7,7 +7,11 @@ title $(windowName)
 $try($.[stuff $"$(stdin)
 ] $.[])])focus
 resize $(foxdot size)
-screen env $"(PYTHONPATH=$(foxdot home)) $"$(Concern interpreter) -m FoxDot --no-startup --pipe
+screen bash -c $"($.(while true; do
+    PYTHONPATH=$shstr$(foxdot home) $shstr$(Concern interpreter) -m FoxDot --no-startup --pipe
+    echo "FoxDot exited with status: $'($)?" >&2
+    read -p 'Press enter to restart it.' || break
+done))
 title $(foxdot windowName)
 focus
 screen vim -u $(vimrcPath) $join($map($(vimArgs) a $"$(a)) $.( ))
