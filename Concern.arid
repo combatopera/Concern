@@ -16,15 +16,16 @@
 : along with Concern.  If not, see <http://www.gnu.org/licenses/>.
 
 Concern
+    command = bash -c $.(while true; do
+        $(shellCommand)
+        echo $shstr$(windowName) exited with status: $'($?) >&2
+        read -p 'Press enter to restart it.' || break
+    done)
     foxdot
         size = 40
         windowName = FoxDot
         home = $/($(cwd) .. FoxDot)
-        command = bash -c $.(while true; do
-            PYTHONPATH=$shstr$(home) $shstr$(interpreter) -m FoxDot --no-startup --pipe
-            echo $shstr$(windowName) exited with status: $'($?) >&2
-            read -p 'Press enter to restart it.' || break
-        done)
+        shellCommand = PYTHONPATH=$shstr$(home) $shstr$(interpreter) -m FoxDot --no-startup --pipe
     sessionName = Concern
     env = $fork()
     synths
