@@ -36,6 +36,7 @@ def main():
             printf("cd %s", projectdir)
             printf('. Concern.arid')
             printf('Concern')
+            printf("\tinterpreter = %s", sys.executable)
             printf("\tvimrcPath = %s", vimrc)
             printf('\tsendblock')
             printf("\t\tfoxdot = %s", sendblockfoxdot)
