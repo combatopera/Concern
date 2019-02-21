@@ -21,8 +21,8 @@ Concern
         windowName = FoxDot
         home = $/($(cwd) .. FoxDot)
         command = bash -c $.(while true; do
-            PYTHONPATH=$shstr$(foxdot home) $shstr$(Concern interpreter) -m FoxDot --no-startup --pipe
-            echo "FoxDot exited with status: $'($)?" >&2
+            PYTHONPATH=$shstr$(home) $shstr$(interpreter) -m FoxDot --no-startup --pipe
+            echo $shstr$(windowName) exited with status: $'($)? >&2
             read -p 'Press enter to restart it.' || break
         done)
     sessionName = Concern
@@ -36,7 +36,7 @@ Concern
         sclang = <Bar>
     synthCommand = bash -c $.(while true; do
         $join$map($(env) k v $(k)=$(v)$.( ))$(executable)
-        echo "Synth exited with status: $'($)?" >&2
+        echo $shstr$(windowName) exited with status: $'($)? >&2
         read -p 'Press enter to restart it.' || break
     done)
     vimArgs += $/($(foxdot home) FoxDot demo)
