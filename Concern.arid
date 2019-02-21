@@ -32,14 +32,10 @@ Concern
         pym2149
             executable = $/($(cwd) .. pym2149 foxdot2jack.py)
             windowName = pym2149
+            shellCommand = $join$map($(env) k v $(k)=$(v)$.( ))$(executable)
     sendKey
         foxdot = <Bslash>
         sclang = <Bar>
-    synthCommand = bash -c $.(while true; do
-        $join$map($(env) k v $(k)=$(v)$.( ))$(executable)
-        echo $shstr$(windowName) exited with status: $'($?) >&2
-        read -p 'Press enter to restart it.' || break
-    done)
     vimArgs += $/($(foxdot home) FoxDot demo)
 
 vimrc
