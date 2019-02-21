@@ -20,6 +20,11 @@ Concern
         size = 40
         windowName = FoxDot
         home = $/($(cwd) .. FoxDot)
+        command = bash -c $.(while true; do
+            PYTHONPATH=$shstr$(foxdot home) $shstr$(Concern interpreter) -m FoxDot --no-startup --pipe
+            echo "FoxDot exited with status: $'($)?" >&2
+            read -p 'Press enter to restart it.' || break
+        done)
     sessionName = Concern
     env = $fork()
     synths
