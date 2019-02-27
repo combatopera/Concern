@@ -22,7 +22,8 @@ Concern
         read -p 'Press enter to restart it.' || break
     done)
     foxdot
-        size = 40
+        fraction = $div(1 3)
+        size = $toAbsWidth$(fraction)
         windowName = FoxDot
         home = $/($(cwd) .. FoxDot)
         shellCommand = PYTHONPATH=$shstr$(home) $shstr$(interpreter) -m FoxDot --no-startup --pipe

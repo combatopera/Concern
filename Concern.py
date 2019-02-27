@@ -17,8 +17,15 @@
 # You should have received a copy of the GNU General Public License
 # along with Concern.  If not, see <http://www.gnu.org/licenses/>.
 
+from aridimpl.model import Function, Number
+from termios import TIOCGWINSZ
 from pathlib import Path
-import tempfile, subprocess, sys, aridity, shutil
+import tempfile, subprocess, sys, aridity, shutil, struct, fcntl
+
+def toabswidth(context, resolvable):
+    winsize = 'HHHH'
+    ws_col = struct.unpack(winsize, fcntl.ioctl(sys.stdin, TIOCGWINSZ, bytes(struct.calcsize(winsize))))[1]
+    return Number(round(resolvable.resolve(context).value * (ws_col - 1))) # Take off 1 for the separator.
 
 def main():
     configdir = Path.home() / '.Concern'
@@ -31,6 +38,7 @@ def main():
         sendblocksclang = tempdir / 'sendblocksclang.py'
         screenrc = tempdir / 'screenrc'
         context = aridity.Context()
+        context['Concern', 'toAbsWidth'] = Function(toabswidth)
         with aridity.Repl(context) as repl:
             printf = repl.printf
             printf("cd %s", projectdir)
