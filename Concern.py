@@ -18,9 +18,10 @@
 # along with Concern.  If not, see <http://www.gnu.org/licenses/>.
 
 from aridimpl.model import Function, Number
+from system import screen
 from termios import TIOCGWINSZ
 from pathlib import Path
-import tempfile, subprocess, sys, aridity, shutil, struct, fcntl
+import tempfile, sys, aridity, shutil, struct, fcntl
 
 def toabswidth(context, resolvable):
     winsize = 'HHHH'
@@ -64,7 +65,7 @@ def main():
             printf('Concern < screenrc.aridt')
         for path in tempdir / 'getblock.py', sendblockfoxdot, sendblocksclang:
             shutil.copy2(projectdir / path.name, path)
-        subprocess.check_call(['screen', '-S', context.resolved('Concern', 'sessionName').value, '-c', screenrc])
+        screen('-S', context.resolved('Concern', 'sessionName').value, '-c', screenrc)
 
 if '__main__' == __name__:
     main()

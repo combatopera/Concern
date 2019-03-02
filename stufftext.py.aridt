@@ -1,9 +1,9 @@
-import subprocess
+from system import screen
 
-# TODO LATER: Support more than one session.
-argv = 'screen', '-S', $"$(sessionName), '-p', $"$(foxdot windowName), '-X', 'stuff'
+session = $"$(sessionName) # TODO LATER: Support more than one session.
+window = $"$(foxdot windowName)
 limit = 756
 
 def stuff(text):
     for start in range(0, len(text), limit):
-        subprocess.check_call(argv + (text[start:start + limit],))
+        screen('-S', session, '-p', window, '-X', 'stuff', text[start:start + limit])
