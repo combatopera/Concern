@@ -32,17 +32,17 @@ def foxdot():
     stuff(readblock())
 
 dispatch = {
-    (1, 'default'): sclang,
-    (1, 'alternate'): foxdot,
-    (2, 'default'): foxdot,
-    (2, 'alternate'): sclang,
+    ('1', 'default'): sclang,
+    ('1', 'alternate'): foxdot,
+    ('2', 'default'): foxdot,
+    ('2', 'alternate'): sclang,
 }
 
 def main():
     s = slice(1, 3)
-    window, target = sys.argv[s]
+    target = dispatch[tuple(sys.argv[s])]
     del sys.argv[s]
-    dispatch[int(window), target]()
+    target()
 
 if '__main__' == __name__:
     main()
