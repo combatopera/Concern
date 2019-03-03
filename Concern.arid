@@ -37,6 +37,13 @@ Concern
     sendKey
         default = <Bslash>
         alternate = <Bar>
+    target
+        1
+            default = sclang
+            alternate = foxdot
+        2
+            default = foxdot
+            alternate = sclang
     vimArgs += $/($(foxdot home) FoxDot demo)
     vim
         windowName = Vim

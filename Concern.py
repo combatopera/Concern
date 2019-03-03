@@ -57,10 +57,12 @@ def main():
             printf('" = $(pystr)')
             printf("redirect %s", tempdir / 'stufftext.py')
             printf('Concern < stufftext.py.aridt')
+            printf("redirect %s", sendblock)
+            printf('Concern < sendblock.py.aridt')
             printf('" = $(screenstr)')
             printf("redirect %s", screenrc)
             printf('Concern < screenrc.aridt')
-        for path in tempdir / 'getblock.py', sendblock:
+        for path in tempdir / 'getblock.py',:
             shutil.copy2(projectdir / path.name, path)
         screen('-S', context.resolved('Concern', 'sessionName').value, '-c', screenrc)
 

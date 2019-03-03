@@ -32,10 +32,10 @@ def foxdot():
     stuff(readblock())
 
 dispatch = {
-    ('1', 'default'): sclang,
-    ('1', 'alternate'): foxdot,
-    ('2', 'default'): foxdot,
-    ('2', 'alternate'): sclang,
+    ('1', 'default'): $(target 1 default),
+    ('1', 'alternate'): $(target 1 alternate),
+    ('2', 'default'): $(target 2 default),
+    ('2', 'alternate'): $(target 2 alternate),
 }
 
 def main():
