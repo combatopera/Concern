@@ -18,15 +18,24 @@
 from getblock import readblock, pilcrow, eol
 from pym2149 import osctrl
 from stufftext import stuff
-import socket
+import socket, sys
 
-def main():
+def foxdot():
+    stuff(readblock())
+
+def sclang():
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # XXX: Close it?
     # FIXME: This must not send a message bigger than pym2149 bufsize.
     sock.sendto(osctrl.Message('/foxdot', [readblock('')]).ser(), ('localhost', 57120))
     sock.settimeout(5) # Give up eventually, if pym2149 has a problem.
     text, _ = sock.recvfrom(1024) # XXX: Big enough for any pym2149 response?
     stuff(eol.join(text.decode('utf_8').splitlines()) + pilcrow + eol)
+
+def main():
+    s = slice(1, 3)
+    window, target = sys.argv[s]
+    del sys.argv[s]
+    globals()[target]()
 
 if '__main__' == __name__:
     main()

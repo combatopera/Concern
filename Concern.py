@@ -35,8 +35,7 @@ def main():
         projectdir = Path(__file__).resolve().parent
         tempdir = Path(tempdir)
         vimrc = tempdir / 'vimrc'
-        sendblockfoxdot = tempdir / 'sendblockfoxdot.py'
-        sendblocksclang = tempdir / 'sendblocksclang.py'
+        sendblock = tempdir / 'sendblock.py'
         screenrc = tempdir / 'screenrc'
         context = aridity.Context()
         context['Concern', 'toAbsWidth'] = Function(toabswidth)
@@ -47,9 +46,7 @@ def main():
             printf('Concern')
             printf("\tinterpreter = %s", sys.executable)
             printf("\tvimrcPath = %s", vimrc)
-            printf('\tsendblock')
-            printf("\t\tfoxdot = %s", sendblockfoxdot)
-            printf("\t\tsclang = %s", sendblocksclang)
+            printf("\tsendblock = %s", sendblock)
             args = sys.argv[1:]
             if args:
                 printf('\tvimArgs := $list()')
@@ -63,7 +60,7 @@ def main():
             printf('" = $(screenstr)')
             printf("redirect %s", screenrc)
             printf('Concern < screenrc.aridt')
-        for path in tempdir / 'getblock.py', sendblockfoxdot, sendblocksclang:
+        for path in tempdir / 'getblock.py', sendblock:
             shutil.copy2(projectdir / path.name, path)
         screen('-S', context.resolved('Concern', 'sessionName').value, '-c', screenrc)
 
