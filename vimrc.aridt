@@ -1,6 +1,6 @@
 source $(vimrc systemPath)
-nnoremap <silent> $(sendKey foxdot) :exe 'sil w !python3 -S $(sendblock)' winnr() 'foxdot' line('.') line('.')<CR>
-nnoremap <silent> $(sendKey sclang) :exe 'sil w !python3 -S $(sendblock)' winnr() 'sclang' line('.') line('.')<CR>
-vnoremap <silent> $(sendKey foxdot) :<C-U>exe 'sil w !python3 -S $(sendblock)' winnr() 'foxdot' line("'<") line("'>")<CR>
-vnoremap <silent> $(sendKey sclang) :<C-U>exe 'sil w !python3 -S $(sendblock)' winnr() 'sclang' line("'<") line("'>")<CR>
+nnoremap <silent> $(sendKey default) :exe 'sil w !python3 -S $(sendblock)' winnr() 'default' line('.') line('.')<CR>
+nnoremap <silent> $(sendKey alternate) :exe 'sil w !python3 -S $(sendblock)' winnr() 'alternate' line('.') line('.')<CR>
+vnoremap <silent> $(sendKey default) :<C-U>exe 'sil w !python3 -S $(sendblock)' winnr() 'default' line("'<") line("'>")<CR>
+vnoremap <silent> $(sendKey alternate) :<C-U>exe 'sil w !python3 -S $(sendblock)' winnr() 'alternate' line("'<") line("'>")<CR>
 source $(vimrc userPath)

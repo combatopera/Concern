@@ -20,9 +20,6 @@ from pym2149 import osctrl
 from stufftext import stuff
 import socket, sys
 
-def foxdot():
-    stuff(readblock())
-
 def sclang():
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # XXX: Close it?
     # FIXME: This must not send a message bigger than pym2149 bufsize.
@@ -31,11 +28,21 @@ def sclang():
     text, _ = sock.recvfrom(1024) # XXX: Big enough for any pym2149 response?
     stuff(eol.join(text.decode('utf_8').splitlines()) + pilcrow + eol)
 
+def foxdot():
+    stuff(readblock())
+
+dispatch = {
+    (1, 'default'): sclang,
+    (1, 'alternate'): foxdot,
+    (2, 'default'): foxdot,
+    (2, 'alternate'): sclang,
+}
+
 def main():
     s = slice(1, 3)
     window, target = sys.argv[s]
     del sys.argv[s]
-    globals()[target]()
+    dispatch[int(window), target]()
 
 if '__main__' == __name__:
     main()
