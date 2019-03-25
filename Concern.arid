@@ -26,7 +26,7 @@ Concern
         size = $toAbsWidth$(fraction)
         windowName = FoxDot
         home = $/($(cwd) .. FoxDot)
-        shellCommand = PYTHONPATH=$shstr$(home) $shstr$(interpreter) -m FoxDot --no-startup --pipe
+        shellCommand = $shstr$/($(home) FoxDot.py) --no-startup --pipe
     sessionName = Concern
     env = $fork()
     synths
