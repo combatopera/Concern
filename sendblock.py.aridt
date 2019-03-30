@@ -26,6 +26,7 @@ def sclang():
     with open(configlog) as f:
         from collections import OrderedDict
         bufsize = eval(f.read())['bufsize']
+        del OrderedDict
     sock.sendto(osctrl.Message('/foxdot', [readblock('')]).ser(), ('localhost', 57120))
 
 def foxdot():
