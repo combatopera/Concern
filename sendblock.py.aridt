@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Concern.  If not, see <http://www.gnu.org/licenses/>.
 
-from getblock import readblock, pilcrow, eol
+from getblock import readblock
 from pym2149 import osctrl
 from stufftext import stuff
 import socket, sys
@@ -23,6 +23,9 @@ import socket, sys
 def sclang():
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # XXX: Close it?
     # FIXME: This must not send a message bigger than pym2149 bufsize.
+    with open(configlog) as f:
+        from collections import OrderedDict
+        bufsize = eval(f.read())['bufsize']
     sock.sendto(osctrl.Message('/foxdot', [readblock('')]).ser(), ('localhost', 57120))
 
 def foxdot():
@@ -40,6 +43,8 @@ def main():
     target = dispatch[tuple(sys.argv[s])]
     del sys.argv[s]
     target()
+
+configlog = $"($(configlog))
 
 if '__main__' == __name__:
     main()
