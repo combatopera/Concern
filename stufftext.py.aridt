@@ -1,9 +1,7 @@
-from system import screen
+import screen
 
 session = $"$(sessionName) # TODO LATER: Support more than one session.
 window = $"$(foxdot windowName)
-limit = 756
 
 def stuff(text):
-    for start in range(0, len(text), limit):
-        screen('-S', session, '-p', window, '-X', 'stuff', text[start:start + limit])
+    screen.stuff(session, window, text)
