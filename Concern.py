@@ -36,6 +36,7 @@ def main():
         tempdir = Path(tempdir)
         vimrc = tempdir / 'vimrc'
         sendblock = tempdir / 'sendblock.py'
+        configlog = tempdir / 'configlog'
         screenrc = tempdir / 'screenrc'
         context = aridity.Context()
         context['Concern', 'toAbsWidth'] = Function(toabswidth)
@@ -47,6 +48,7 @@ def main():
             printf("\tinterpreter = %s", sys.executable)
             printf("\tvimrcPath = %s", vimrc)
             printf("\tsendblock = %s", sendblock)
+            printf("\tconfiglog = %s", configlog)
             args = sys.argv[1:]
             if args:
                 printf('\tvimArgs := $list()')
