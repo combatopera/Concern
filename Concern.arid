@@ -38,10 +38,10 @@ Concern
         default = <CR>
         alternate = ]
     target
-        1
+        notes.py
             default = sclang
             alternate = foxdot
-        2
+        patterns.py
             default = foxdot
             alternate = sclang
     vimArgs +=

@@ -19,7 +19,7 @@ from getblock import readblock, ReadBlocks
 from pym2149 import osctrl
 from screen import stuff
 from collections import OrderedDict
-import socket, sys
+import socket, sys, os
 
 def sclang():
     with open(configlog) as f:
@@ -44,7 +44,7 @@ def foxdot():
 
 def main():
     script, stroke = (sys.argv.pop(1) for _ in range(2))
-    globals()[dispatch[script][stroke]]()
+    globals()[dispatch[os.path.basename(script)][stroke]]()
 
 dispatch = $repr$(target)
 configlog = $"$(configlog)
