@@ -17,7 +17,7 @@
 
 from getblock import readblock, ReadBlocks
 from pym2149 import osctrl
-from stufftext import stuff
+from screen import stuff
 import socket, sys
 
 def sclang():
@@ -39,7 +39,7 @@ def sclang():
         sock.sendto(chunk, ('localhost', 57120))
 
 def foxdot():
-    stuff(readblock())
+    stuff(session, window, readblock())
 
 dispatch = {
     ('1', 'default'): $(target 1 default),
@@ -55,6 +55,8 @@ def main():
     target()
 
 configlog = $"($(configlog))
+session = $"$(sessionName) # TODO LATER: Support more than one session.
+window = $"$(foxdot windowName)
 
 if '__main__' == __name__:
     main()

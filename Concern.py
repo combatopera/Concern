@@ -57,8 +57,6 @@ def main():
             printf("redirect %s", vimrc)
             printf('Concern < vimrc.aridt')
             printf('" = $(pystr)')
-            printf("redirect %s", tempdir / 'stufftext.py')
-            printf('Concern < stufftext.py.aridt')
             printf("redirect %s", sendblock)
             printf('Concern < sendblock.py.aridt')
             printf('" = $(screenstr)')

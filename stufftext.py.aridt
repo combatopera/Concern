@@ -1,7 +1,0 @@
-import screen
-
-session = $"$(sessionName) # TODO LATER: Support more than one session.
-window = $"$(foxdot windowName)
-
-def stuff(text):
-    screen.stuff(session, window, text)
