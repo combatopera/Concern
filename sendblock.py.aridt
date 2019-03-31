@@ -43,10 +43,8 @@ def foxdot():
     stuff(session, window, readblock())
 
 def main():
-    s = slice(1, 3)
-    x, y = sys.argv[s]
-    del sys.argv[s]
-    globals()[dispatch[x][y]]()
+    script, stroke = (sys.argv.pop(1) for _ in range(2))
+    globals()[dispatch[script][stroke]]()
 
 dispatch = $repr$(target)
 configlog = $"$(configlog)
