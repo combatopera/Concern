@@ -35,8 +35,8 @@ Concern
             windowName = pym2149
             shellCommand = $join$map($(env) k v $(k)=$shstr$(v)$.( ))$shstr$(executable) --session $shstr$(sessionName) --window $shstr$(foxdot windowName) --repr FoxDot --log $shstr$(configlog)
     sendKey
-        default = <Bslash>
-        alternate = <Bar>
+        default = <CR>
+        alternate = ]
     target
         1
             default = sclang
