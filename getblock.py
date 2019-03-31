@@ -29,6 +29,9 @@ def hastext(line):
     return anytext.search(line) is not None
 
 def getblock(text, first, last, pilcrow):
+    return getblockimpl(text, first, last, pilcrow)[2]
+
+def getblockimpl(text, first, last, pilcrow):
     lines = text.splitlines()
     max = len(lines) - 1
     first -= 1
@@ -36,7 +39,7 @@ def getblock(text, first, last, pilcrow):
     i = first
     while i < max and not hastext(lines[i]):
         if i >= last and istoplevel(lines[i + 1]):
-            return '# Nothing to send.' + pilcrow + eol
+            return None, None, '# Nothing to send.' + pilcrow + eol
         i += 1
     while last < max and not istoplevel(lines[last + 1]):
         last += 1
@@ -45,7 +48,23 @@ def getblock(text, first, last, pilcrow):
     while first and not istoplevel(lines[first]):
         first -= 1
     lines[last] # Check for out of range.
-    return eol.join(l for l in lines[first:last + 1] if hastext(l)) + pilcrow + eol
+    return first, last, eol.join(l for l in lines[first:last + 1] if hastext(l)) + pilcrow + eol
 
-def readblock(pilcrow = pilcrow):
+def readblock():
     return getblock(sys.stdin.read(), *map(int, sys.argv[1:]), pilcrow)
+
+class ReadBlocks:
+
+    def __init__(self):
+        self.text = sys.stdin.read()
+        self.first, self.last = map(int, sys.argv[1:])
+
+    def __call__(self, n):
+        first = self.first
+        for i in range(n):
+            # Most importantly last must achieve self.last:
+            last = first + (self.last - first) // (n - i)
+            _, actuallast, block = getblockimpl(self.text, first, last, '')
+            if actuallast is not None:
+                yield block
+                first = actuallast + 1

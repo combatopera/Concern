@@ -15,19 +15,28 @@
 # You should have received a copy of the GNU General Public License
 # along with Concern.  If not, see <http://www.gnu.org/licenses/>.
 
-from getblock import readblock
+from getblock import readblock, ReadBlocks
 from pym2149 import osctrl
 from stufftext import stuff
 import socket, sys
 
 def sclang():
-    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # XXX: Close it?
-    # FIXME: This must not send a message bigger than pym2149 bufsize.
     with open(configlog) as f:
         from collections import OrderedDict
         bufsize = eval(f.read())['bufsize']
         del OrderedDict
-    sock.sendto(osctrl.Message('/foxdot', [readblock('')]).ser(), ('localhost', 57120))
+    readblocks = ReadBlocks()
+    n = 1
+    while True:
+        chunks = [osctrl.Message('/foxdot', [text]).ser() for text in readblocks(n)]
+        if not chunks:
+            return # Nothing to send.
+        if max(len(chunk) for chunk in chunks) <= bufsize:
+            break
+        n *= 2
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # XXX: Close it?
+    for chunk in chunks:
+        sock.sendto(chunk, ('localhost', 57120))
 
 def foxdot():
     stuff(readblock())
