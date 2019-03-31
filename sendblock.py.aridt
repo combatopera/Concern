@@ -49,7 +49,7 @@ def main():
     globals()[dispatch[x][y]]()
 
 dispatch = $repr$(target)
-configlog = $"($(configlog))
+configlog = $"$(configlog)
 session = $"$(sessionName) # TODO LATER: Support more than one session.
 window = $"$(foxdot windowName)
 
