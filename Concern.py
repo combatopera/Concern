@@ -21,12 +21,19 @@ from aridimpl.model import Function, Number
 from system import screen
 from termios import TIOCGWINSZ
 from pathlib import Path
-import tempfile, sys, aridity, shutil, struct, fcntl
+import tempfile, sys, aridity, shutil, struct, fcntl, subprocess
 
 def toabswidth(context, resolvable):
     winsize = 'HHHH'
     ws_col = struct.unpack(winsize, fcntl.ioctl(sys.stdin, TIOCGWINSZ, bytes(struct.calcsize(winsize))))[1]
     return Number(round(resolvable.resolve(context).value * (ws_col - 1))) # Take off 1 for the separator.
+
+def getbufsize(context):
+    command = "%s --repr FoxDot" % context.resolved('Concern', 'synths', 'pym2149', 'shellCommand').value
+    from collections import OrderedDict
+    bufsize = eval(subprocess.check_output(['bash', '-c', command]))['bufsize']
+    del OrderedDict
+    return bufsize
 
 def main():
     configdir = Path.home() / '.Concern'
@@ -36,7 +43,6 @@ def main():
         tempdir = Path(tempdir)
         vimrc = tempdir / 'vimrc'
         sendblock = tempdir / 'sendblock.py'
-        configlog = tempdir / 'configlog'
         screenrc = tempdir / 'screenrc'
         context = aridity.Context()
         context['Concern', 'toAbsWidth'] = Function(toabswidth)
@@ -48,7 +54,7 @@ def main():
             printf("\tinterpreter = %s", sys.executable)
             printf("\tvimrcPath = %s", vimrc)
             printf("\tsendblock = %s", sendblock)
-            printf("\tconfiglog = %s", configlog)
+            printf("\tpym2149 bufsize = %s", getbufsize(context))
             args = sys.argv[1:]
             if args:
                 printf('\tvimArgs := $list()')

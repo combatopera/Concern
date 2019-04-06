@@ -32,7 +32,7 @@ Concern
         pym2149
             executable = $/($(cwd) .. pym2149 foxdot2jack.py)
             windowName = pym2149
-            shellCommand = $shstr$(executable) --session $shstr$(sessionName) --window $shstr$(foxdot windowName) --repr FoxDot --log $shstr$(configlog)
+            shellCommand = $shstr$(executable) --session $shstr$(sessionName) --window $shstr$(foxdot windowName)
     sendKey
         default = <CR>
         alternate = ]

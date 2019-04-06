@@ -22,10 +22,6 @@ from collections import OrderedDict
 import socket, sys, os
 
 def sclang():
-    with open(configlog) as f:
-        from collections import OrderedDict
-        bufsize = eval(f.read())['bufsize']
-        del OrderedDict
     readblocks = ReadBlocks()
     n = 1
     while True:
@@ -47,7 +43,7 @@ def main():
     globals()[dispatch[os.path.basename(script)][stroke]]()
 
 dispatch = $repr$(target)
-configlog = $"$(configlog)
+bufsize = $(pym2149 bufsize)
 session = $"$(sessionName) # TODO LATER: Support more than one session.
 window = $"$(foxdot windowName)
 
