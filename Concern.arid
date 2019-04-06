@@ -26,7 +26,7 @@ Concern
         size = $toAbsWidth$(fraction)
         windowName = FoxDot
         home = $/($(cwd) .. FoxDot)
-        shellCommand = $shstr$/($(home) FoxDot.py) --no-startup --pipe
+        shellCommand = $shstr$/($(home) FoxDot.py) --no-startup --pipe --updaterate $shstr$(pym2149 updaterate)
     sessionName = Concern
     synths
         pym2149
