@@ -21,7 +21,9 @@ from aridimpl.model import Function, Number
 from system import screen
 from termios import TIOCGWINSZ
 from pathlib import Path
-import tempfile, sys, aridity, shutil, struct, fcntl, subprocess, shlex
+import tempfile, sys, aridity, shutil, struct, fcntl, subprocess, shlex, logging
+
+log = logging.getLogger(__name__)
 
 def toabswidth(context, resolvable):
     winsize = 'HHHH'
@@ -38,6 +40,7 @@ def getconfig(context, *names):
     return values
 
 def main():
+    logging.basicConfig(format = "[%(levelname)s] %(message)s", level = logging.DEBUG)
     configdir = Path.home() / '.Concern'
     configdir.mkdir(parents = True, exist_ok = True)
     with tempfile.TemporaryDirectory(dir = configdir) as tempdir:
@@ -52,6 +55,11 @@ def main():
             printf = repl.printf
             printf("cd %s", projectdir)
             printf('. Concern.arid')
+            settings = Path.home() / '.settings.arid'
+            if settings.exists():
+                printf(". %s", settings)
+            else:
+                log.info("No such file: %s", settings)
             printf('Concern')
             printf("\tinterpreter = %s", sys.executable)
             printf("\tvimrcPath = %s", vimrc)
