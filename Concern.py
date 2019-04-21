@@ -46,7 +46,7 @@ def main():
     with tempfile.TemporaryDirectory(dir = configdir) as tempdir:
         projectdir = Path(__file__).resolve().parent
         tempdir = Path(tempdir)
-        vimrc = tempdir / 'vimrc'
+        concernvimrc = tempdir / 'vimrc'
         sendblock = tempdir / 'sendblock.py'
         screenrc = tempdir / 'screenrc'
         context = aridity.Context()
@@ -60,9 +60,14 @@ def main():
                 printf(". %s", settings)
             else:
                 log.info("No such file: %s", settings)
+            uservimrc = Path.home() / '.vimrc'
+            if uservimrc.exists():
+                printf("vimrc userPath = %s", uservimrc)
+            else:
+                log.info("No such file: %s", uservimrc)
             printf('Concern')
             printf("\tinterpreter = %s", sys.executable)
-            printf("\tvimrcPath = %s", vimrc)
+            printf("\tvimrcPath = %s", concernvimrc)
             printf("\tsendblock = %s", sendblock)
             printf('\tpym2149')
             foxdot, updaterate = getconfig(context, 'FoxDot', 'updaterate')
@@ -73,7 +78,7 @@ def main():
                 printf('\tvimArgs := $list()')
                 for arg in args:
                     printf("\tvimArgs += %s", arg)
-            printf("redirect %s", vimrc)
+            printf("redirect %s", concernvimrc)
             printf('Concern < vimrc.aridt')
             printf('" = $(pystr)')
             printf("redirect %s", sendblock)

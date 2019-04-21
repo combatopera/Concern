@@ -52,4 +52,3 @@ Concern
         shellCommand = vim -u $shstr$(vimrcPath) $join($map($(vimArgs) a $shstr$(a)) $.( ))
 vimrc
     systemPath = /usr/share/vim/vimrc
-    userPath = ~/.vimrc
