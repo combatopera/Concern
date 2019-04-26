@@ -48,7 +48,7 @@ def install(cmdargs): # TODO LATER: Mac and/or Windows host support.
             '--build-arg', "EUID=%s" % os.geteuid(), '--build-arg', "EGID=%s" % os.getegid(),
             '--build-arg', "USERNAME=%s" % username, '--build-arg', "GROUPNAME=%s" % groupname,
             '--build-arg', "GENERATION=%s" % _getgeneration(config.fetch),
-            '--tag', imagename, str(Path(__file__).parent / 'docker')])
+            '--tag', imagename, str(Path(__file__).parent / 'container')])
     subprocess.check_call(['docker', 'create',
             '--name', config.name,
             '--device', '/dev/snd',
