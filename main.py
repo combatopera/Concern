@@ -42,7 +42,8 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--chdir', type = os.path.expanduser)
     config, vimargs = parser.parse_known_args()
-    os.chdir(config.chdir)
+    if config.chdir is not None:
+        os.chdir(config.chdir)
     configdir = Path.home() / '.Concern'
     configdir.mkdir(parents = True, exist_ok = True)
     with tempfile.TemporaryDirectory(dir = configdir) as tempdir:
