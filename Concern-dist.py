@@ -24,7 +24,6 @@ import tempfile, shutil
 def main():
     with tempfile.TemporaryDirectory() as tempdir:
         ziproot = Path(tempdir, 'ziproot')
-        ziproot.mkdir()
         projectname = 'Concern'
         git('clone', '--single-branch', "https://github.com/combatopera/%s" % projectname, ziproot / projectname)
         foldername = "Concern-%s" % git('rev-parse', '--short', '@', cwd = ziproot / projectname).stdout.decode().rstrip()
