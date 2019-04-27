@@ -18,7 +18,7 @@
 # along with Concern.  If not, see <http://www.gnu.org/licenses/>.
 
 from initlogging import logging
-from system import git, zip
+from system import git, zip, unzip
 from pathlib import Path
 import tempfile, shutil, aridity
 
@@ -27,6 +27,8 @@ githuburl = "https://github.com/combatopera"
 leafprojectname = 'Concern'
 
 class VersionConflictException(Exception): pass
+
+class ObstructionException(Exception): pass
 
 def main():
     with tempfile.TemporaryDirectory() as tempdir:
@@ -53,10 +55,16 @@ def main():
         foldername = "%s-%s" % (
                 leafprojectname,
                 git('rev-parse', '--short', '@', cwd = projectsdir / leafprojectname).stdout.decode().rstrip())
-        for path in projectsdir.glob('*/.git'):
-            shutil.rmtree(path)
+        for projectpath in projectsdir.glob('*'):
+            shutil.rmtree(projectpath / '.git')
+            for name in '.gitignore', '.flakesignore', '.travis.yml':
+                (projectpath / name).unlink()
         projectsdir.rename(projectsdir.parent / foldername)
-        zip('-r', Path("%s.zip" % foldername).resolve(), foldername, cwd = tempdir)
+        zippath = Path("%s.zip" % foldername)
+        if zippath.exists():
+            raise ObstructionException(zippath)
+        zip('-r', zippath.resolve(), foldername, cwd = tempdir)
+        unzip('-t', zippath, stdout = None)
 
 if '__main__' == __name__:
     main()
