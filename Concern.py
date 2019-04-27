@@ -48,7 +48,7 @@ def main():
         os.chdir(config.chdir)
     configdir = Path.home() / '.Concern'
     configdir.mkdir(parents = True, exist_ok = True)
-    with tempfile.TemporaryDirectory(dir = configdir) as tempdir:
+    with tempfile.TemporaryDirectory(dir = str(configdir)) as tempdir:
         projectdir = Path(__file__).resolve().parent
         tempdir = Path(tempdir)
         concernvimrc = tempdir / 'vimrc'
