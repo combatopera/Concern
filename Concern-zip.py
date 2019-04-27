@@ -18,13 +18,14 @@
 # along with Concern.  If not, see <http://www.gnu.org/licenses/>.
 
 from initlogging import logging
-from system import git, zip, unzip
+from system import git, zip, wget, unzip
 from pathlib import Path
 import tempfile, shutil, aridity
 
 log = logging.getLogger(__name__)
 githuburl = "https://github.com/combatopera"
 leafprojectname = 'Concern'
+hashlen = 7
 
 class VersionConflictException(Exception): pass
 
@@ -35,7 +36,9 @@ def main():
         ziproot = Path(tempdir, 'ziproot')
         shutil.copytree(Path(__file__).parent / 'skel', ziproot)
         projectsdir = ziproot / 'projects'
-        projects = {(name, 'master') for name in [leafprojectname, 'pyven', 'FoxDot']}
+        projectsdir.mkdir()
+        longhash = git('ls-remote', "%s/%s" % (githuburl, leafprojectname), 'master').stdout.decode()[:40]
+        projects = {(leafprojectname, longhash)} | {(name, 'master') for name in ['pyven', 'FoxDot']}
         doneprojects = set()
         while projects != doneprojects:
             remaining = sorted(projects - doneprojects)
@@ -44,7 +47,10 @@ def main():
             projectpath = projectsdir / projectname
             if projectpath.exists():
                 raise VersionConflictException
-            git('clone', '--branch', branch, '--single-branch', "%s/%s" % (githuburl, projectname), projectpath)
+            wget("%s/%s/archive/%s.zip" % (githuburl, projectname, branch), cwd = projectsdir)
+            unzip("%s.zip" % branch, cwd = projectsdir)
+            (projectsdir / ("%s-%s" % (projectname, branch))).rename(projectpath)
+            (projectsdir / ("%s.zip" % branch)).unlink()
             context = aridity.Context()
             with aridity.Repl(context) as repl:
                 repl.printf('projects := $list()')
@@ -53,16 +59,12 @@ def main():
             depbranches = context.resolved('branch').unravel()
             for depname in context.resolved('projects').unravel():
                 projects.add((depname, depbranches.get(depname, 'master')))
-            doneprojects.add((projectname, branch))
-        foldername = "%s-%s" % (
-                leafprojectname,
-                git('rev-parse', '--short', '@', cwd = projectsdir / leafprojectname).stdout.decode().rstrip())
-        for projectpath in projectsdir.glob('*'):
-            shutil.rmtree(projectpath / '.git')
             for name in '.gitignore', '.flakesignore', '.travis.yml':
                 path = projectpath / name
                 if path.exists():
                     path.unlink()
+            doneprojects.add((projectname, branch))
+        foldername = "%s-%s" % (leafprojectname, longhash[:hashlen])
         ziproot.rename(ziproot.parent / foldername)
         zippath = Path("%s.zip" % foldername)
         if zippath.exists():
