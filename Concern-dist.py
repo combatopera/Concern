@@ -33,8 +33,9 @@ class ObstructionException(Exception): pass
 def main():
     with tempfile.TemporaryDirectory() as tempdir:
         ziproot = Path(tempdir, 'ziproot')
+        shutil.copytree(Path(__file__).parent / 'skel', ziproot)
         projectsdir = ziproot / 'projects'
-        projects = {(leafprojectname, 'master')}
+        projects = {(name, 'master') for name in [leafprojectname, 'pyven']}
         doneprojects = set()
         while projects != doneprojects:
             remaining = sorted(projects - doneprojects)

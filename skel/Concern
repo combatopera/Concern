@@ -1,0 +1,17 @@
+#!/usr/bin/env python3
+
+from pathlib import Path
+import os
+
+def main():
+    context = Path(__file__).resolve().parent
+    projects = context / 'projects'
+    pyvendir = projects / 'pyven'
+    PATH = os.environ.get('PATH')
+    # Prepend to use our pyven if system already has it:
+    os.environ['PATH'] = str(pyvendir) if PATH is None else "%s%s%s" % (pyvendir, os.pathsep, PATH)
+    argv = [str(arg) for arg in ['pyven', projects / 'Concern' / 'main.py']]
+    os.execvp(argv[0], argv)
+
+if '__main__' == __name__:
+    main()
