@@ -44,6 +44,7 @@ def main():
         projectsdir = ziproot / 'projects'
         projectsdir.mkdir()
         doneprojects = set()
+        deps = set()
         while projects != doneprojects:
             remaining = sorted(projects - doneprojects)
             log.info("Remaining: %s", remaining)
@@ -59,7 +60,9 @@ def main():
             with aridity.Repl(context) as repl:
                 repl.printf('projects := $list()')
                 repl.printf('branch := $fork()')
+                repl.printf('deps := $list()')
                 repl.printf(". %s", projectpath / 'project.arid')
+            deps.update(context.resolved('deps').unravel())
             depbranches = context.resolved('branch').unravel()
             for depname in context.resolved('projects').unravel():
                 projects.add((depname, depbranches.get(depname, 'master')))
@@ -68,6 +71,9 @@ def main():
                 if path.exists():
                     path.unlink()
             doneprojects.add((projectname, branch))
+        with (ziproot / '.requirements.txt').open('w') as f:
+            for dep in deps:
+                print(dep, file = f)
         zip('-r', zippath.resolve(), foldername, cwd = tempdir)
         unzip('-t', zippath, stdout = None)
 
