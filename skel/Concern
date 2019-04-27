@@ -10,7 +10,7 @@ def main():
     PATH = os.environ.get('PATH')
     # Prepend to use our pyven if system already has it:
     os.environ['PATH'] = str(pyvendir) if PATH is None else "%s%s%s" % (pyvendir, os.pathsep, PATH)
-    argv = [str(arg) for arg in ['pyven', projects / 'Concern' / 'main.py']] + sys.argv[1:]
+    argv = [str(projects / 'Concern' / 'Concern.py')] + sys.argv[1:]
     os.execvp(argv[0], argv)
 
 if '__main__' == __name__:
