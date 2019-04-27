@@ -35,7 +35,7 @@ def main():
         ziproot = Path(tempdir, 'ziproot')
         shutil.copytree(Path(__file__).parent / 'skel', ziproot)
         projectsdir = ziproot / 'projects'
-        projects = {(name, 'master') for name in [leafprojectname, 'pyven']}
+        projects = {(name, 'master') for name in [leafprojectname, 'pyven', 'FoxDot']}
         doneprojects = set()
         while projects != doneprojects:
             remaining = sorted(projects - doneprojects)
@@ -60,7 +60,9 @@ def main():
         for projectpath in projectsdir.glob('*'):
             shutil.rmtree(projectpath / '.git')
             for name in '.gitignore', '.flakesignore', '.travis.yml':
-                (projectpath / name).unlink()
+                path = projectpath / name
+                if path.exists():
+                    path.unlink()
         ziproot.rename(ziproot.parent / foldername)
         zippath = Path("%s.zip" % foldername)
         if zippath.exists():
