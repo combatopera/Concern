@@ -32,7 +32,8 @@ class ObstructionException(Exception): pass
 
 def main():
     with tempfile.TemporaryDirectory() as tempdir:
-        projectsdir = Path(tempdir, 'projects')
+        ziproot = Path(tempdir, 'ziproot')
+        projectsdir = ziproot / 'projects'
         projects = {(leafprojectname, 'master')}
         doneprojects = set()
         while projects != doneprojects:
@@ -59,7 +60,7 @@ def main():
             shutil.rmtree(projectpath / '.git')
             for name in '.gitignore', '.flakesignore', '.travis.yml':
                 (projectpath / name).unlink()
-        projectsdir.rename(projectsdir.parent / foldername)
+        ziproot.rename(ziproot.parent / foldername)
         zippath = Path("%s.zip" % foldername)
         if zippath.exists():
             raise ObstructionException(zippath)
