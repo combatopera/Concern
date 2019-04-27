@@ -22,8 +22,8 @@ from pathlib import Path
 import tempfile, shutil
 
 def main():
-    with tempfile.TemporaryDirectory() as dirpath:
-        ziproot = Path(dirpath, 'ziproot')
+    with tempfile.TemporaryDirectory() as tempdir:
+        ziproot = Path(tempdir, 'ziproot')
         ziproot.mkdir()
         projectname = 'Concern'
         git('clone', '--single-branch', "https://github.com/combatopera/%s" % projectname, ziproot / projectname)
@@ -31,7 +31,7 @@ def main():
         for path in ziproot.glob('*/.git'):
             shutil.rmtree(path)
         ziproot.rename(ziproot.parent / foldername)
-        zip('-r', Path("%s.zip" % foldername).resolve(), foldername, cwd = dirpath)
+        zip('-r', Path("%s.zip" % foldername).resolve(), foldername, cwd = tempdir)
 
 if '__main__' == __name__:
     main()
