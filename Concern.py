@@ -91,8 +91,8 @@ def main():
             printf("redirect %s", screenrc)
             printf('Concern < screenrc.aridt')
         for path in tempdir / 'getblock.py',:
-            shutil.copy2(projectdir / path.name, path)
-        screen('-S', context.resolved('Concern', 'sessionName').value, '-c', screenrc)
+            shutil.copy2(str(projectdir / path.name), str(path))
+        screen('-S', context.resolved('Concern', 'sessionName').value, '-c', str(screenrc))
 
 if '__main__' == __name__:
     main()
