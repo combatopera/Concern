@@ -1,10 +1,16 @@
 #!/usr/bin/env python3
 
 from pathlib import Path
-import os, sys
+import os, sys, venv
 
 def main():
     context = Path(__file__).resolve().parent
+    venvpath = str(context / 'venv')
+    installflag = context / '.install'
+    if installflag.exists():
+        venv.create(venvpath, with_pip = True)
+        installflag.unlink()
+    os.environ['MINICONDA3_HOME'] = venvpath
     projects = context / 'projects'
     pyvendir = projects / 'pyven'
     PATH = os.environ.get('PATH')
