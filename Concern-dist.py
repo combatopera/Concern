@@ -23,14 +23,14 @@ import tempfile, shutil
 
 def main():
     with tempfile.TemporaryDirectory() as dirpath:
-        root = Path(dirpath, 'Concern')
-        root.mkdir()
+        ziproot = Path(dirpath, 'ziproot')
+        ziproot.mkdir()
         projectname = 'Concern'
-        git('clone', '--single-branch', "https://github.com/combatopera/%s" % projectname, root / projectname)
-        foldername = "Concern-%s" % git('rev-parse', '--short', '@', cwd = root / projectname).stdout.decode().rstrip()
-        for path in root.glob('*/.git'):
+        git('clone', '--single-branch', "https://github.com/combatopera/%s" % projectname, ziproot / projectname)
+        foldername = "Concern-%s" % git('rev-parse', '--short', '@', cwd = ziproot / projectname).stdout.decode().rstrip()
+        for path in ziproot.glob('*/.git'):
             shutil.rmtree(path)
-        root.rename(root.parent / foldername)
+        ziproot.rename(ziproot.parent / foldername)
         zip('-r', Path("%s.zip" % foldername).resolve(), foldername, cwd = dirpath)
 
 if '__main__' == __name__:
