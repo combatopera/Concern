@@ -17,19 +17,45 @@
 # You should have received a copy of the GNU General Public License
 # along with Concern.  If not, see <http://www.gnu.org/licenses/>.
 
+from initlogging import logging
 from system import git, zip
 from pathlib import Path
-import tempfile, shutil
+import tempfile, shutil, aridity
+
+log = logging.getLogger(__name__)
+githuburl = "https://github.com/combatopera"
+leafprojectname = 'Concern'
+
+class VersionConflictException(Exception): pass
 
 def main():
     with tempfile.TemporaryDirectory() as tempdir:
-        ziproot = Path(tempdir, 'ziproot')
-        projectname = 'Concern'
-        git('clone', '--single-branch', "https://github.com/combatopera/%s" % projectname, ziproot / projectname)
-        foldername = "Concern-%s" % git('rev-parse', '--short', '@', cwd = ziproot / projectname).stdout.decode().rstrip()
-        for path in ziproot.glob('*/.git'):
+        projectsdir = Path(tempdir, 'projects')
+        projects = {(leafprojectname, 'master')}
+        doneprojects = set()
+        while projects != doneprojects:
+            remaining = sorted(projects - doneprojects)
+            log.info("Remaining: %s", remaining)
+            projectname, branch = remaining[0]
+            projectpath = projectsdir / projectname
+            if projectpath.exists():
+                raise VersionConflictException
+            git('clone', '--branch', branch, '--single-branch', "%s/%s" % (githuburl, projectname), projectpath)
+            context = aridity.Context()
+            with aridity.Repl(context) as repl:
+                repl.printf('projects := $list()')
+                repl.printf('branch := $fork()')
+                repl.printf(". %s", projectpath / 'project.arid')
+            depbranches = context.resolved('branch').unravel()
+            for depname in context.resolved('projects').unravel():
+                projects.add((depname, depbranches.get(depname, 'master')))
+            doneprojects.add((projectname, branch))
+        foldername = "%s-%s" % (
+                leafprojectname,
+                git('rev-parse', '--short', '@', cwd = projectsdir / leafprojectname).stdout.decode().rstrip())
+        for path in projectsdir.glob('*/.git'):
             shutil.rmtree(path)
-        ziproot.rename(ziproot.parent / foldername)
+        projectsdir.rename(projectsdir.parent / foldername)
         zip('-r', Path("%s.zip" % foldername).resolve(), foldername, cwd = tempdir)
 
 if '__main__' == __name__:

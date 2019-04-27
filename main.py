@@ -15,11 +15,12 @@
 # You should have received a copy of the GNU General Public License
 # along with Concern.  If not, see <http://www.gnu.org/licenses/>.
 
+from initlogging import logging
 from aridimpl.model import Function, Number
 from system import screen
 from termios import TIOCGWINSZ
 from pathlib import Path
-import tempfile, sys, aridity, shutil, struct, fcntl, subprocess, shlex, logging, os, argparse
+import tempfile, sys, aridity, shutil, struct, fcntl, subprocess, shlex, os, argparse
 
 log = logging.getLogger(__name__)
 
@@ -38,7 +39,6 @@ def getconfig(context, *names):
     return values
 
 def main():
-    logging.basicConfig(format = "[%(levelname)s] %(message)s", level = logging.DEBUG)
     parser = argparse.ArgumentParser()
     parser.add_argument('--chdir', type = os.path.expanduser)
     config, vimargs = parser.parse_known_args()
