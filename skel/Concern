@@ -9,7 +9,8 @@ def main():
     requirementspath = context / '.requirements.txt'
     if requirementspath.exists():
         venv.create(str(venvpath), with_pip = True)
-        subprocess.check_call([str(venvpath / 'bin' / 'pip'), 'install', '-r', str(requirementspath)])
+        for args in ['wheel'], ['-r', str(requirementspath)]:
+            subprocess.check_call([str(venvpath / 'bin' / 'pip'), 'install'] + args)
         requirementspath.unlink()
     os.environ['MINICONDA3_HOME'] = str(venvpath)
     projects = context / 'projects'
