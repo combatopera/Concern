@@ -27,7 +27,7 @@ def main():
         root.mkdir()
         projectname = 'Concern'
         git('clone', '--single-branch', "https://github.com/combatopera/%s" % projectname, root / projectname)
-        foldername = "Concern-%s" % git('rev-parse', '--short', '@').stdout.decode().rstrip()
+        foldername = "Concern-%s" % git('rev-parse', '--short', '@', cwd = root / projectname).stdout.decode().rstrip()
         for path in root.glob('*/.git'):
             shutil.rmtree(path)
         root.rename(root.parent / foldername)
