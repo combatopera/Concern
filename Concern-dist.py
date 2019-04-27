@@ -28,7 +28,8 @@ def main():
         projectname = 'Concern'
         git('clone', '--single-branch', "https://github.com/combatopera/%s" % projectname, root / projectname)
         foldername = "Concern-%s" % git('rev-parse', '--short', '@').stdout.decode().rstrip()
-        shutil.rmtree(root / projectname / '.git')
+        for path in root.glob('*/.git'):
+            shutil.rmtree(path)
         root.rename(root.parent / foldername)
         zip('-r', Path("%s.zip" % foldername).resolve(), foldername, cwd = dirpath)
 
