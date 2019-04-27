@@ -70,6 +70,8 @@ def main():
                 path = projectpath / name
                 if path.exists():
                     path.unlink()
+            with (projectpath / '.pyven.arid').open('w') as f:
+                print("branch = %s" % aridity.Repl.quote(branch), file = f)
             doneprojects.add((projectname, branch))
         with (ziproot / '.requirements.txt').open('w') as f:
             for dep in deps:
