@@ -25,20 +25,24 @@ import tempfile, shutil, aridity
 log = logging.getLogger(__name__)
 githuburl = "https://github.com/combatopera"
 leafprojectname = 'Concern'
-hashlen = 7
+shorthashlen = 7
 
 class VersionConflictException(Exception): pass
 
 class ObstructionException(Exception): pass
 
 def main():
+    longhash = git('ls-remote', "%s/%s" % (githuburl, leafprojectname), 'master').stdout.decode()[:40]
+    projects = {(leafprojectname, longhash)} | {(name, 'master') for name in ['pyven', 'FoxDot']}
+    foldername = "%s-%s" % (leafprojectname, longhash[:shorthashlen])
+    zippath = Path("%s.zip" % foldername)
+    if zippath.exists():
+        raise ObstructionException(zippath)
     with tempfile.TemporaryDirectory() as tempdir:
-        ziproot = Path(tempdir, 'ziproot')
+        ziproot = Path(tempdir, foldername)
         shutil.copytree(Path(__file__).parent / 'skel', ziproot)
         projectsdir = ziproot / 'projects'
         projectsdir.mkdir()
-        longhash = git('ls-remote', "%s/%s" % (githuburl, leafprojectname), 'master').stdout.decode()[:40]
-        projects = {(leafprojectname, longhash)} | {(name, 'master') for name in ['pyven', 'FoxDot']}
         doneprojects = set()
         while projects != doneprojects:
             remaining = sorted(projects - doneprojects)
@@ -64,11 +68,6 @@ def main():
                 if path.exists():
                     path.unlink()
             doneprojects.add((projectname, branch))
-        foldername = "%s-%s" % (leafprojectname, longhash[:hashlen])
-        ziproot.rename(ziproot.parent / foldername)
-        zippath = Path("%s.zip" % foldername)
-        if zippath.exists():
-            raise ObstructionException(zippath)
         zip('-r', zippath.resolve(), foldername, cwd = tempdir)
         unzip('-t', zippath, stdout = None)
 
