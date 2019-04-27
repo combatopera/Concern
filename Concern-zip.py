@@ -75,7 +75,6 @@ def main():
             for dep in deps:
                 print(dep, file = f)
         zip('-r', zippath.resolve(), foldername, cwd = tempdir)
-        unzip('-t', zippath, stdout = None)
 
 if '__main__' == __name__:
     main()
