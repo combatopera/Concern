@@ -17,8 +17,11 @@
 # You should have received a copy of the GNU General Public License
 # along with Concern.  If not, see <http://www.gnu.org/licenses/>.
 
+from initlogging import logging
 from pathlib import Path
 import argparse, os, subprocess, json, sys
+
+log = logging.getLogger(__name__)
 
 def _commonparser():
     parser = argparse.ArgumentParser()
@@ -65,6 +68,7 @@ imagename = 'concern'
 commands = {f.__name__: f for f in [install, uninstall]}
 
 def main():
+    log.warning('Docker support is experimental, do not expect everything to work.')
     args = sys.argv[1:]
     if args:
         command = commands.get(args[0])
