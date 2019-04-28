@@ -74,7 +74,7 @@ def main():
                 print("branch = %s" % aridity.Repl.quote(branch), file = f)
             doneprojects.add((projectname, branch))
         with (ziproot / '.requirements.txt').open('w') as f:
-            for dep in deps:
+            for dep in sorted(deps):
                 print(dep, file = f)
         zip('-r', zippath.resolve(), foldername, cwd = tempdir)
 
