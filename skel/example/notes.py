@@ -1,5 +1,3 @@
-#!/usr/bin/env pyven
-
 # Copyright 2019 Andrzej Cichocki
 
 # This file is part of Concern.
