@@ -38,10 +38,6 @@ def _getgeneration(fetch):
             return max(generations) + fetch
     return 1
 
-def rustic(cmdargs):
-    argv = ['/usr/bin/env', 'pyven', str(Path(__file__).parent / 'main.py')] + cmdargs
-    os.execvp(argv[0], argv)
-
 def install(cmdargs): # TODO LATER: Mac and/or Windows host support.
     parser = _commonparser()
     parser.add_argument('--fetch', action = 'store_true')
@@ -66,7 +62,7 @@ def uninstall(cmdargs):
     subprocess.check_call(['docker', 'rm', '--force', config.name])
 
 imagename = 'concern'
-commands = {f.__name__: f for f in [rustic, install, uninstall]}
+commands = {f.__name__: f for f in [install, uninstall]}
 
 def main():
     args = sys.argv[1:]
@@ -79,7 +75,7 @@ def main():
     subprocess.check_call(['docker', 'start', config.name]) # Idempotent.
     # TODO LATER: Allow run from outside home directory assuming absolute paths in args.
     argv = ['docker', 'exec', '--interactive', '--tty', config.name,
-            '/usr/bin/env', 'pyven', '/opt/Concern/main.py',
+            '/opt/Concern/Concern.py',
             '--chdir', "~/%s" % str(Path.cwd().relative_to(Path.home())).replace(os.sep, '/')] + fwdargs
     os.execvp(argv[0], argv)
 
