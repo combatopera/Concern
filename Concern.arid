@@ -19,7 +19,7 @@ Concern
     command = bash -c $.(while true; do
         $(shellCommand)
         echo $shstr$(windowName) exited with status: $'($?) >&2
-        read -p 'Press enter to restart it.' || break
+        read -p "Press enter to restart it, or your system's EOF key combination to finish." || break
     done)
     foxdot
         fraction = $div(1 3)
