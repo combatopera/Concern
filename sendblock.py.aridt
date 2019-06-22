@@ -16,12 +16,12 @@
 # along with Concern.  If not, see <http://www.gnu.org/licenses/>.
 
 from getblock import readblock
-from screen import stuff
+from screen import Stuff
 from collections import OrderedDict
 import sys
 
 def foxdot():
-    stuff(session, window, readblock())
+    Stuff(session, window, doublequotekey)(readblock())
 
 def main():
     _, stroke = (sys.argv.pop(1) for _ in range(2))
@@ -30,6 +30,7 @@ def main():
 dispatch = $repr$(target)
 session = $"$(sessionName) # TODO LATER: Support more than one session.
 window = $"$(foxdot windowName)
+doublequotekey = $"$(doubleQuoteKey)
 
 if '__main__' == __name__:
     main()

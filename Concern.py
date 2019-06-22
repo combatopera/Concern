@@ -20,6 +20,7 @@
 from initlogging import logging
 from aridimpl.model import Function, Number
 from system import screen
+from screen import screenenv
 from termios import TIOCGWINSZ
 from pathlib import Path
 import tempfile, sys, aridity, shutil, struct, fcntl, os, argparse
@@ -79,7 +80,8 @@ def main():
             printf('Concern < screenrc.aridt')
         for path in tempdir / 'getblock.py',:
             shutil.copy2(str(projectdir / path.name), str(path))
-        screen('-S', context.resolved('Concern', 'sessionName').value, '-c', str(screenrc))
+        doublequotekey = context.resolved('Concern', 'doubleQuoteKey').value
+        screen('-S', context.resolved('Concern', 'sessionName').value, '-c', str(screenrc), env = screenenv(doublequotekey))
 
 if '__main__' == __name__:
     main()
