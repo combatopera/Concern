@@ -17,7 +17,6 @@
 
 projects +=
     aridity
-    pym2149
     system
 pyversions += 3
 executable = true

@@ -33,7 +33,7 @@ class ObstructionException(Exception): pass
 
 def main():
     longhash = git('ls-remote', "%s/%s" % (githuburl, leafprojectname), 'master').stdout.decode()[:40]
-    projects = {(leafprojectname, longhash)} | {(name, 'master') for name in ['pyven', 'FoxDot']}
+    projects = {(leafprojectname, longhash), ('pyven', 'master')}
     foldername = "%s-%s" % (leafprojectname, longhash[:shorthashlen])
     zippath = Path("%s.zip" % foldername)
     if zippath.exists():

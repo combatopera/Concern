@@ -16,34 +16,18 @@
 # along with Concern.  If not, see <http://www.gnu.org/licenses/>.
 
 from getblock import readblock, ReadBlocks
-from pym2149 import osctrl
 from screen import stuff
 from collections import OrderedDict
 import socket, sys, os
-
-def sclang():
-    readblocks = ReadBlocks()
-    n = 1
-    while True:
-        chunks = [osctrl.Message('/foxdot', [text]).ser() for text in readblocks(n)]
-        if not chunks:
-            return # Nothing to send.
-        if max(len(chunk) for chunk in chunks) <= bufsize:
-            break
-        n *= 2
-    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # XXX: Close it?
-    for chunk in chunks:
-        sock.sendto(chunk, ('localhost', 57120))
 
 def foxdot():
     stuff(session, window, readblock())
 
 def main():
-    script, stroke = (sys.argv.pop(1) for _ in range(2))
-    globals()[dispatch[os.path.basename(script)][stroke]]()
+    _, stroke = (sys.argv.pop(1) for _ in range(2))
+    globals()[dispatch['patterns.py'][stroke]]()
 
 dispatch = $repr$(target)
-bufsize = $(pym2149 bufsize)
 session = $"$(sessionName) # TODO LATER: Support more than one session.
 window = $"$(foxdot windowName)
 

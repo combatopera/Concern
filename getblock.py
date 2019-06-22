@@ -20,7 +20,7 @@ import re, sys
 toplevel = re.compile(r'^\S')
 anytext = re.compile(r'\S')
 eol = '\n' # FoxDot uses API so anything is fine.
-pilcrow = '\xb6'
+pilcrow = eol
 
 def istoplevel(line):
     return toplevel.search(line) is not None

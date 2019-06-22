@@ -26,26 +26,16 @@ Concern
         size = $toAbsWidth$(fraction)
         windowName = FoxDot
         home = $/($(cwd) .. FoxDot)
-        shellCommand = $shstr$/($(home) FoxDot.py) --no-startup --pipe --updaterate $shstr$(pym2149 updaterate)
+        shellCommand = PYTHONPATH=$shstr$(home) python3 -m FoxDot --pipe
     sessionName = Concern
-    synths
-        pym2149
-            executable = $/($(cwd) .. pym2149 foxdot2portaudio.py)
-            windowName = pym2149
-            shellCommand = $shstr$(executable) --session $shstr$(sessionName) --window $shstr$(foxdot windowName)
     sendKey
         default = <CR>
         alternate = ]
     target
-        notes.py
-            default = sclang
-            alternate = foxdot
         patterns.py
             default = foxdot
             alternate = sclang
     vimArgs +=
-        -o
-        notes.py
         $/($(foxdot home) FoxDot demo)
     vim
         windowName = Vim

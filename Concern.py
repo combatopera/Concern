@@ -22,7 +22,7 @@ from aridimpl.model import Function, Number
 from system import screen
 from termios import TIOCGWINSZ
 from pathlib import Path
-import tempfile, sys, aridity, shutil, struct, fcntl, subprocess, shlex, os, argparse
+import tempfile, sys, aridity, shutil, struct, fcntl, os, argparse
 
 log = logging.getLogger(__name__)
 
@@ -30,15 +30,6 @@ def toabswidth(context, resolvable):
     winsize = 'HHHH'
     ws_col = struct.unpack(winsize, fcntl.ioctl(sys.stdin, TIOCGWINSZ, bytes(struct.calcsize(winsize))))[1]
     return Number(round(resolvable.resolve(context).value * (ws_col - 1))) # Take off 1 for the separator.
-
-def getconfig(context, *names):
-    command = context.resolved('Concern', 'synths', 'pym2149', 'shellCommand').value
-    for name in names:
-        command += ' --repr ' + shlex.quote(name)
-    from collections import OrderedDict
-    values = list(map(eval, subprocess.check_output(['bash', '-c', command]).splitlines()))
-    del OrderedDict
-    return values
 
 def main():
     parser = argparse.ArgumentParser()
@@ -74,10 +65,6 @@ def main():
             printf("\tinterpreter = %s", sys.executable)
             printf("\tvimrcPath = %s", concernvimrc)
             printf("\tsendblock = %s", sendblock)
-            printf('\tpym2149')
-            foxdot, updaterate = getconfig(context, 'FoxDot', 'updaterate')
-            printf("\t\tbufsize = %s", foxdot['bufsize'])
-            printf("\t\tupdaterate = %s", updaterate)
             if vimargs:
                 printf('\tvimArgs := $list()')
                 for arg in vimargs:

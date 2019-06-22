@@ -1,11 +1,6 @@
 vbell off
 split -v
-$join$map(
-    $(synths)
-    $.[screen $join($map($,(command) w $"$(w)) $.( ))
-title $(windowName)
-$try($.[stuff $"$(stdin)
-] $.[])])focus
+focus
 resize $(foxdot size)
 screen $join($map($,(foxdot command) w $"$(w)) $.( ))
 title $(foxdot windowName)

@@ -1,5 +1,5 @@
 # Concern
-Run FoxDot with Vim and pym2149
+Run FoxDot with Vim
 ## Install
 * Get the latest zip file from https://github.com/combatopera/Concern/releases/latest
 ### Linux
