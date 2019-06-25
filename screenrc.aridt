@@ -1,9 +1,9 @@
 vbell off
 split -v
 focus
-resize $(foxdot size)
-screen $join($map($,(foxdot command) w $"$(w)) $.( ))
-title $(foxdot windowName)
+resize $(consumer size)
+screen $join($map($,(consumer command) w $"$(w)) $.( ))
+title $(consumer windowName)
 focus
 screen $join($map($,(vim command) w $"$(w)) $.( ))
 title $(vim windowName)

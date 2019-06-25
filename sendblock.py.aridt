@@ -29,7 +29,7 @@ def main():
 
 dispatch = $repr$(target)
 session = $"$(sessionName) # TODO LATER: Support more than one session.
-window = $"$(foxdot windowName)
+window = $"$(consumer windowName)
 doublequotekey = $"$(doubleQuoteKey)
 
 if '__main__' == __name__:
