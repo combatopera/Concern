@@ -22,13 +22,15 @@ Concern
         read -p "Press enter to restart it, or your system's EOF key combination to finish." || break
     done)
     foxdot
-        fraction = $div(1 3)
-        size = $toAbsWidth$(fraction)
-        windowName = FoxDot
         home = $/($(cwd) .. FoxDot)
         demoPath = $/($(home) FoxDot demo)
         shellCommand = PYTHONPATH=$shstr$(home) python3 -m FoxDot --pipe
-    consumer = $(foxdot)
+    consumer
+        fraction = $div(1 3)
+        size = $toAbsWidth$(fraction)
+        windowName = FoxDot
+        demoPath = $(foxdot demoPath)
+        shellCommand = $(foxdot shellCommand)
     sessionName = Concern
     sendKey
         default = <CR>
