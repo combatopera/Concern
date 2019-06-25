@@ -26,6 +26,7 @@ Concern
         size = $toAbsWidth$(fraction)
         windowName = FoxDot
         home = $/($(cwd) .. FoxDot)
+        demo = $/($(home) FoxDot demo)
         shellCommand = PYTHONPATH=$shstr$(home) python3 -m FoxDot --pipe
     sessionName = Concern
     sendKey
@@ -36,7 +37,7 @@ Concern
             default = foxdot
             alternate = sclang
     vimArgs +=
-        $/($(foxdot home) FoxDot demo)
+        $(foxdot demo)
     vim
         windowName = Vim
         shellCommand = vim -u $shstr$(vimrcPath) $join($map($(vimArgs) a $shstr$(a)) $.( ))
