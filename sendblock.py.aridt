@@ -20,7 +20,7 @@ from screen import Stuff
 from collections import OrderedDict
 import sys
 
-def foxdot():
+def stuff():
     Stuff(session, window, doublequotekey)(readblock())
 
 def main():
