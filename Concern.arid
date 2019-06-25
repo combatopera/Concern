@@ -34,9 +34,8 @@ Concern
         default = <CR>
         alternate = ]
     target
-        patterns.py
-            default = stuff
-            alternate = sclang
+        default = stuff
+        alternate = sclang
     vimArgs +=
         $(consumer demoPath)
     vim

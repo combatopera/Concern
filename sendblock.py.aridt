@@ -25,7 +25,7 @@ def stuff():
 
 def main():
     _, stroke = (sys.argv.pop(1) for _ in range(2))
-    globals()[dispatch['patterns.py'][stroke]]()
+    globals()[dispatch[stroke]]()
 
 dispatch = $repr$(target)
 session = $"$(sessionName) # TODO LATER: Support more than one session.
