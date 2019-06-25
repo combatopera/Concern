@@ -4,6 +4,7 @@ focus
 resize $(consumer size)
 screen $join($map($,(consumer command) w $"$(w)) $.( ))
 title $(consumer windowName)
+scrollback $(consumer scrollback)
 focus
 screen $join($map($,(vim command) w $"$(w)) $.( ))
 title $(vim windowName)

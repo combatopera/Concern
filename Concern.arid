@@ -29,6 +29,7 @@ Concern
         fraction = $div(1 3)
         size = $toAbsWidth$(fraction)
         windowName = FoxDot
+        scrollback = 10000
         demoPath = $(foxdot demoPath)
         shellCommand = $(foxdot shellCommand)
     sessionName = Concern
