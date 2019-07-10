@@ -1,6 +1,6 @@
 # Concern
 
-Use Vim to control FoxDot with the aid of GNU Screen.
+Use Vim to control FoxDot or pym2149 with the aid of GNU Screen.
 
 ## Install
 
