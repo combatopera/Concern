@@ -58,7 +58,7 @@ class ReadBlocks:
             self.last = len(self.text.splitlines())
 
     def readblock(self):
-        return getblock(self.text, self.first, self.last, pilcrow)
+        return getblockimpl(self.text.splitlines(), self.first, self.last, pilcrow)[2]
 
     def __call__(self, n):
         first = self.first
