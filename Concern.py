@@ -77,7 +77,7 @@ def main():
             printf('Concern < vimrc.aridt')
             printf('" = $(pystr)')
             printf("redirect %s", sendblock)
-            printf('Concern < sendblock.py.aridt')
+            printf('Concern < $/(Concern sendblock.py.aridt)')
             printf('" = $(screenstr)')
             printf("redirect %s", screenrc)
             printf('Concern < screenrc.aridt')
