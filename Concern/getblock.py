@@ -57,10 +57,10 @@ class ReadBlocks:
         if 'alternate' == stroke:
             self.last = len(self.lines)
 
-    def readblock(self):
+    def monolith(self):
         return getblockimpl(self.lines, self.first, self.last, pilcrow)[2]
 
-    def __call__(self, n):
+    def chunked(self, n):
         first = self.first
         for i in range(n):
             # Most importantly last must achieve self.last:

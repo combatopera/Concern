@@ -23,7 +23,7 @@ import socket, sys, os, timelyOSC
 def OSC(readblocks):
     n = 1
     while True:
-        chunks = [timelyOSC.Message('/lc', [text]).ser() for text in readblocks(n)]
+        chunks = [timelyOSC.Message('/lc', [text]).ser() for text in readblocks.chunked(n)]
         if not chunks:
             return # Nothing to send.
         if max(len(chunk) for chunk in chunks) <= bufsize:
@@ -34,7 +34,7 @@ def OSC(readblocks):
         sock.sendto(chunk, ('localhost', port))
 
 def stuff(readblocks):
-    Stuff(session, window, doublequotekey)(readblocks.readblock())
+    Stuff(session, window, doublequotekey)(readblocks.monolith())
 
 def main():
     _, stroke = (sys.argv.pop(1) for _ in range(2))
