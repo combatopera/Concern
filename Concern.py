@@ -82,7 +82,7 @@ def main():
             printf("redirect %s", screenrc)
             printf('Concern < screenrc.aridt')
         for path in tempdir / 'getblock.py',:
-            shutil.copy2(str(projectdir / path.name), str(path))
+            shutil.copy2(str(projectdir / 'Concern' / path.name), str(path))
         doublequotekey = context.resolved('Concern', 'doubleQuoteKey').value
         screen('-S', context.resolved('Concern', 'sessionName').value, '-c', str(screenrc), env = screenenv(doublequotekey))
 
