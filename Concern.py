@@ -17,7 +17,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Concern.  If not, see <http://www.gnu.org/licenses/>.
 
-from initlogging import logging
+from Concern.initlogging import logging
 from aridimpl.model import Function, Number
 from system import screen
 from screen import screenenv
