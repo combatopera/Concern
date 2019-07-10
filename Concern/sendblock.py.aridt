@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Concern.  If not, see <http://www.gnu.org/licenses/>.
 
-from getblock import readblock, ReadBlocks
+from getblock import ReadBlocks
 from screen import Stuff
 from collections import OrderedDict
 import socket, sys, os, timelyOSC
@@ -35,7 +35,8 @@ def OSC(stroke):
         sock.sendto(chunk, ('localhost', port))
 
 def stuff(stroke):
-    Stuff(session, window, doublequotekey)(readblock(stroke))
+    readblocks = ReadBlocks(stroke)
+    Stuff(session, window, doublequotekey)(readblocks.readblock())
 
 def main():
     _, stroke = (sys.argv.pop(1) for _ in range(2))

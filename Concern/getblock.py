@@ -50,14 +50,14 @@ def getblockimpl(text, first, last, pilcrow):
     lines[last] # Check for out of range.
     return first, last, eol.join(l for l in lines[first:last + 1] if hastext(l)) + pilcrow + eol
 
-def readblock(stroke):
-    return getblock(sys.stdin.read(), *map(int, sys.argv[1:]), pilcrow)
-
 class ReadBlocks:
 
     def __init__(self, stroke):
         self.text = sys.stdin.read()
         self.first, self.last = map(int, sys.argv[1:])
+
+    def readblock(self):
+        return getblock(self.text, self.first, self.last, pilcrow)
 
     def __call__(self, n):
         first = self.first
