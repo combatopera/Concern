@@ -23,7 +23,7 @@ from system import screen
 from screen import screenenv
 from termios import TIOCGWINSZ
 from pathlib import Path
-import tempfile, sys, aridity, shutil, struct, fcntl, os, argparse
+import tempfile, sys, aridity, shutil, struct, fcntl, os, argparse, importlib
 
 log = logging.getLogger(__name__)
 
@@ -70,6 +70,9 @@ def main():
                 printf('\tvimArgs := $list()')
                 for arg in vimargs:
                     printf("\tvimArgs += %s", arg)
+        importlib.import_module("Concern.%s" % context.resolved('Concern', 'consumerName').value).configure(context)
+        with aridity.Repl(context) as repl:
+            printf = repl.printf
             printf("redirect %s", concernvimrc)
             printf('Concern < vimrc.aridt')
             printf('" = $(pystr)')
