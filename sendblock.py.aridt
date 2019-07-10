@@ -21,8 +21,6 @@ from collections import OrderedDict
 import socket, sys, os, timelyOSC
 
 def OSC(stroke):
-    bufsize = $(consumer bufsize)
-    port = $(consumer port)
     readblocks = ReadBlocks(stroke)
     n = 1
     while True:
@@ -44,6 +42,8 @@ def main():
     globals()[interface](stroke)
 
 interface = $"$(consumer interface)
+bufsize = $(consumer bufsize)
+port = $(consumer port)
 session = $"$(sessionName) # TODO LATER: Support more than one session.
 window = $"$(consumer windowName)
 doublequotekey = $"$(doubleQuoteKey)
