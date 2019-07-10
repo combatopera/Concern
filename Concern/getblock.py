@@ -52,20 +52,20 @@ def getblockimpl(lines, first, last, pilcrow):
 class ReadBlocks:
 
     def __init__(self, stroke):
-        self.text = sys.stdin.read()
+        self.lines = sys.stdin.read().splitlines()
         self.first, self.last = map(int, sys.argv[1:])
         if 'alternate' == stroke:
-            self.last = len(self.text.splitlines())
+            self.last = len(self.lines)
 
     def readblock(self):
-        return getblockimpl(self.text.splitlines(), self.first, self.last, pilcrow)[2]
+        return getblockimpl(self.lines, self.first, self.last, pilcrow)[2]
 
     def __call__(self, n):
         first = self.first
         for i in range(n):
             # Most importantly last must achieve self.last:
             last = first + (self.last - first) // (n - i)
-            _, actuallast, block = getblockimpl(self.text.splitlines(), first, last, '')
+            _, actuallast, block = getblockimpl(self.lines, first, last, '')
             if actuallast is not None:
                 yield block
                 first = actuallast + 1
