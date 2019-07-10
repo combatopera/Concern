@@ -39,9 +39,6 @@ Concern
     sendKey
         default = <CR>
         alternate = ]
-    target
-        default = $(consumer interface)
-        alternate = TODO
     vimArgs +=
         $(consumer demoPath)
     vim

@@ -25,9 +25,9 @@ def stuff():
 
 def main():
     _, stroke = (sys.argv.pop(1) for _ in range(2))
-    globals()[dispatch[stroke]]()
+    globals()[interface]()
 
-dispatch = $repr$(target)
+interface = $"$(consumer interface)
 session = $"$(sessionName) # TODO LATER: Support more than one session.
 window = $"$(consumer windowName)
 doublequotekey = $"$(doubleQuoteKey)
