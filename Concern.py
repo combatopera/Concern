@@ -74,13 +74,13 @@ def main():
         with aridity.Repl(context) as repl:
             printf = repl.printf
             printf("redirect %s", concernvimrc)
-            printf('Concern < vimrc.aridt')
+            printf('Concern < $/(Concern vimrc.aridt)')
             printf('" = $(pystr)')
             printf("redirect %s", sendblock)
             printf('Concern < $/(Concern sendblock.py.aridt)')
             printf('" = $(screenstr)')
             printf("redirect %s", screenrc)
-            printf('Concern < screenrc.aridt')
+            printf('Concern < $/(Concern screenrc.aridt)')
         for path in tempdir / 'getblock.py',:
             shutil.copy2(str(projectdir / 'Concern' / path.name), str(path))
         doublequotekey = context.resolved('Concern', 'doubleQuoteKey').value
