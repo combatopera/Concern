@@ -20,8 +20,7 @@ from screen import Stuff
 from collections import OrderedDict
 import socket, sys, os, timelyOSC
 
-def OSC(stroke):
-    readblocks = ReadBlocks(stroke)
+def OSC(readblocks):
     n = 1
     while True:
         chunks = [timelyOSC.Message('/lc', [text]).ser() for text in readblocks(n)]
@@ -34,13 +33,12 @@ def OSC(stroke):
     for chunk in chunks:
         sock.sendto(chunk, ('localhost', port))
 
-def stuff(stroke):
-    readblocks = ReadBlocks(stroke)
+def stuff(readblocks):
     Stuff(session, window, doublequotekey)(readblocks.readblock())
 
 def main():
     _, stroke = (sys.argv.pop(1) for _ in range(2))
-    globals()[interface](stroke)
+    globals()[interface](ReadBlocks(stroke))
 
 interface = $"$(consumer interface)
 bufsize = $(consumer bufsize)
