@@ -18,6 +18,7 @@
 projects +=
     aridity
     system
+    timelyOSC
 pyversions += 3
 executable = true
 years += 2019
