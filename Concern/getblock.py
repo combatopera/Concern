@@ -55,6 +55,8 @@ class ReadBlocks:
     def __init__(self, stroke):
         self.text = sys.stdin.read()
         self.first, self.last = map(int, sys.argv[1:])
+        if 'alternate' == stroke:
+            self.last = len(self.text.splitlines())
 
     def readblock(self):
         return getblock(self.text, self.first, self.last, pilcrow)
