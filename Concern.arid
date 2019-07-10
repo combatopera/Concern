@@ -41,6 +41,8 @@ Concern
         demoPath = $($(consumerName) demoPath)
         shellCommand = $($(consumerName) shellCommand)
         interface = $($(consumerName) interface)
+        bufsize = None
+        port = None
     sessionName = Concern
     sendKey
         default = <CR>
