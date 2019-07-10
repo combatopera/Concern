@@ -20,12 +20,12 @@ from screen import Stuff
 from collections import OrderedDict
 import sys
 
-def stuff():
-    Stuff(session, window, doublequotekey)(readblock())
+def stuff(stroke):
+    Stuff(session, window, doublequotekey)(readblock(stroke))
 
 def main():
     _, stroke = (sys.argv.pop(1) for _ in range(2))
-    globals()[interface]()
+    globals()[interface](stroke)
 
 interface = $"$(consumer interface)
 session = $"$(sessionName) # TODO LATER: Support more than one session.
