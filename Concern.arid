@@ -27,6 +27,12 @@ Concern
         demoPath = $/($(home) FoxDot demo)
         shellCommand = PYTHONPATH=$shstr$(home) python3 -m FoxDot --pipe
         interface = stuff
+    pym2149
+        title = pym2149
+        home = $/($(cwd) .. pym2149)
+        demoPath = $/($(home) contrib)
+        shellCommand = $/($(home) lc2jack.py) --config $shstr($.(pianorollenabled = false)) /dev/null
+        interface = OSC
     consumer
         fraction = $div(1 3)
         size = $toAbsWidth$(fraction)
