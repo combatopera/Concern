@@ -29,10 +29,9 @@ def hastext(line):
     return anytext.search(line) is not None
 
 def getblock(text, first, last, pilcrow):
-    return getblockimpl(text, first, last, pilcrow)[2]
+    return getblockimpl(text.splitlines(), first, last, pilcrow)[2]
 
-def getblockimpl(text, first, last, pilcrow):
-    lines = text.splitlines()
+def getblockimpl(lines, first, last, pilcrow):
     max = len(lines) - 1
     first -= 1
     last -= 1
@@ -66,7 +65,7 @@ class ReadBlocks:
         for i in range(n):
             # Most importantly last must achieve self.last:
             last = first + (self.last - first) // (n - i)
-            _, actuallast, block = getblockimpl(self.text, first, last, '')
+            _, actuallast, block = getblockimpl(self.text.splitlines(), first, last, '')
             if actuallast is not None:
                 yield block
                 first = actuallast + 1
