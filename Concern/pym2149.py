@@ -27,9 +27,9 @@ def _getconfig(context, *names):
     return values
 
 def configure(context):
-    consumerinfo, = _getconfig(context, 'FoxDot')
+    consumerinfo, = _getconfig(context, 'OSC')
     with aridity.Repl(context) as repl:
         printf = repl.printf
         printf('Concern consumer')
         printf("\tbufsize = %s", consumerinfo['bufsize'])
-        printf("\tport = %s", consumerinfo['pym2149']['port'])
+        printf("\tport = %s", consumerinfo['port'])
