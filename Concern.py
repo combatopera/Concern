@@ -17,7 +17,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Concern.  If not, see <http://www.gnu.org/licenses/>.
 
-from Concern.initlogging import logging
+from concernlib.initlogging import logging
 from aridimpl.model import Function, Number
 from lagoon import screen
 from screen import screenenv
@@ -70,19 +70,19 @@ def main():
                 printf('\tvimArgs := $list()')
                 for arg in vimargs:
                     printf("\tvimArgs += %s", arg)
-        importlib.import_module("Concern.%s" % context.resolved('Concern', 'consumerName').value).configure(context)
+        importlib.import_module("concernlib.%s" % context.resolved('Concern', 'consumerName').value).configure(context)
         with aridity.Repl(context) as repl:
             printf = repl.printf
             printf("redirect %s", concernvimrc)
-            printf('Concern < $/(Concern vimrc.aridt)')
+            printf('Concern < $/(concernlib vimrc.aridt)')
             printf('" = $(pystr)')
             printf("redirect %s", sendblock)
-            printf('Concern < $/(Concern sendblock.py.aridt)')
+            printf('Concern < $/(concernlib sendblock.py.aridt)')
             printf('" = $(screenstr)')
             printf("redirect %s", screenrc)
-            printf('Concern < $/(Concern screenrc.aridt)')
+            printf('Concern < $/(concernlib screenrc.aridt)')
         for path in tempdir / 'getblock.py',:
-            shutil.copy2(str(projectdir / 'Concern' / path.name), str(path))
+            shutil.copy2(str(projectdir / 'concernlib' / path.name), str(path))
         doublequotekey = context.resolved('Concern', 'doubleQuoteKey').value
         screen('-S', context.resolved('Concern', 'sessionName').value, '-c', str(screenrc), env = screenenv(doublequotekey))
 
