@@ -19,7 +19,7 @@
 
 from Concern.initlogging import logging
 from aridimpl.model import Function, Number
-from system import screen
+from lagoon import screen
 from screen import screenenv
 from termios import TIOCGWINSZ
 from pathlib import Path

@@ -18,7 +18,7 @@
 # along with Concern.  If not, see <http://www.gnu.org/licenses/>.
 
 from Concern.initlogging import logging
-from system import git, zip, wget, unzip
+from lagoon import git, zip, wget, unzip
 from pathlib import Path
 import tempfile, shutil, aridity
 
