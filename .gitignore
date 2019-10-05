@@ -1,4 +1,3 @@
-*.zip
 #gclean
 __pycache__/
 /Concern.egg-info/
