@@ -65,10 +65,9 @@ def main():
             printf("\tinterpreter = %s", sys.executable)
             printf("\tvimrcPath = %s", concernvimrc)
             printf("\tsendblock = %s", sendblock)
-            if vimargs:
-                printf('\tvimArgs := $list()')
-                for arg in vimargs:
-                    printf("\tvimArgs += %s", arg)
+            printf('\tvimArgs := $list()')
+            for arg in vimargs:
+                printf("\tvimArgs += %s", arg)
         importlib.import_module("concernlib.%s" % context.resolved('Concern', 'consumerName').value).configure(context)
         with aridity.Repl(context) as repl:
             printf = repl.printf

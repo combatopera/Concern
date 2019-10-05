@@ -23,14 +23,10 @@ Concern
     done)
     foxdot
         title = FoxDot
-        home = $/($(cwd) .. FoxDot)
-        demoPath = $/($(home) FoxDot demo)
-        shellCommand = PYTHONPATH=$shstr$(home) python3 -m FoxDot --pipe
+        shellCommand = $shstr$(interpreter) -m FoxDot --pipe
         interface = stuff
     pym2149
         title = pym2149
-        home = $/($(cwd) .. pym2149)
-        demoPath = $/($(home) contrib)
         shellCommand = lc2jack.py --config $shstr($.(pianorollenabled = false)) /dev/null
         interface = OSC
     consumer
@@ -38,7 +34,6 @@ Concern
         size = $toAbsWidth$(fraction)
         scrollback = 10000
         windowName = $($(consumerName) title)
-        demoPath = $($(consumerName) demoPath)
         shellCommand = $($(consumerName) shellCommand)
         interface = $($(consumerName) interface)
         bufsize = None
@@ -47,8 +42,6 @@ Concern
     sendKey
         default = <CR>
         alternate = ]
-    vimArgs +=
-        $(consumer demoPath)
     vim
         windowName = Vim
         shellCommand = vim -u $shstr$(vimrcPath) $join($map($(vimArgs) a $shstr$(a)) $.( ))
