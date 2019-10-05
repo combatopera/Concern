@@ -1,6 +1,6 @@
 source $(vimrc systemPath)
-nnoremap <silent> <Leader>$(sendKey default) :exe 'sil w !$(interpreter) -S $(sendblock)' string(bufname("%")) 'default' line('.') line('.')<CR>
-nnoremap <silent> <Leader>$(sendKey alternate) :exe 'sil w !$(interpreter) -S $(sendblock)' string(bufname("%")) 'alternate' line('.') line('.')<CR>
-vnoremap <silent> <Leader>$(sendKey default) :<C-U>exe 'sil w !$(interpreter) -S $(sendblock)' string(bufname("%")) 'default' line("'<") line("'>")<CR>
-vnoremap <silent> <Leader>$(sendKey alternate) :<C-U>exe 'sil w !$(interpreter) -S $(sendblock)' string(bufname("%")) 'alternate' line("'<") line("'>")<CR>$try[$.(
+nnoremap <silent> <Leader>$(sendKey default) :exe 'sil w !$(interpreter) $(sendblock)' string(bufname("%")) 'default' line('.') line('.')<CR>
+nnoremap <silent> <Leader>$(sendKey alternate) :exe 'sil w !$(interpreter) $(sendblock)' string(bufname("%")) 'alternate' line('.') line('.')<CR>
+vnoremap <silent> <Leader>$(sendKey default) :<C-U>exe 'sil w !$(interpreter) $(sendblock)' string(bufname("%")) 'default' line("'<") line("'>")<CR>
+vnoremap <silent> <Leader>$(sendKey alternate) :<C-U>exe 'sil w !$(interpreter) $(sendblock)' string(bufname("%")) 'alternate' line("'<") line("'>")<CR>$try[$.(
 source $(vimrc userPath)) $.()]
