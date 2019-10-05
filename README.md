@@ -1,11 +1,13 @@
 # Concern
-
 Use Vim to control FoxDot or pym2149 with the aid of GNU Screen.
 
-## Install
+[![Build Status](https://travis-ci.org/combatopera/Concern.svg?branch=master)](https://travis-ci.org/combatopera/Concern)
 
-* Get the latest zip file from <https://github.com/combatopera/Concern/releases/latest>
-
+## Install latest release
+```
+# Tested on Linux and Mac:
+pip3 install --user Concern
+```
 ## Usage
 
 * FoxDot is running in the right hand third of the screen
