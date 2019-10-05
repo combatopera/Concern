@@ -51,7 +51,7 @@ def main():
         with aridity.Repl(context) as repl:
             printf = repl.printf
             printf("cd %s", projectdir)
-            printf('. Concern.arid')
+            printf('. $/(concernlib Concern.arid)')
             settings = Path.home() / '.settings.arid'
             if settings.exists():
                 printf(". %s", settings)
