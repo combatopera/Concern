@@ -19,6 +19,7 @@ projects +=
     aridity
     lagoon
     timelyOSC
+    pyven
 pyversions += 3
 executable = true
 years += 2019
