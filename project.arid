@@ -17,7 +17,7 @@
 
 projects +=
     aridity
-    system
+    lagoon
     timelyOSC
 pyversions += 3
 executable = true
