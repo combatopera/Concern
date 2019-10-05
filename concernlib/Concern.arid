@@ -31,7 +31,7 @@ Concern
         title = pym2149
         home = $/($(cwd) .. pym2149)
         demoPath = $/($(home) contrib)
-        shellCommand = $/($(home) lc2jack.py) --config $shstr($.(pianorollenabled = false)) /dev/null
+        shellCommand = lc2jack.py --config $shstr($.(pianorollenabled = false)) /dev/null
         interface = OSC
     consumer
         fraction = $div(1 3)

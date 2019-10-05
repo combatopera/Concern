@@ -23,7 +23,8 @@ from lagoon import screen
 from screen import screenenv
 from termios import TIOCGWINSZ
 from pathlib import Path
-import tempfile, sys, aridity, shutil, struct, fcntl, os, argparse, importlib, pkg_resources
+from pkg_resources import resource_filename
+import tempfile, sys, aridity, shutil, struct, fcntl, os, argparse, importlib
 
 log = logging.getLogger(__name__)
 
@@ -41,7 +42,6 @@ def main():
     configdir = Path.home() / '.Concern'
     configdir.mkdir(parents = True, exist_ok = True)
     with tempfile.TemporaryDirectory(dir = str(configdir)) as tempdir:
-        projectdir = Path(__file__).resolve().parent
         tempdir = Path(tempdir)
         concernvimrc = tempdir / 'vimrc'
         sendblock = tempdir / 'sendblock.py'
@@ -50,8 +50,7 @@ def main():
         context['Concern', 'toAbsWidth'] = Function(toabswidth)
         with aridity.Repl(context) as repl:
             printf = repl.printf
-            printf("cd %s", projectdir)
-            printf(". %s", pkg_resources.resource_filename('concernlib', 'Concern.arid'))
+            printf(". %s", resource_filename('concernlib', 'Concern.arid'))
             settings = Path.home() / '.settings.arid'
             if settings.exists():
                 printf(". %s", settings)
@@ -74,15 +73,15 @@ def main():
         with aridity.Repl(context) as repl:
             printf = repl.printf
             printf("redirect %s", concernvimrc)
-            printf('Concern < $/(concernlib vimrc.aridt)')
+            printf("Concern < %s", resource_filename('concernlib', 'vimrc.aridt'))
             printf('" = $(pystr)')
             printf("redirect %s", sendblock)
-            printf('Concern < $/(concernlib sendblock.py.aridt)')
+            printf("Concern < %s", resource_filename('concernlib', 'sendblock.py.aridt'))
             printf('" = $(screenstr)')
             printf("redirect %s", screenrc)
-            printf('Concern < $/(concernlib screenrc.aridt)')
+            printf("Concern < %s", resource_filename('concernlib', 'screenrc.aridt'))
         for path in tempdir / 'getblock.py',:
-            shutil.copy2(str(projectdir / 'concernlib' / path.name), str(path))
+            shutil.copy2(resource_filename('concernlib', path.name), str(path))
         doublequotekey = context.resolved('Concern', 'doubleQuoteKey').value
         screen('-S', context.resolved('Concern', 'sessionName').value, '-c', str(screenrc), env = screenenv(doublequotekey))
 
