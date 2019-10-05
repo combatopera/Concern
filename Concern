@@ -23,7 +23,7 @@ from lagoon import screen
 from screen import screenenv
 from termios import TIOCGWINSZ
 from pathlib import Path
-import tempfile, sys, aridity, shutil, struct, fcntl, os, argparse, importlib
+import tempfile, sys, aridity, shutil, struct, fcntl, os, argparse, importlib, pkg_resources
 
 log = logging.getLogger(__name__)
 
@@ -51,7 +51,7 @@ def main():
         with aridity.Repl(context) as repl:
             printf = repl.printf
             printf("cd %s", projectdir)
-            printf('. $/(concernlib Concern.arid)')
+            printf(". %s", pkg_resources.resource_filename('concernlib', 'Concern.arid'))
             settings = Path.home() / '.settings.arid'
             if settings.exists():
                 printf(". %s", settings)
