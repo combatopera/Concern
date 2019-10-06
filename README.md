@@ -8,7 +8,7 @@ Use Vim to control FoxDot or pym2149 with the aid of GNU Screen.
 # Tested on Linux and Mac:
 pip3 install --user Concern
 ```
-* You will also need a backend
+You will also need a backend.
 
 ### FoxDot backend
 ```
@@ -24,6 +24,10 @@ pip3 install --user pym2149
 echo Concern consumerName = pym2149 >>~/.settings.arid
 ```
 ## Usage
+```
+# Any arguments are passed to vim, here we discover the FoxDot demo directory:
+Concern "$(python3 -c "from pkg_resources import resource_filename; print(resource_filename('FoxDot', 'demo'))" | tail -1)"
+```
 * FoxDot (or alternative backend) is running in the right hand third of the screen
 * Send code to FoxDot by typing backslash followed by enter
     * This will send the smallest top-level suite under the cursor
