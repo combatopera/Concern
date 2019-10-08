@@ -45,6 +45,7 @@ def main():
         tempdir = Path(tempdir)
         concernvimrc = tempdir / 'vimrc'
         sendblock = tempdir / 'sendblock.py'
+        quit = tempdir / 'quit.py'
         screenrc = tempdir / 'screenrc'
         context = aridity.Context()
         context['Concern', 'toAbsWidth'] = Function(toabswidth)
@@ -65,6 +66,7 @@ def main():
             printf("\tinterpreter = %s", sys.executable)
             printf("\tvimrcPath = %s", concernvimrc)
             printf("\tsendblock = %s", sendblock)
+            printf("\tquit = %s", quit)
             printf('\tvimArgs := $list()')
             for arg in vimargs:
                 printf("\tvimArgs += %s", arg)
@@ -76,6 +78,8 @@ def main():
             printf('" = $(pystr)')
             printf("redirect %s", sendblock)
             printf("Concern < %s", resource_filename('concernlib', 'sendblock.py.aridt'))
+            printf("redirect %s", quit)
+            printf("Concern < %s", resource_filename('concernlib', 'quit.py.aridt'))
             printf('" = $(screenstr)')
             printf("redirect %s", screenrc)
             printf("Concern < %s", resource_filename('concernlib', 'screenrc.aridt'))

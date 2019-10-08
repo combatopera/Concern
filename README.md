@@ -35,8 +35,7 @@ Concern "$(python3 -c 'from pkg_resources import resource_filename; print(resour
     * The backslash is actually your Vim leader key
 * Use visual mode to send multiple top-level suites at once
 * Use backslash `]` instead of backslash enter to send from cursor to the end of the file
-* To quit you will need to terminate both Vim and FoxDot manually
-    * Use `ctrl a` followed by `n` to navigate to the next GNU Screen window
+* Use backslash `q` to quit all of Vim, FoxDot and GNU Screen
 
 ### pym2149
 ```
@@ -46,4 +45,4 @@ svn export https://github.com/combatopera/pym2149/trunk/contrib
 # Load a non-trivial tune written in pym2149's (currently nameless) live coding language:
 Concern 'contrib/Lemmings 2 Tune 6.py'
 ```
-* Once pym2149 has initialised, type backslash `]` at the top of the file to send it
+* Once pym2149 has initialised, type backslash `]` at the top of the file to send the whole program

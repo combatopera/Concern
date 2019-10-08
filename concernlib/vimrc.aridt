@@ -1,4 +1,5 @@
 source $(vimrc systemPath)
+nnoremap <silent> <Leader>q :exe 'sil !$(interpreter) $(quit) &'<CR>
 nnoremap <silent> <Leader>$(sendKey default) :exe 'sil w !$(interpreter) $(sendblock)' shellescape(bufname("%"), 1) 'default' line('.') line('.')<CR>
 nnoremap <silent> <Leader>$(sendKey alternate) :exe 'sil w !$(interpreter) $(sendblock)' shellescape(bufname("%"), 1) 'alternate' line('.') line('.')<CR>
 vnoremap <silent> <Leader>$(sendKey default) :<C-U>exe 'sil w !$(interpreter) $(sendblock)' shellescape(bufname("%"), 1) 'default' line("'<") line("'>")<CR>
