@@ -42,6 +42,7 @@ Concern
     sendKey
         default = <CR>
         alternate = ]
+    quitKey = q
     vim
         windowName = Vim
         shellCommand = vim -u $shstr$(vimrcPath) $join($map($(vimArgs) a $shstr$(a)) $.( ))
