@@ -23,7 +23,8 @@ def main():
     consumer.eof()
     vim = Stuff(session, vimwindow, doublequotekey)
     vim(':q\n') # XXX: Sufficient EOL on all platforms?
-    vim.eof()
+    while True:
+        vim.eof()
 
 session = $"$(sessionName)
 consumerwindow = $"$(consumer windowName)
