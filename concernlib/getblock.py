@@ -53,9 +53,12 @@ class ReadBlocks:
 
     def __init__(self, stroke):
         self.lines = sys.stdin.read().splitlines()
-        self.first, self.last = map(int, sys.argv[1:])
-        if 'alternate' == stroke:
+        def default():
+            self.first, self.last = map(int, sys.argv[1:])
+        def alternate():
+            default()
             self.last = len(self.lines)
+        locals()[stroke]()
 
     def monolith(self):
         return getblockimpl(self.lines, self.first, self.last, pilcrow)[2]
