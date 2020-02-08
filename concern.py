@@ -1,5 +1,3 @@
-#!/bin/null
-
 # Copyright 2019 Andrzej Cichocki
 
 # This file is part of Concern.
@@ -33,7 +31,7 @@ def toabswidth(context, resolvable):
     ws_col = struct.unpack(winsize, fcntl.ioctl(sys.stdin, TIOCGWINSZ, bytes(struct.calcsize(winsize))))[1]
     return Number(round(resolvable.resolve(context).value * (ws_col - 1))) # Take off 1 for the separator.
 
-def main():
+def main_Concern():
     parser = argparse.ArgumentParser()
     parser.add_argument('--chdir', type = os.path.expanduser)
     config, vimargs = parser.parse_known_args()
@@ -87,6 +85,3 @@ def main():
             shutil.copy2(resource_filename('concernlib', path.name), str(path))
         doublequotekey = context.resolved('Concern', 'doubleQuoteKey').value
         screen('-S', context.resolved('Concern', 'sessionName').value, '-c', str(screenrc), env = screenenv(doublequotekey))
-
-if '__main__' == __name__:
-    main()
