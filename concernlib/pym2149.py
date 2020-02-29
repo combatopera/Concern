@@ -15,14 +15,15 @@
 # You should have received a copy of the GNU General Public License
 # along with Concern.  If not, see <http://www.gnu.org/licenses/>.
 
-import subprocess, shlex, aridity
+from lagoon.binary import bash
+import aridity, shlex
 
 def _getconfig(context, *names):
     command = context.resolved('Concern', 'pym2149', 'shellCommand').value
     for name in names:
         command += ' --repr ' + shlex.quote(name)
     from collections import OrderedDict
-    values = list(map(eval, subprocess.check_output(['bash', '-c', command]).splitlines()))
+    values = list(map(eval, bash('-c', command).splitlines()))
     del OrderedDict
     return values
 
