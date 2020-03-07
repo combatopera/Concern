@@ -84,4 +84,4 @@ def main_Concern():
         for path in tempdir / 'getblock.py',:
             shutil.copy2(resource_filename('concernlib', path.name), str(path))
         doublequotekey = context.resolved('Concern', 'doubleQuoteKey').value
-        screen('-S', context.resolved('Concern', 'sessionName').value, '-c', screenrc, env = screenenv(doublequotekey))
+        screen.print('-S', context.resolved('Concern', 'sessionName').value, '-c', screenrc, env = screenenv(doublequotekey))
