@@ -23,7 +23,7 @@ def _getconfig(context, *names):
     for name in names:
         command += ' --repr ' + shlex.quote(name)
     from collections import OrderedDict
-    values = list(map(eval, bash('-c', command).splitlines()))
+    values = list(map(eval, bash._c(command).splitlines()))
     del OrderedDict
     return values
 
