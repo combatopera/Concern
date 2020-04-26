@@ -17,8 +17,7 @@
 
 from concernlib.initlogging import logging
 from aridimpl.model import Function, Number
-from lagoon import screen
-from screen import screenenv
+from screen import stuffablescreen
 from termios import TIOCGWINSZ
 from pathlib import Path
 from pkg_resources import resource_filename
@@ -84,4 +83,4 @@ def main_Concern():
         for path in tempdir / 'getblock.py',:
             shutil.copy2(resource_filename('concernlib', path.name), str(path))
         doublequotekey = context.resolved('Concern', 'doubleQuoteKey').value
-        screen.print('-S', context.resolved('Concern', 'sessionName').value, '-c', screenrc, env = screenenv(doublequotekey))
+        stuffablescreen(doublequotekey).print('-S', context.resolved('Concern', 'sessionName').value, '-c', screenrc)
