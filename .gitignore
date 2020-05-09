@@ -5,3 +5,4 @@ __pycache__/
 /dist/
 /setup.cfg
 /setup.py
+/pyproject.toml
