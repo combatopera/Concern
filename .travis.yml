@@ -10,4 +10,4 @@ install:
 env:
 - HEADS=true
 - HEADS=false
-script: travis_ci
+script: travis-ci
