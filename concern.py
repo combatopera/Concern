@@ -15,13 +15,17 @@
 # You should have received a copy of the GNU General Public License
 # along with Concern.  If not, see <http://www.gnu.org/licenses/>.
 
+from argparse import ArgumentParser
+from aridity import Context, Repl
+from aridity.model import Function, Number
 from concernlib.initlogging import logging
-from aridimpl.model import Function, Number
-from screen import stuffablescreen
-from termios import TIOCGWINSZ
+from importlib import import_module
 from pathlib import Path
 from pkg_resources import resource_filename
-import tempfile, sys, aridity, shutil, struct, fcntl, os, argparse, importlib
+from screen import stuffablescreen
+from tempfile import TemporaryDirectory
+from termios import TIOCGWINSZ
+import fcntl, os, shutil, struct, sys
 
 log = logging.getLogger(__name__)
 
@@ -31,22 +35,22 @@ def toabswidth(context, resolvable):
     return Number(round(resolvable.resolve(context).value * (ws_col - 1))) # Take off 1 for the separator.
 
 def main_Concern():
-    parser = argparse.ArgumentParser()
+    parser = ArgumentParser()
     parser.add_argument('--chdir', type = os.path.expanduser)
     config, vimargs = parser.parse_known_args()
     if config.chdir is not None:
         os.chdir(config.chdir)
     configdir = Path.home() / '.Concern'
     configdir.mkdir(parents = True, exist_ok = True)
-    with tempfile.TemporaryDirectory(dir = str(configdir)) as tempdir:
+    with TemporaryDirectory(dir = str(configdir)) as tempdir:
         tempdir = Path(tempdir)
         concernvimrc = tempdir / 'vimrc'
         sendblock = tempdir / 'sendblock.py'
         quit = tempdir / 'quit.py'
         screenrc = tempdir / 'screenrc'
-        context = aridity.Context()
+        context = Context()
         context['Concern', 'toAbsWidth'] = Function(toabswidth)
-        with aridity.Repl(context) as repl:
+        with Repl(context) as repl:
             printf = repl.printf
             printf(". %s", resource_filename('concernlib', 'Concern.arid'))
             settings = Path.home() / '.settings.arid'
@@ -67,8 +71,8 @@ def main_Concern():
             printf('\tvimArgs := $list()')
             for arg in vimargs:
                 printf("\tvimArgs += %s", arg)
-        importlib.import_module("concernlib.%s" % context.resolved('Concern', 'consumerName').value).configure(context)
-        with aridity.Repl(context) as repl:
+        import_module("concernlib.%s" % context.resolved('Concern', 'consumerName').value).configure(context)
+        with Repl(context) as repl:
             printf = repl.printf
             printf("redirect %s", concernvimrc)
             printf("Concern < %s", resource_filename('concernlib', 'vimrc.aridt'))
