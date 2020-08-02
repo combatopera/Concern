@@ -42,7 +42,7 @@ def main_Concern():
         os.chdir(config.chdir)
     configdir = Path.home() / '.Concern'
     configdir.mkdir(parents = True, exist_ok = True)
-    with TemporaryDirectory(dir = str(configdir)) as tempdir:
+    with TemporaryDirectory(dir = configdir) as tempdir:
         tempdir = Path(tempdir)
         concernvimrc = tempdir / 'vimrc'
         sendblock = tempdir / 'sendblock.py'
@@ -85,6 +85,6 @@ def main_Concern():
             printf("redirect %s", screenrc)
             printf("Concern < %s", resource_filename(__name__, 'screenrc.aridt'))
         for path in tempdir / 'getblock.py',:
-            shutil.copy2(resource_filename(__name__, path.name), str(path))
+            shutil.copy2(resource_filename(__name__, path.name), path)
         doublequotekey = context.resolved('Concern', 'doubleQuoteKey').value
         stuffablescreen(doublequotekey).print('-S', context.resolved('Concern', 'sessionName').value, '-c', screenrc)
