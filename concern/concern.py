@@ -52,13 +52,13 @@ def main_Concern():
         config = Config.blank()
         config.put('Concern', 'toAbsWidth', function = toabswidth)
         with config.repl() as repl:
+            repl.printf(". %s", resource_filename(__name__, 'Concern.arid'))
+        try:
+            config.loadsettings()
+        except FileNotFoundError as e:
+            log.info("No such file: %s", e)
+        with config.repl() as repl:
             printf = repl.printf
-            printf(". %s", resource_filename(__name__, 'Concern.arid'))
-            settings = Path.home() / '.settings.arid'
-            if settings.exists():
-                printf(". %s", settings)
-            else:
-                log.info("No such file: %s", settings)
             uservimrc = Path.home() / '.vimrc'
             if uservimrc.exists():
                 printf("vimrc userPath = %s", uservimrc)
