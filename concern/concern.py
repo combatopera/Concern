@@ -15,6 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Concern.  If not, see <http://www.gnu.org/licenses/>.
 
+from . import templates
 from .initlogging import logging
 from argparse import ArgumentParser
 from aridity import Context, Repl
@@ -75,14 +76,14 @@ def main_Concern():
         with Repl(context) as repl:
             printf = repl.printf
             printf("redirect %s", concernvimrc)
-            printf("Concern < %s", resource_filename(__name__, 'vimrc.aridt'))
+            printf("Concern < %s", resource_filename(templates.__name__, 'vimrc.aridt'))
             printf('" = $(pystr)')
             printf("redirect %s", sendblock)
-            printf("Concern < %s", resource_filename(__name__, 'sendblock.py.aridt'))
+            printf("Concern < %s", resource_filename(templates.__name__, 'sendblock.py.aridt'))
             printf("redirect %s", quit)
-            printf("Concern < %s", resource_filename(__name__, 'quit.py.aridt'))
+            printf("Concern < %s", resource_filename(templates.__name__, 'quit.py.aridt'))
             printf('" = $(screenstr)')
             printf("redirect %s", screenrc)
-            printf("Concern < %s", resource_filename(__name__, 'screenrc.aridt'))
+            printf("Concern < %s", resource_filename(templates.__name__, 'screenrc.aridt'))
         doublequotekey = context.resolved('Concern', 'doubleQuoteKey').value
         stuffablescreen(doublequotekey).print('-S', context.resolved('Concern', 'sessionName').value, '-c', screenrc)
