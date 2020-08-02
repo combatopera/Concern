@@ -73,17 +73,13 @@ def main_Concern():
             for arg in vimargs:
                 printf("\tvimArgs += %s", arg)
         import_module(f".consumer.{config.Concern.consumerName}", package = __package__).configure(config)
+        config.Concern.processtemplate(resource_filename(templates.__name__, 'vimrc.aridt'), concernvimrc)
         with config.repl() as repl:
-            printf = repl.printf
-            printf("redirect %s", concernvimrc)
-            printf("Concern < %s", resource_filename(templates.__name__, 'vimrc.aridt'))
-            printf('" = $(pystr)')
-            printf("redirect %s", sendblock)
-            printf("Concern < %s", resource_filename(templates.__name__, 'sendblock.py.aridt'))
-            printf("redirect %s", quit)
-            printf("Concern < %s", resource_filename(templates.__name__, 'quit.py.aridt'))
-            printf('" = $(screenstr)')
-            printf("redirect %s", screenrc)
-            printf("Concern < %s", resource_filename(templates.__name__, 'screenrc.aridt'))
+            repl.printf('" = $(pystr)')
+        config.Concern.processtemplate(resource_filename(templates.__name__, 'sendblock.py.aridt'), sendblock)
+        config.Concern.processtemplate(resource_filename(templates.__name__, 'quit.py.aridt'), quit)
+        with config.repl() as repl:
+            repl.printf('" = $(screenstr)')
+        config.Concern.processtemplate(resource_filename(templates.__name__, 'screenrc.aridt'), screenrc)
         doublequotekey = config.Concern.doubleQuoteKey
         stuffablescreen(doublequotekey).print('-S', config.Concern.sessionName, '-c', screenrc)
