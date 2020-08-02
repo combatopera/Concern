@@ -25,7 +25,7 @@ from pkg_resources import resource_filename
 from screen import stuffablescreen
 from tempfile import TemporaryDirectory
 from termios import TIOCGWINSZ
-import fcntl, os, shutil, struct, sys
+import fcntl, os, struct, sys
 
 log = logging.getLogger(__name__)
 
@@ -84,7 +84,5 @@ def main_Concern():
             printf('" = $(screenstr)')
             printf("redirect %s", screenrc)
             printf("Concern < %s", resource_filename(__name__, 'screenrc.aridt'))
-        for path in tempdir / 'getblock.py',:
-            shutil.copy2(resource_filename(__name__, path.name), path)
         doublequotekey = context.resolved('Concern', 'doubleQuoteKey').value
         stuffablescreen(doublequotekey).print('-S', context.resolved('Concern', 'sessionName').value, '-c', screenrc)

@@ -15,10 +15,10 @@
 # You should have received a copy of the GNU General Public License
 # along with Concern.  If not, see <http://www.gnu.org/licenses/>.
 
-from getblock import ReadBlocks
-from screen import Stuff
 from collections import OrderedDict
-import socket, sys, os, timelyOSC
+from concern.getblock import ReadBlocks
+from screen import Stuff
+import os, socket, sys, timelyOSC
 
 def OSC(readblocks):
     n = 1
