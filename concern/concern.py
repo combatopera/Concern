@@ -18,8 +18,8 @@
 from . import templates
 from .initlogging import logging
 from argparse import ArgumentParser
-from aridity import Context, Repl
-from aridity.model import Function, Number
+from aridity.config import Config
+from aridity.model import Number
 from importlib import import_module
 from pathlib import Path
 from pkg_resources import resource_filename
@@ -49,9 +49,9 @@ def main_Concern():
         sendblock = tempdir / 'sendblock.py'
         quit = tempdir / 'quit.py'
         screenrc = tempdir / 'screenrc'
-        context = Context()
-        context['Concern', 'toAbsWidth'] = Function(toabswidth)
-        with Repl(context) as repl:
+        config = Config.blank()
+        config.put('Concern', 'toAbsWidth', function = toabswidth)
+        with config.repl() as repl:
             printf = repl.printf
             printf(". %s", resource_filename(__name__, 'Concern.arid'))
             settings = Path.home() / '.settings.arid'
@@ -72,8 +72,8 @@ def main_Concern():
             printf('\tvimArgs := $list()')
             for arg in vimargs:
                 printf("\tvimArgs += %s", arg)
-        import_module(f".consumer.{context.resolved('Concern', 'consumerName').value}", package = __package__).configure(context)
-        with Repl(context) as repl:
+        import_module(f".consumer.{config.Concern.consumerName}", package = __package__).configure(config)
+        with config.repl() as repl:
             printf = repl.printf
             printf("redirect %s", concernvimrc)
             printf("Concern < %s", resource_filename(templates.__name__, 'vimrc.aridt'))
@@ -85,5 +85,5 @@ def main_Concern():
             printf('" = $(screenstr)')
             printf("redirect %s", screenrc)
             printf("Concern < %s", resource_filename(templates.__name__, 'screenrc.aridt'))
-        doublequotekey = context.resolved('Concern', 'doubleQuoteKey').value
-        stuffablescreen(doublequotekey).print('-S', context.resolved('Concern', 'sessionName').value, '-c', screenrc)
+        doublequotekey = config.Concern.doubleQuoteKey
+        stuffablescreen(doublequotekey).print('-S', config.Concern.sessionName, '-c', screenrc)

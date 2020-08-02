@@ -15,12 +15,11 @@
 # You should have received a copy of the GNU General Public License
 # along with Concern.  If not, see <http://www.gnu.org/licenses/>.
 
-from aridity import Repl
 from lagoon.binary import bash
 import shlex
 
-def _getconfig(context, *names):
-    command = context.resolved('Concern', 'pym2149', 'shellCommand').value
+def _getconfig(config, *names):
+    command = config.Concern.pym2149.shellCommand
     for name in names:
         command += ' --repr ' + shlex.quote(name)
     from collections import OrderedDict
@@ -28,9 +27,9 @@ def _getconfig(context, *names):
     del OrderedDict
     return values
 
-def configure(context):
-    consumerinfo, = _getconfig(context, 'OSC')
-    with Repl(context) as repl:
+def configure(config):
+    consumerinfo, = _getconfig(config, 'OSC')
+    with config.repl() as repl:
         printf = repl.printf
         printf('Concern consumer')
         printf("\tbufsize = %s", consumerinfo['bufsize'])
