@@ -51,35 +51,29 @@ def main_Concern():
         screenrc = tempdir / 'screenrc'
         config = Config.blank()
         config.put('Concern', 'toAbsWidth', function = toabswidth)
-        with config.repl() as repl:
-            repl.printf(". %s", resource_filename(__name__, 'Concern.arid'))
+        config.printf(". %s", resource_filename(__name__, 'Concern.arid'))
         try:
             config.loadsettings()
         except FileNotFoundError as e:
             log.info("No such file: %s", e)
-        with config.repl() as repl:
-            printf = repl.printf
-            uservimrc = Path.home() / '.vimrc'
-            if uservimrc.exists():
-                printf("vimrc userPath = %s", uservimrc)
-            else:
-                log.info("No such file: %s", uservimrc)
-            printf('Concern')
-            printf("\tinterpreter = %s", sys.executable)
-            printf("\tvimrcPath = %s", concernvimrc)
-            printf("\tsendblock = %s", sendblock)
-            printf("\tquit = %s", quit)
-            printf('\tvimArgs := $list()')
-            for arg in vimargs:
-                printf("\tvimArgs += %s", arg)
+        uservimrc = Path.home() / '.vimrc'
+        if uservimrc.exists():
+            config.printf("vimrc userPath = %s", uservimrc)
+        else:
+            log.info("No such file: %s", uservimrc)
+        config.printf("Concern interpreter = %s", sys.executable)
+        config.printf("Concern vimrcPath = %s", concernvimrc)
+        config.printf("Concern sendblock = %s", sendblock)
+        config.printf("Concern quit = %s", quit)
+        config.printf('Concern vimArgs := $list()')
+        for arg in vimargs:
+            config.printf("Concern vimArgs += %s", arg)
         import_module(f".consumer.{config.Concern.consumerName}", package = __package__).configure(config)
         config.Concern.processtemplate(resource_filename(templates.__name__, 'vimrc.aridt'), concernvimrc)
-        with config.repl() as repl:
-            repl.printf('" = $(pystr)')
+        config.printf('" = $(pystr)')
         config.Concern.processtemplate(resource_filename(templates.__name__, 'sendblock.py.aridt'), sendblock)
         config.Concern.processtemplate(resource_filename(templates.__name__, 'quit.py.aridt'), quit)
-        with config.repl() as repl:
-            repl.printf('" = $(screenstr)')
+        config.printf('" = $(screenstr)')
         config.Concern.processtemplate(resource_filename(templates.__name__, 'screenrc.aridt'), screenrc)
         doublequotekey = config.Concern.doubleQuoteKey
         stuffablescreen(doublequotekey).print('-S', config.Concern.sessionName, '-c', screenrc)

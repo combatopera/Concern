@@ -29,8 +29,5 @@ def _getconfig(config, *names):
 
 def configure(config):
     consumerinfo, = _getconfig(config, 'OSC')
-    with config.repl() as repl:
-        printf = repl.printf
-        printf('Concern consumer')
-        printf("\tbufsize = %s", consumerinfo['bufsize'])
-        printf("\tport = %s", consumerinfo['port'])
+    config.printf("Concern consumer bufsize = %s", consumerinfo['bufsize'])
+    config.printf("Concern consumer port = %s", consumerinfo['port'])
