@@ -15,10 +15,10 @@
 # You should have received a copy of the GNU General Public License
 # along with Concern.  If not, see <http://www.gnu.org/licenses/>.
 
+from .initlogging import logging
 from argparse import ArgumentParser
 from aridity import Context, Repl
 from aridity.model import Function, Number
-from concernlib.initlogging import logging
 from importlib import import_module
 from pathlib import Path
 from pkg_resources import resource_filename
@@ -52,7 +52,7 @@ def main_Concern():
         context['Concern', 'toAbsWidth'] = Function(toabswidth)
         with Repl(context) as repl:
             printf = repl.printf
-            printf(". %s", resource_filename('concernlib', 'Concern.arid'))
+            printf(". %s", resource_filename(__name__, 'Concern.arid'))
             settings = Path.home() / '.settings.arid'
             if settings.exists():
                 printf(". %s", settings)
@@ -71,20 +71,20 @@ def main_Concern():
             printf('\tvimArgs := $list()')
             for arg in vimargs:
                 printf("\tvimArgs += %s", arg)
-        import_module("concernlib.%s" % context.resolved('Concern', 'consumerName').value).configure(context)
+        import_module(f".{context.resolved('Concern', 'consumerName').value}", package = __package__).configure(context)
         with Repl(context) as repl:
             printf = repl.printf
             printf("redirect %s", concernvimrc)
-            printf("Concern < %s", resource_filename('concernlib', 'vimrc.aridt'))
+            printf("Concern < %s", resource_filename(__name__, 'vimrc.aridt'))
             printf('" = $(pystr)')
             printf("redirect %s", sendblock)
-            printf("Concern < %s", resource_filename('concernlib', 'sendblock.py.aridt'))
+            printf("Concern < %s", resource_filename(__name__, 'sendblock.py.aridt'))
             printf("redirect %s", quit)
-            printf("Concern < %s", resource_filename('concernlib', 'quit.py.aridt'))
+            printf("Concern < %s", resource_filename(__name__, 'quit.py.aridt'))
             printf('" = $(screenstr)')
             printf("redirect %s", screenrc)
-            printf("Concern < %s", resource_filename('concernlib', 'screenrc.aridt'))
+            printf("Concern < %s", resource_filename(__name__, 'screenrc.aridt'))
         for path in tempdir / 'getblock.py',:
-            shutil.copy2(resource_filename('concernlib', path.name), str(path))
+            shutil.copy2(resource_filename(__name__, path.name), str(path))
         doublequotekey = context.resolved('Concern', 'doubleQuoteKey').value
         stuffablescreen(doublequotekey).print('-S', context.resolved('Concern', 'sessionName').value, '-c', screenrc)
