@@ -71,7 +71,7 @@ def main_Concern():
             printf('\tvimArgs := $list()')
             for arg in vimargs:
                 printf("\tvimArgs += %s", arg)
-        import_module(f".{context.resolved('Concern', 'consumerName').value}", package = __package__).configure(context)
+        import_module(f".consumer.{context.resolved('Concern', 'consumerName').value}", package = __package__).configure(context)
         with Repl(context) as repl:
             printf = repl.printf
             printf("redirect %s", concernvimrc)
