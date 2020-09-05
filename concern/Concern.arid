@@ -27,7 +27,8 @@ Concern
         interface = stuff
     pym2149
         title = pym2149
-        shellCommand = lc2jack --config $shstr($.(pianorollenabled = false)) /dev/null
+        executable = lc2jack
+        shellCommand = $shstr$(executable) --config $shstr($.(pianorollenabled = false)) /dev/null
         interface = OSC
     consumer
         fraction = $div(1 3)
