@@ -68,12 +68,12 @@ def main_Concern():
         config.printf('Concern vimArgs := $list()')
         for arg in vimargs:
             config.printf("Concern vimArgs += %s", arg)
-        import_module(f".consumer.{config.Concern.consumerName}", package = __package__).configure(config)
-        config.Concern.processtemplate(resource_filename(templates.__name__, 'vimrc.aridt'), concernvimrc)
+        import_module(f".consumer.{config.node.Concern.consumerName}", package = __package__).configure(config)
+        config.node.Concern.processtemplate(resource_filename(templates.__name__, 'vimrc.aridt'), concernvimrc)
         config.printf('" = $(pystr)')
-        config.Concern.processtemplate(resource_filename(templates.__name__, 'sendblock.py.aridt'), sendblock)
-        config.Concern.processtemplate(resource_filename(templates.__name__, 'quit.py.aridt'), quit)
+        config.node.Concern.processtemplate(resource_filename(templates.__name__, 'sendblock.py.aridt'), sendblock)
+        config.node.Concern.processtemplate(resource_filename(templates.__name__, 'quit.py.aridt'), quit)
         config.printf('" = $(screenstr)')
-        config.Concern.processtemplate(resource_filename(templates.__name__, 'screenrc.aridt'), screenrc)
-        doublequotekey = config.Concern.doubleQuoteKey
-        stuffablescreen(doublequotekey).print('-S', config.Concern.sessionName, '-c', screenrc)
+        config.node.Concern.processtemplate(resource_filename(templates.__name__, 'screenrc.aridt'), screenrc)
+        doublequotekey = config.node.Concern.doubleQuoteKey
+        stuffablescreen(doublequotekey).print('-S', config.node.Concern.sessionName, '-c', screenrc)

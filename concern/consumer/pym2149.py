@@ -28,6 +28,6 @@ def _getconfig(config, *names):
     return values
 
 def configure(config):
-    consumerinfo, = _getconfig(config, 'OSC')
+    consumerinfo, = _getconfig(config.node, 'OSC')
     config.printf("Concern consumer bufsize = %s", consumerinfo['bufsize'])
     config.printf("Concern consumer port = %s", consumerinfo['port'])
