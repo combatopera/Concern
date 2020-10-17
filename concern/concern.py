@@ -51,7 +51,7 @@ def main_Concern():
         screenrc = tempdir / 'screenrc'
         config = ConfigCtrl()
         config.put('Concern', 'toAbsWidth', function = toabswidth)
-        config.printf(". %s", resource_filename(__name__, 'Concern.arid'))
+        config.printf("Concern . %s", resource_filename(__name__, 'Concern.arid'))
         try:
             config.loadsettings()
         except FileNotFoundError as e:
