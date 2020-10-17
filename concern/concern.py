@@ -18,7 +18,7 @@
 from . import templates
 from .initlogging import logging
 from argparse import ArgumentParser
-from aridity.config import Config
+from aridity.config import ConfigCtrl
 from aridity.model import Number
 from importlib import import_module
 from pathlib import Path
@@ -49,7 +49,7 @@ def main_Concern():
         sendblock = tempdir / 'sendblock.py'
         quit = tempdir / 'quit.py'
         screenrc = tempdir / 'screenrc'
-        config = Config.blank()
+        config = ConfigCtrl()
         config.put('Concern', 'toAbsWidth', function = toabswidth)
         config.printf(". %s", resource_filename(__name__, 'Concern.arid'))
         try:
