@@ -58,7 +58,7 @@ def main_Concern():
             log.info("No such file: %s", e)
         uservimrc = Path.home() / '.vimrc'
         if uservimrc.exists():
-            config.printf("vimrc userPath = %s", uservimrc)
+            config.printf("Concern vimrc userPath = %s", uservimrc)
         else:
             log.info("No such file: %s", uservimrc)
         config.printf("Concern interpreter = %s", sys.executable)

@@ -49,5 +49,4 @@ Concern
         shellCommand = vim -u $shstr$(vimrcPath) $join($map($(vimArgs) a $shstr$(a)) $.( ))
     doubleQuoteKey = DQ
     consumerName = foxdot
-vimrc
-    systemPath = /usr/share/vim/vimrc
+    vimrc systemPath = /usr/share/vim/vimrc
