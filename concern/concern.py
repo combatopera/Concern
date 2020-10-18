@@ -63,7 +63,7 @@ def main_Concern():
             (-config).printf("vimrc userPath = %s", uservimrc)
         else:
             log.info("No such file: %s", uservimrc)
-        (-config).printf("interpreter = %s", sys.executable)
+        (-config).printf("interpreter = %s", sys.executable) # TODO: Migrate to config file.
         (-config).printf("vimrcPath = %s", concernvimrc)
         (-config).printf("sendblock = %s", sendblock)
         (-config).printf("quit = %s", quit)
