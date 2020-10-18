@@ -71,10 +71,10 @@ def main_Concern():
             (-Concern).printf("vimArgs += %s", arg)
         import_module(f".consumer.{Concern.consumerName}", package = __package__).configure(config)
         (-Concern).processtemplate(resource_filename(templates.__name__, 'vimrc.aridt'), concernvimrc)
-        config.printf('" = $(pystr)')
+        (-Concern).printf('" = $(pystr)')
         (-Concern).processtemplate(resource_filename(templates.__name__, 'sendblock.py.aridt'), sendblock)
         (-Concern).processtemplate(resource_filename(templates.__name__, 'quit.py.aridt'), quit)
-        config.printf('" = $(screenstr)')
+        (-Concern).printf('" = $(screenstr)')
         (-Concern).processtemplate(resource_filename(templates.__name__, 'screenrc.aridt'), screenrc)
         doublequotekey = Concern.doubleQuoteKey
         stuffablescreen(doublequotekey).print('-S', Concern.sessionName, '-c', screenrc)
