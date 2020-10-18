@@ -21,8 +21,9 @@ from argparse import ArgumentParser
 from aridity.config import ConfigCtrl
 from aridity.model import Number
 from importlib import import_module
+from io import TextIOWrapper
 from pathlib import Path
-from pkg_resources import resource_filename
+from pkg_resources import resource_stream
 from screen import stuffablescreen
 from tempfile import TemporaryDirectory
 from termios import TIOCGWINSZ
@@ -37,7 +38,8 @@ def toabswidth(context, resolvable):
 
 def _processtemplate(config, quotename, templatename, targetpath):
     (-config).printf('" = $(%s)', quotename)
-    (-config).processtemplate(resource_filename(templates.__name__, templatename), targetpath)
+    with TextIOWrapper(resource_stream(templates.__name__, templatename)) as f:
+        (-config).processtemplate(f, targetpath)
 
 def main_Concern():
     parser = ArgumentParser()
