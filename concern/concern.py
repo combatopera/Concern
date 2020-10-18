@@ -37,9 +37,10 @@ def toabswidth(context, resolvable):
     return Number(round(resolvable.resolve(context).value * (ws_col - 1))) # Take off 1 for the separator.
 
 def _processtemplate(config, quotename, templatename, targetpath):
-    (-config).printf('" = $(%s)', quotename) # TODO: Use a throwaway child instead of mutating main config.
+    child = (-config).createchild()
+    child.printf('" = $(%s)', quotename)
     with TextIOWrapper(resource_stream(templates.__name__, templatename)) as f:
-        (-config).processtemplate(f, targetpath)
+        child.processtemplate(f, targetpath)
 
 def main_Concern():
     parser = ArgumentParser()
