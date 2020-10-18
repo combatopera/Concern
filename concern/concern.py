@@ -51,12 +51,7 @@ def main_Concern():
         screenrc = tempdir / 'screenrc'
         config = ConfigCtrl()
         config.put('Concern', 'toAbsWidth', function = toabswidth)
-        config.printf("Concern . %s", resource_filename(__name__, 'Concern.arid'))
-        try:
-            config.loadsettings()
-        except FileNotFoundError as e:
-            log.info("No such file: %s", e)
-        Concern = config.node.Concern
+        Concern = config.loadappconfig(main_Concern, 'Concern.arid', True)
         uservimrc = Path.home() / '.vimrc'
         if uservimrc.exists():
             (-Concern).printf("vimrc userPath = %s", uservimrc)
