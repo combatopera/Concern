@@ -51,7 +51,7 @@ def main_Concern():
         screenrc = tempdir / 'screenrc'
         ctrl = ConfigCtrl()
         ctrl.put('Concern', 'toAbsWidth', function = toabswidth)
-        config = ctrl.loadappconfig(main_Concern, 'Concern.arid', True)
+        config = ctrl.loadappconfig(main_Concern, 'Concern.arid', settingsoptional = True)
         uservimrc = Path.home() / '.vimrc'
         if uservimrc.exists():
             (-config).printf("vimrc userPath = %s", uservimrc)
