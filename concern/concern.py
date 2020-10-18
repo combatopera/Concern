@@ -56,19 +56,19 @@ def main_Concern():
             config.loadsettings()
         except FileNotFoundError as e:
             log.info("No such file: %s", e)
+        Concern = config.node.Concern
         uservimrc = Path.home() / '.vimrc'
         if uservimrc.exists():
-            config.printf("Concern vimrc userPath = %s", uservimrc)
+            (-Concern).printf("vimrc userPath = %s", uservimrc)
         else:
             log.info("No such file: %s", uservimrc)
-        config.printf("Concern interpreter = %s", sys.executable)
-        config.printf("Concern vimrcPath = %s", concernvimrc)
-        config.printf("Concern sendblock = %s", sendblock)
-        config.printf("Concern quit = %s", quit)
-        config.printf('Concern vimArgs := $list()')
+        (-Concern).printf("interpreter = %s", sys.executable)
+        (-Concern).printf("vimrcPath = %s", concernvimrc)
+        (-Concern).printf("sendblock = %s", sendblock)
+        (-Concern).printf("quit = %s", quit)
+        (-Concern).printf('vimArgs := $list()')
         for arg in vimargs:
-            config.printf("Concern vimArgs += %s", arg)
-        Concern = config.node.Concern
+            (-Concern).printf("vimArgs += %s", arg)
         import_module(f".consumer.{Concern.consumerName}", package = __package__).configure(config)
         (-Concern).processtemplate(resource_filename(templates.__name__, 'vimrc.aridt'), concernvimrc)
         config.printf('" = $(pystr)')
