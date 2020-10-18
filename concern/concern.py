@@ -35,6 +35,10 @@ def toabswidth(context, resolvable):
     ws_col = struct.unpack(winsize, fcntl.ioctl(sys.stdin, TIOCGWINSZ, bytes(struct.calcsize(winsize))))[1]
     return Number(round(resolvable.resolve(context).value * (ws_col - 1))) # Take off 1 for the separator.
 
+def _processtemplate(config, quotename, templatename, targetpath):
+    (-config).printf('" = $(%s)', quotename)
+    (-config).processtemplate(resource_filename(templates.__name__, templatename), targetpath)
+
 def main_Concern():
     parser = ArgumentParser()
     parser.add_argument('--chdir', type = os.path.expanduser)
@@ -65,10 +69,8 @@ def main_Concern():
         for arg in vimargs:
             (-config).printf("vimArgs += %s", arg)
         import_module(f".consumer.{config.consumerName}", package = __package__).configure(config)
-        (-config).processtemplate(resource_filename(templates.__name__, 'vimrc.aridt'), concernvimrc)
-        (-config).printf('" = $(pystr)')
-        (-config).processtemplate(resource_filename(templates.__name__, 'sendblock.py.aridt'), sendblock)
-        (-config).processtemplate(resource_filename(templates.__name__, 'quit.py.aridt'), quit)
-        (-config).printf('" = $(screenstr)')
-        (-config).processtemplate(resource_filename(templates.__name__, 'screenrc.aridt'), screenrc)
+        _processtemplate(config, 'void', 'vimrc.aridt', concernvimrc)
+        _processtemplate(config, 'pystr', 'sendblock.py.aridt', sendblock)
+        _processtemplate(config, 'pystr', 'quit.py.aridt', quit)
+        _processtemplate(config, 'screenstr', 'screenrc.aridt', screenrc)
         stuffablescreen(config.doubleQuoteKey).print('-S', config.sessionName, '-c', screenrc)
