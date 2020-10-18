@@ -19,7 +19,7 @@ from lagoon.binary import bash
 import shlex
 
 def _getconfig(config, *names):
-    command = config.Concern.pym2149.shellCommand
+    command = config.pym2149.shellCommand
     for name in names:
         command += ' --repr ' + shlex.quote(name)
     from collections import OrderedDict
@@ -28,6 +28,6 @@ def _getconfig(config, *names):
     return values
 
 def configure(config):
-    consumerinfo, = _getconfig(config.node, 'OSC')
-    config.printf("Concern consumer bufsize = %s", consumerinfo['bufsize'])
-    config.printf("Concern consumer port = %s", consumerinfo['port'])
+    consumerinfo, = _getconfig(config, 'OSC')
+    (-config).printf("consumer bufsize = %s", consumerinfo['bufsize'])
+    (-config).printf("consumer port = %s", consumerinfo['port'])

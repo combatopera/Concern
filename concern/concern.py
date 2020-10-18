@@ -69,7 +69,7 @@ def main_Concern():
         (-Concern).printf('vimArgs := $list()')
         for arg in vimargs:
             (-Concern).printf("vimArgs += %s", arg)
-        import_module(f".consumer.{Concern.consumerName}", package = __package__).configure(config)
+        import_module(f".consumer.{Concern.consumerName}", package = __package__).configure(Concern)
         (-Concern).processtemplate(resource_filename(templates.__name__, 'vimrc.aridt'), concernvimrc)
         (-Concern).printf('" = $(pystr)')
         (-Concern).processtemplate(resource_filename(templates.__name__, 'sendblock.py.aridt'), sendblock)
