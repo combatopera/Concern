@@ -76,5 +76,4 @@ def main_Concern():
         (-Concern).processtemplate(resource_filename(templates.__name__, 'quit.py.aridt'), quit)
         (-Concern).printf('" = $(screenstr)')
         (-Concern).processtemplate(resource_filename(templates.__name__, 'screenrc.aridt'), screenrc)
-        doublequotekey = Concern.doubleQuoteKey
-        stuffablescreen(doublequotekey).print('-S', Concern.sessionName, '-c', screenrc)
+        stuffablescreen(Concern.doubleQuoteKey).print('-S', Concern.sessionName, '-c', screenrc)
