@@ -16,7 +16,7 @@
 : along with Concern.  If not, see <http://www.gnu.org/licenses/>.
 
 requires +=
-    aridity>=35
+    aridity>=37
     lagoon>=17
     timelyOSC>=4
 pyversions += 3
