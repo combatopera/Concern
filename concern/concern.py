@@ -20,10 +20,9 @@ from .initlogging import logging
 from argparse import ArgumentParser
 from aridity.config import ConfigCtrl
 from aridity.model import Number
+from aridity.util import openresource
 from importlib import import_module
-from io import TextIOWrapper
 from pathlib import Path
-from pkg_resources import resource_stream
 from screen import stuffablescreen
 from tempfile import TemporaryDirectory
 from termios import TIOCGWINSZ
@@ -39,7 +38,7 @@ def toabswidth(context, resolvable):
 def _processtemplate(config, quotename, templatename, targetpath):
     child = (-config).createchild()
     child.printf('" = $(%s)', quotename)
-    with TextIOWrapper(resource_stream(templates.__name__, templatename)) as f:
+    with openresource(templates.__name__, templatename) as f:
         child.processtemplate(f, targetpath)
 
 def main_Concern():
