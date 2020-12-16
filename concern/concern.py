@@ -42,6 +42,7 @@ def _processtemplate(config, quotename, templatename, targetpath):
         child.processtemplate(f, targetpath)
 
 def main_Concern():
+    'Vim-based live coding environment.'
     parser = ArgumentParser()
     parser.add_argument('--chdir', type = os.path.expanduser)
     config, vimargs = parser.parse_known_args()
