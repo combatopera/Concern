@@ -36,7 +36,7 @@ def toabswidth(context, resolvable):
     return Number(round(resolvable.resolve(context).scalar * (ws_col - 1))) # Take off 1 for the separator.
 
 def _processtemplate(config, quotename, templatename, targetpath):
-    child = (-config).createchild()
+    child = (-config).childctrl()
     child.printf('" = $(%s)', quotename)
     with openresource(templates.__name__, templatename) as f:
         child.processtemplate(f, targetpath)
