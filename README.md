@@ -34,7 +34,7 @@ python3 -m venv venvname
 venvname/bin/pip install Concern
 . venvname/bin/activate
 ```
-To add a backend substitute `pip install` for `pip3 install --user` above.
+To add a backend, substitute `pip install` for `pip3 install --user` above.
 
 ### To develop
 First clone the repo using HTTP or SSH:
