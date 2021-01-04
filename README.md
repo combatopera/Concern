@@ -1,21 +1,24 @@
 # Concern
-Use Vim to control FoxDot or pym2149 with the aid of GNU Screen.
+Control pym2149 (via Lurlene) or FoxDot using Vim
 
-[![Build Status](https://travis-ci.org/combatopera/Concern.svg?branch=master)](https://travis-ci.org/combatopera/Concern)
+## Install
+These are generic installation instructions.
 
-## Install latest release
+### To use, permanently
+The quickest way to get started is to install the current release from PyPI:
 ```
 # Tested on Linux and Mac:
 pip3 install --user Concern
 ```
 You will also need one of the following backends.
 
-### FoxDot backend
+#### FoxDot backend
 ```
 # Simply install, and Concern will use it:
 pip3 install --user FoxDot
 ```
-### pym2149 backend
+
+#### pym2149 backend
 ```
 # Install as usual:
 pip3 install --user pym2149
@@ -23,6 +26,33 @@ pip3 install --user pym2149
 # Tell Concern to use it instead of foxdot:
 echo Concern consumerName = pym2149 | tee -a ~/.settings.arid
 ```
+
+### To use, temporarily
+If you prefer to keep .local clean, install to a virtualenv:
+```
+python3 -m venv venvname
+venvname/bin/pip install Concern
+. venvname/bin/activate
+```
+To add a backend substitute `pip install` for `pip3 install --user` above.
+
+### To develop
+First clone the repo using HTTP or SSH:
+```
+git clone https://github.com/combatopera/Concern.git
+git clone git@github.com:combatopera/Concern.git
+```
+Now use pyven's pipify to create a setup.py, which pip can then use to install the project editably:
+```
+python3 -m venv pyvenvenv
+pyvenvenv/bin/pip install pyven
+pyvenvenv/bin/pipify Concern
+
+python3 -m venv venvname
+venvname/bin/pip install -e Concern
+. venvname/bin/activate
+```
+
 ## Usage
 ### FoxDot
 ```
