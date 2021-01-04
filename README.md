@@ -72,7 +72,7 @@ Concern "$(python3 -c 'from pkg_resources import resource_filename; print(resour
 # GitHub trick to download some files to play with:
 svn export https://github.com/combatopera/pym2149/trunk/contrib
 
-# Load a non-trivial tune written in pym2149's (currently nameless) live coding language:
+# Load a non-trivial tune written in the Lurlene live coding language:
 Concern 'contrib/Lemmings 2 Tune 6.py'
 ```
 * Once pym2149 has initialised, type backslash enter at the top of the file to send the whole program
