@@ -53,7 +53,13 @@ venvname/bin/pip install -e Concern
 . venvname/bin/activate
 ```
 
+## Commands
+
+### Concern
+Vim-based live coding environment.
+
 ## Usage
+
 ### FoxDot
 ```
 # Any arguments are passed to vim, here we discover the FoxDot demo directory:
