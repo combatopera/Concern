@@ -17,7 +17,7 @@
 
 requires +=
     aridity>=49
-    lagoon>=17
+    lagoon>=22
     timelyOSC>=4
 pyversions += 3
 executable = true
