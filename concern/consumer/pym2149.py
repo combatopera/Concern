@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Concern.  If not, see <http://www.gnu.org/licenses/>.
 
-from lagoon.binary import bash
+from lagoon.binary import sh
 import shlex
 
 def _getconfig(config, *names):
@@ -23,7 +23,7 @@ def _getconfig(config, *names):
     for name in names:
         command += ' --repr ' + shlex.quote(name)
     from collections import OrderedDict
-    values = list(map(eval, bash._c(command).splitlines()))
+    values = list(map(eval, sh._c(command).splitlines()))
     del OrderedDict
     return values
 
