@@ -72,6 +72,7 @@ def main_Concern():
         (-config).printf('vimArgs := $list()')
         for arg in vimargs:
             (-config).printf("vimArgs += %s", arg)
+        (-config).printf("signalpath = %s", tempdir / 'signal')
         import_module(f".consumer.{config.consumerName}", package = __package__).configure(config)
         _processtemplate(config, 'void', 'vimrc.aridt', concernvimrc)
         _processtemplate(config, 'pystr', 'loop.py.aridt', looppath)

@@ -1,3 +1,4 @@
+from pathlib import Path
 import subprocess, sys
 
 def main():
@@ -9,11 +10,15 @@ def main():
         except KeyboardInterrupt:
             status = process.wait()
         print(f"{windowname} exited with status: {status}", file = sys.stderr)
+        if signalpath.exists():
+            break
         sys.stderr.write('''Press enter to restart it, or your system's EOF key combination to finish.''')
         try:
             input()
         except EOFError:
             break
+
+signalpath = Path($"$(signalpath))
 
 if '__main__' == __name__:
     main()

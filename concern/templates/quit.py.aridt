@@ -15,21 +15,19 @@
 # You should have received a copy of the GNU General Public License
 # along with Concern.  If not, see <http://www.gnu.org/licenses/>.
 
+from pathlib import Path
 from screen import Stuff
 
 def main():
-    consumer = Stuff(session, consumerwindow, doublequotekey)
-    consumer.interrupt() # TODO LATER: EOF is enough for FoxDot.
-    consumer.eof()
-    vim = Stuff(session, vimwindow, doublequotekey)
-    vim(':q\n') # XXX: Sufficient EOL on all platforms?
-    while True:
-        vim.eof()
+    signalpath.write_text('')
+    Stuff(session, vimwindow, doublequotekey)(':q\n') # XXX: Sufficient EOL on all platforms?
+    Stuff(session, consumerwindow, doublequotekey).interrupt() # TODO LATER: EOF is enough for FoxDot.
 
 session = $"$(sessionName)
 consumerwindow = $"$(consumer windowName)
 vimwindow = $"$(vim windowName)
 doublequotekey = $"$(doubleQuoteKey)
+signalpath = Path($"$(signalpath))
 
 if '__main__' == __name__:
     main()
