@@ -9,8 +9,9 @@ def main():
         except KeyboardInterrupt:
             status = process.wait()
         print(f"{windowname} exited with status: {status}", file = sys.stderr)
+        sys.stderr.write('''Press enter to restart it, or your system's EOF key combination to finish.''')
         try:
-            input('''Press enter to restart it, or your system's EOF key combination to finish.''')
+            input()
         except EOFError:
             break
 
