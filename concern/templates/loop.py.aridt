@@ -1,0 +1,18 @@
+import subprocess, sys
+
+def main():
+    windowname, shellcommand = sys.argv[1:]
+    while True:
+        process = subprocess.Popen(shellcommand, shell = True)
+        try:
+            status = process.wait()
+        except KeyboardInterrupt:
+            status = process.wait()
+        print(f"{windowname} exited with status: {status}", file = sys.stderr)
+        try:
+            input('''Press enter to restart it, or your system's EOF key combination to finish.''')
+        except EOFError:
+            break
+
+if '__main__' == __name__:
+    main()

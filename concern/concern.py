@@ -53,6 +53,7 @@ def main_Concern():
     with TemporaryDirectory(dir = configdir) as tempdir:
         tempdir = Path(tempdir)
         concernvimrc = tempdir / 'vimrc'
+        looppath = tempdir / 'loop.py'
         sendblock = tempdir / 'sendblock.py'
         quit = tempdir / 'quit.py'
         screenrc = tempdir / 'screenrc'
@@ -66,6 +67,7 @@ def main_Concern():
             log.info("No such file: %s", uservimrc)
         (-config).printf("interpreter = %s", sys.executable) # TODO: Migrate to config file.
         (-config).printf("vimrcPath = %s", concernvimrc)
+        (-config).printf("looppath = %s", looppath)
         (-config).printf("sendblock = %s", sendblock)
         (-config).printf("quit = %s", quit)
         (-config).printf('vimArgs := $list()')
@@ -73,6 +75,7 @@ def main_Concern():
             (-config).printf("vimArgs += %s", arg)
         import_module(f".consumer.{config.consumerName}", package = __package__).configure(config)
         _processtemplate(config, 'void', 'vimrc.aridt', concernvimrc)
+        _processtemplate(config, 'pystr', 'loop.py.aridt', looppath)
         _processtemplate(config, 'pystr', 'sendblock.py.aridt', sendblock)
         _processtemplate(config, 'pystr', 'quit.py.aridt', quit)
         _processtemplate(config, 'screenstr', 'screenrc.aridt', screenrc)
