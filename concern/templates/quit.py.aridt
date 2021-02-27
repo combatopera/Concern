@@ -21,6 +21,7 @@ from screen import Stuff
 def main():
     signalpath.write_text('')
     Stuff(session, vimwindow, doublequotekey)(':q\n') # XXX: Sufficient EOL on all platforms?
+    # Screen will show a message and block for a couple of seconds if there is no such window:
     Stuff(session, consumerwindow, doublequotekey).interrupt() # TODO LATER: EOF is enough for FoxDot.
 
 session = $"$(sessionName)
