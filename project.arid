@@ -1,4 +1,4 @@
-: Copyright 2019 Andrzej Cichocki
+: Copyright 2019, 2021 Andrzej Cichocki
 
 : This file is part of Concern.
 :
@@ -21,6 +21,8 @@ requires +=
     timelyOSC>=4
 pyversions += 3
 executable = true
-years += 2019
+years +=
+    2019
+    2021
 author = Andrzej Cichocki
 name = Concern
