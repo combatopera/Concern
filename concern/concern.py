@@ -30,10 +30,10 @@ import fcntl, os, struct, sys
 
 log = logging.getLogger(__name__)
 
-def toabswidth(context, resolvable):
+def toabswidth(scope, resolvable):
     winsize = 'HHHH'
     ws_col = struct.unpack(winsize, fcntl.ioctl(sys.stdin, TIOCGWINSZ, bytes(struct.calcsize(winsize))))[1]
-    return Number(round(resolvable.resolve(context).scalar * (ws_col - 1))) # Take off 1 for the separator.
+    return Number(round(resolvable.resolve(scope).scalar * (ws_col - 1))) # Take off 1 for the separator.
 
 def _processtemplate(config, quotename, templatename, targetpath):
     child = (-config).childctrl()
