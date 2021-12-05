@@ -26,3 +26,4 @@ years +=
     2021
 author = Andrzej Cichocki
 name = Concern
+buildbot enabled = true
