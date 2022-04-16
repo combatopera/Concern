@@ -21,7 +21,6 @@ from argparse import ArgumentParser
 from aridity.config import ConfigCtrl
 from aridity.model import Number
 from aridity.util import openresource
-from importlib import import_module
 from pathlib import Path
 from screen import stuffablescreen
 from tempfile import TemporaryDirectory
@@ -73,7 +72,6 @@ def main_Concern():
         for arg in vimargs:
             (-config).printf("vimArgs += %s", arg)
         (-config).printf("signalpath = %s", tempdir / 'signal')
-        import_module(f".consumer.{config.consumerName}", package = __package__).configure(config)
         _processtemplate(config, 'void', 'vimrc.aridt', concernvimrc)
         _processtemplate(config, 'pystr', 'loop.py.aridt', looppath)
         _processtemplate(config, 'pystr', 'sendblock.py.aridt', sendblock)
