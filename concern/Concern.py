@@ -78,3 +78,6 @@ def main_Concern():
         _processtemplate(config, 'pystr', 'quit.py.aridt', quit)
         _processtemplate(config, 'screenstr', 'screenrc.aridt', screenrc)
         stuffablescreen(config.doubleQuoteKey)[print]('-S', config.sessionName, '-c', screenrc)
+
+if '__main__' == __name__:
+    main_Concern()
