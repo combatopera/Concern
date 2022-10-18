@@ -15,6 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Concern.  If not, see <http://www.gnu.org/licenses/>.
 
+'Vim-based live coding environment.'
 from . import templates
 from .initlogging import logging
 from argparse import ArgumentParser
@@ -40,8 +41,7 @@ def _processtemplate(config, quotename, templatename, targetpath):
     with openresource(templates.__name__, templatename) as f:
         child.processtemplate(f, targetpath)
 
-def main_Concern():
-    'Vim-based live coding environment.'
+def main():
     parser = ArgumentParser()
     parser.add_argument('--chdir', type = os.path.expanduser)
     config, vimargs = parser.parse_known_args()
@@ -58,7 +58,7 @@ def main_Concern():
         screenrc = tempdir / 'screenrc'
         ctrl = ConfigCtrl()
         ctrl.put('Concern', 'toAbsWidth', function = toabswidth)
-        config = ctrl.loadappconfig(main_Concern, 'Concern.arid', settingsoptional = True)
+        config = ctrl.loadappconfig(main, 'Concern.arid', settingsoptional = True)
         uservimrc = Path.home() / '.vimrc'
         if uservimrc.exists():
             (-config).printf("vimrc userPath = %s", uservimrc)
@@ -80,4 +80,4 @@ def main_Concern():
         stuffablescreen(config.doubleQuoteKey)[print]('-S', config.sessionName, '-c', screenrc)
 
 if '__main__' == __name__:
-    main_Concern()
+    main()
