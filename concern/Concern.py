@@ -24,15 +24,16 @@ from aridity.model import Number
 from aridity.util import openresource
 from pathlib import Path
 from screen import stuffablescreen
+from struct import Struct
 from tempfile import TemporaryDirectory
 from termios import TIOCGWINSZ
-import fcntl, os, struct, sys
+import fcntl, os, sys
 
 log = logging.getLogger(__name__)
+winsize = Struct('HHHH')
 
 def toabswidth(scope, resolvable):
-    winsize = 'HHHH'
-    ws_col = struct.unpack(winsize, fcntl.ioctl(sys.stdin, TIOCGWINSZ, bytes(struct.calcsize(winsize))))[1]
+    ws_col = winsize.unpack(fcntl.ioctl(sys.stdin, TIOCGWINSZ, bytes(winsize.size)))[1]
     return Number(round(resolvable.resolve(scope).scalar * (ws_col - 1))) # Take off 1 for the separator.
 
 def _processtemplate(config, quotename, templatename, targetpath):
