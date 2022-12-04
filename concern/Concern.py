@@ -17,7 +17,7 @@
 
 'Vim-based live coding environment.'
 from . import templates
-from .initlogging import logging
+from .util import initlogging
 from argparse import ArgumentParser
 from aridity.config import ConfigCtrl
 from aridity.model import Number
@@ -27,7 +27,7 @@ from screen import stuffablescreen
 from struct import Struct
 from tempfile import TemporaryDirectory
 from termios import TIOCGWINSZ
-import fcntl, os, sys
+import fcntl, logging, os, sys
 
 log = logging.getLogger(__name__)
 winsize = Struct('HHHH')
@@ -43,6 +43,7 @@ def _processtemplate(config, quotename, templatename, targetpath):
         child.processtemplate(f, targetpath)
 
 def main():
+    initlogging()
     parser = ArgumentParser()
     parser.add_argument('--chdir', type = os.path.expanduser)
     config, vimargs = parser.parse_known_args()
