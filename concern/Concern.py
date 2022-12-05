@@ -74,7 +74,7 @@ def main():
         _processtemplate(config, 'pystr', 'sendblock.py.aridt', sendblock)
         _processtemplate(config, 'pystr', 'quit.py.aridt', quit)
         _processtemplate(config, 'screenstr', 'screenrc.aridt', screenrc)
-        stuffablescreen(config.doubleQuoteKey)[print]('-S', config.sessionName, '-c', screenrc)
+        stuffablescreen(config.doubleQuoteKey)[print]('-S', config.sessionName, '-c', screenrc, env = dict(PYTHONPATH = os.pathsep.join(sys.path[1:])))
 
 if '__main__' == __name__:
     main()
