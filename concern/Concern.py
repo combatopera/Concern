@@ -53,7 +53,7 @@ def main():
     configdir.mkdir(parents = True, exist_ok = True)
     with TemporaryDirectory(dir = configdir) as tempdir:
         tempdir = Path(tempdir)
-        concernvimrc = tempdir / 'vimrc'
+        session_vim = tempdir / 'Session.vim'
         looppath = tempdir / 'loop.py'
         sendblock = tempdir / 'sendblock.py'
         quit = tempdir / 'quit.py'
@@ -61,12 +61,7 @@ def main():
         ctrl = ConfigCtrl()
         ctrl.put('Concern', 'toAbsWidth', function = toabswidth)
         config = ctrl.loadappconfig(main, 'Concern.arid', settingsoptional = True)
-        uservimrc = Path.home() / '.vimrc'
-        if uservimrc.exists():
-            (-config).printf("vimrc userPath = %s", uservimrc)
-        else:
-            log.info("No such file: %s", uservimrc)
-        (-config).printf("vimrcPath = %s", concernvimrc)
+        (-config).printf("Session_vim = %s", session_vim)
         (-config).printf("looppath = %s", looppath)
         (-config).printf("sendblock = %s", sendblock)
         (-config).printf("quit = %s", quit)
@@ -74,7 +69,7 @@ def main():
         for arg in vimargs:
             (-config).printf("vimArgs += %s", arg)
         (-config).printf("signalpath = %s", tempdir / 'signal')
-        _processtemplate(config, 'void', 'vimrc.aridt', concernvimrc)
+        _processtemplate(config, 'void', 'Session.vim.aridt', session_vim)
         _processtemplate(config, 'pystr', 'loop.py.aridt', looppath)
         _processtemplate(config, 'pystr', 'sendblock.py.aridt', sendblock)
         _processtemplate(config, 'pystr', 'quit.py.aridt', quit)
