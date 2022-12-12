@@ -29,25 +29,33 @@ def hastext(line):
     return anytext.search(line) is not None
 
 def getblock(text, first, last, pilcrow):
-    return getblockimpl(text.splitlines(), first, last, pilcrow)[2]
+    return Block.get(text.splitlines(), first, last, pilcrow).block
 
-def getblockimpl(lines, first, last, pilcrow):
-    max = len(lines) - 1
-    first -= 1
-    last -= 1
-    i = first
-    while i < max and not hastext(lines[i]):
-        if i >= last and istoplevel(lines[i + 1]):
-            return None, None, '# Nothing to send.' + pilcrow + eol
-        i += 1
-    while last < max and not istoplevel(lines[last + 1]):
-        last += 1
-    while first < last and not hastext(lines[first]):
-        first += 1
-    while first and not istoplevel(lines[first]):
+class Block:
+
+    @classmethod
+    def get(cls, lines, first, last, pilcrow):
+        max = len(lines) - 1
         first -= 1
-    lines[last] # Check for out of range.
-    return first, last, eol.join(l for l in lines[first:last + 1] if hastext(l)) + pilcrow + eol
+        last -= 1
+        i = first
+        while i < max and not hastext(lines[i]):
+            if i >= last and istoplevel(lines[i + 1]):
+                return cls(None, None, '# Nothing to send.' + pilcrow + eol)
+            i += 1
+        while last < max and not istoplevel(lines[last + 1]):
+            last += 1
+        while first < last and not hastext(lines[first]):
+            first += 1
+        while first and not istoplevel(lines[first]):
+            first -= 1
+        lines[last] # Check for out of range.
+        return cls(first, last, eol.join(l for l in lines[first:last + 1] if hastext(l)) + pilcrow + eol)
+
+    def __init__(self, first, last, block):
+        self.first = first
+        self.last = last
+        self.block = block
 
 class ReadBlocks:
 
@@ -63,14 +71,14 @@ class ReadBlocks:
         locals()[stroke]()
 
     def monolith(self):
-        return getblockimpl(self.lines, self.first, self.last, pilcrow)[2]
+        return Block.get(self.lines, self.first, self.last, pilcrow).block
 
     def chunked(self, n):
         first = self.first
         for i in range(n):
             # Most importantly last must achieve self.last:
             last = first + (self.last - first) // (n - i)
-            _, actuallast, block = getblockimpl(self.lines, first, last, '')
-            if actuallast is not None:
-                yield block
-                first = actuallast + 1
+            actual = Block.get(self.lines, first, last, '')
+            if actual.last is not None:
+                yield actual.block
+                first = actual.last + 1
