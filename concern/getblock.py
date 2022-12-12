@@ -22,10 +22,10 @@ anytext = re.compile(r'\S')
 eol = '\n' # FoxDot uses API so anything is fine.
 pilcrow = eol
 
-def istoplevel(line):
+def _istoplevel(line):
     return toplevel.search(line) is not None
 
-def hastext(line):
+def _hastext(line):
     return anytext.search(line) is not None
 
 def getblock(text, first, last, pilcrow):
@@ -39,18 +39,18 @@ class Block:
         first -= 1
         last -= 1
         i = first
-        while i < max and not hastext(lines[i]):
-            if i >= last and istoplevel(lines[i + 1]):
+        while i < max and not _hastext(lines[i]):
+            if i >= last and _istoplevel(lines[i + 1]):
                 return cls(None, None, '# Nothing to send.' + pilcrow + eol)
             i += 1
-        while last < max and not istoplevel(lines[last + 1]):
+        while last < max and not _istoplevel(lines[last + 1]):
             last += 1
-        while first < last and not hastext(lines[first]):
+        while first < last and not _hastext(lines[first]):
             first += 1
-        while first and not istoplevel(lines[first]):
+        while first and not _istoplevel(lines[first]):
             first -= 1
         lines[last] # Check for out of range.
-        return cls(first, last, eol.join(l for l in lines[first:last + 1] if hastext(l)) + pilcrow + eol)
+        return cls(first, last, eol.join(l for l in lines[first:last + 1] if _hastext(l)) + pilcrow + eol)
 
     def __init__(self, first, last, block):
         self.first = first
