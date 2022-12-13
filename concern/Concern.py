@@ -41,7 +41,7 @@ def main():
     config, vimargs = parser.parse_known_args()
     if config.chdir is not None:
         os.chdir(config.chdir)
-    configdir = Path.home() / '.Concern'
+    configdir = Path.home() / '.config' / 'Concern'
     configdir.mkdir(parents = True, exist_ok = True)
     with TemporaryDirectory(dir = configdir) as tempdir:
         tempdir = Path(tempdir)
