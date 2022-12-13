@@ -36,9 +36,10 @@ def _processtemplate(config, quotename, templatename, targetpath):
 
 def main():
     initlogging()
+    config = ConfigCtrl().loadappconfig(main, 'Concern.arid', settingsoptional = True)
     parser = ArgumentParser()
     parser.add_argument('--chdir', type = os.path.expanduser)
-    config, vimargs = parser.parse_known_args()
+    _, vimargs = parser.parse_known_args(namespace = config.cli)
     if config.chdir is not None:
         os.chdir(config.chdir)
     configdir = Path.home() / '.config' / 'Concern'
@@ -50,7 +51,6 @@ def main():
         sendblock = tempdir / 'sendblock.py'
         quit = tempdir / 'quit.py'
         screenrc = tempdir / 'screenrc'
-        config = ConfigCtrl().loadappconfig(main, 'Concern.arid', settingsoptional = True)
         config.Session_vim = str(session_vim)
         config.looppath = str(looppath)
         config.sendblock = str(sendblock)
