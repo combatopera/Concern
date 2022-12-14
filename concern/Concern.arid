@@ -48,3 +48,4 @@ vim
     shellCommand = vim -S $shstr$(Session_vim) $join($map($(vimArgs) a $shstr$(a)) $.( ))
 doubleQuoteKey = DQ
 consumerName = foxdot
+context := $fork()

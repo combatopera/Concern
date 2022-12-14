@@ -28,11 +28,16 @@ import logging, os, sys
 
 log = logging.getLogger(__name__)
 
-def _processtemplate(config, quotename, templatename, targetpath):
-    child = (-config).childctrl()
-    child.printf('" = $(%s)', quotename)
-    with openresource(templates.__name__, templatename) as f:
-        child.processtemplate(f, targetpath)
+class Context:
+
+    def __init__(self, config):
+        self.contextctrl = -config.context
+
+    def processtemplate(self, quotename, templatename, targetpath):
+        cc = self.contextctrl.childctrl()
+        cc.printf('" = $(%s)', quotename)
+        with openresource(templates.__name__, templatename) as f:
+            cc.processtemplate(f, targetpath)
 
 def main():
     initlogging()
@@ -59,11 +64,12 @@ def main():
         for arg in vimargs:
             (-config).printf("vimArgs += %s", arg)
         config.signalpath = str(tempdir / 'signal')
-        _processtemplate(config, 'void', 'Session.vim.aridt', session_vim)
-        _processtemplate(config, 'pystr', 'loop.py.aridt', looppath)
-        _processtemplate(config, 'pystr', 'sendblock.py.aridt', sendblock)
-        _processtemplate(config, 'pystr', 'quit.py.aridt', quit)
-        _processtemplate(config, 'screenstr', 'screenrc.aridt', screenrc)
+        context = Context(config)
+        context.processtemplate('void', 'Session.vim.aridt', session_vim)
+        context.processtemplate('pystr', 'loop.py.aridt', looppath)
+        context.processtemplate('pystr', 'sendblock.py.aridt', sendblock)
+        context.processtemplate('pystr', 'quit.py.aridt', quit)
+        context.processtemplate('screenstr', 'screenrc.aridt', screenrc)
         stuffablescreen(config.doubleQuoteKey)[print]('-S', config.sessionName, '-c', screenrc, env = dict(PYTHONPATH = os.pathsep.join(sys.path[1:])))
 
 if '__main__' == __name__:
