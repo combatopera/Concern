@@ -63,7 +63,7 @@ def main():
         (-config).printf('vimArgs := $list()')
         for arg in vimargs:
             (-config).printf("vimArgs += %s", arg)
-        config.signalpath = str(tempdir / 'signal')
+        config.context.signalpath = str(tempdir / 'signal')
         context = Context(config)
         context.processtemplate('void', 'Session.vim.aridt', session_vim)
         context.processtemplate('pystr', 'loop.py.aridt', looppath)
