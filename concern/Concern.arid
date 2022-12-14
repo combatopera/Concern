@@ -38,7 +38,7 @@ consumer
     interface = $($(consumerName) interface)
     bufsize = None
     port = None
-sessionName = Concern
+sessionName = $(cli session)
 sendKey
     default = <CR>
     alternate = ]

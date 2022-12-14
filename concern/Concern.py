@@ -44,6 +44,7 @@ def main():
     config = ConfigCtrl().loadappconfig(main, 'Concern.arid', settingsoptional = True)
     parser = ArgumentParser()
     parser.add_argument('--chdir', type = os.path.expanduser)
+    parser.add_argument('--session', default = 'Concern')
     _, vimargs = parser.parse_known_args(namespace = config.cli)
     if config.chdir is not None:
         os.chdir(config.chdir)
