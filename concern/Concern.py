@@ -59,8 +59,8 @@ def main():
         screenrc = tempdir / 'screenrc'
         config.Session_vim = str(session_vim)
         config.looppath = str(looppath)
-        config.sendblock = str(sendblock)
-        config.quit = str(quit)
+        config.context.sendblock = str(sendblock)
+        config.context.quit = str(quit)
         (-config).printf('vimArgs := $list()')
         for arg in vimargs:
             (-config).printf("vimArgs += %s", arg)

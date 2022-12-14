@@ -48,4 +48,7 @@ vim
     shellCommand = vim -S $shstr$(Session_vim) $join($map($(vimArgs) a $shstr$(a)) $.( ))
 doubleQuoteKey = DQ
 consumerName = foxdot
-context signalpath = $(void)
+context
+    quit = $(void)
+    sendblock = $(void)
+    signalpath = $(void)
