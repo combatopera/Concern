@@ -41,8 +41,8 @@ def main():
     if config.chdir is not None:
         os.chdir(config.chdir)
     configdir.mkdir(parents = True, exist_ok = True)
-    with TemporaryDirectory(dir = configdir) as tempdir:
-        config.sessiondir = tempdir
+    with TemporaryDirectory(dir = configdir) as sessiondir:
+        config.sessiondir = sessiondir
         for c in config.T:
             with openresource(templates.__name__, c.templatename) as f:
                 (-c.context).processtemplate(f, c.P)
