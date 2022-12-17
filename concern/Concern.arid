@@ -19,7 +19,7 @@ cli := $fork()
 chdir = $(cli chdir)
 toAbsWidth = $pyref(concern.util toabswidth)
 interpreter = $pyref(sys executable)
-command = $(interpreter) $(looppath) $(windowName) $(shellCommand)
+command = $(interpreter) $(loop_py) $(windowName) $(shellCommand)
 foxdot
     title = FoxDot
     shellCommand = $shstr$(interpreter) -m FoxDot --pipe
@@ -53,3 +53,5 @@ template
     sendblock_py = $/($(sessiondir) sendblock.py)
     signalpath = $/($(sessiondir) signal)
 sessiondir = $(void)
+session_vim = $/($(sessiondir) session.vim)
+loop_py = $/($(sessiondir) loop.py)

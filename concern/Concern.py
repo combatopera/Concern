@@ -53,17 +53,13 @@ def main():
     with TemporaryDirectory(dir = configdir) as tempdir:
         config.sessiondir = tempdir
         tempdir = Path(tempdir)
-        session_vim = tempdir / 'session.vim'
-        looppath = tempdir / 'loop.py'
         screenrc = tempdir / 'screenrc'
-        config.session_vim = str(session_vim)
-        config.looppath = str(looppath)
         (-config).printf('vimArgs := $list()')
         for arg in vimargs:
             (-config).printf("vimArgs += %s", arg)
         templateconfig = TemplateConfig(config)
-        templateconfig.process('void', 'session.vim.aridt', session_vim)
-        templateconfig.process('pystr', 'loop.py.aridt', looppath)
+        templateconfig.process('void', 'session.vim.aridt', config.session_vim)
+        templateconfig.process('pystr', 'loop.py.aridt', config.loop_py)
         templateconfig.process('pystr', 'sendblock.py.aridt', config.template.sendblock_py)
         templateconfig.process('pystr', 'quit.py.aridt', config.template.quit_py)
         templateconfig.process('screenstr', 'screenrc.aridt', screenrc)
