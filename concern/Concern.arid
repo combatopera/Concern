@@ -17,7 +17,7 @@
 
 cli := $fork()
 chdir = $(cli chdir)
-toAbsWidth = $pyref(concern.util toabswidth)
+toabswidth = $pyref(concern.util toabswidth)
 interpreter = $pyref(sys executable)
 command = $(interpreter) $(T loop.py P) $(windowName) $(shellCommand)
 foxdot
@@ -31,7 +31,7 @@ pym2149
     interface = OSC
 consumer
     fraction = $div(1 3)
-    size = $toAbsWidth$(fraction)
+    size = $toabswidth$(fraction)
     scrollback = 10000
     windowName = $($(consumerName) title)
     shellCommand = $($(consumerName) shellCommand)
