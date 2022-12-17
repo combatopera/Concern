@@ -52,6 +52,7 @@ template
     loop_py = $/($(sessiondir) loop.py)
     quit_py = $/($(sessiondir) quit.py)
     sendblock_py = $/($(sessiondir) sendblock.py)
+    screenrc = $/($(sessiondir) screenrc)
     session_vim = $/($(sessiondir) session.vim)
     signalpath = $/($(sessiondir) signal)
 sessiondir = $(void)

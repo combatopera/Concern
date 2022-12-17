@@ -54,15 +54,13 @@ def main():
     configdir.mkdir(parents = True, exist_ok = True)
     with TemporaryDirectory(dir = configdir) as tempdir:
         config.sessiondir = tempdir
-        tempdir = Path(tempdir)
-        screenrc = tempdir / 'screenrc'
         templateconfig = TemplateConfig(config)
         templateconfig.process('void', 'session.vim.aridt', config.template.session_vim)
         templateconfig.process('pystr', 'loop.py.aridt', config.template.loop_py)
         templateconfig.process('pystr', 'sendblock.py.aridt', config.template.sendblock_py)
         templateconfig.process('pystr', 'quit.py.aridt', config.template.quit_py)
-        templateconfig.process('screenstr', 'screenrc.aridt', screenrc)
-        stuffablescreen(config.doubleQuoteKey)[print]('-S', config.sessionName, '-c', screenrc, env = dict(PYTHONPATH = os.pathsep.join(sys.path[1:])))
+        templateconfig.process('screenstr', 'screenrc.aridt', config.template.screenrc)
+        stuffablescreen(config.doubleQuoteKey)[print]('-S', config.sessionName, '-c', config.template.screenrc, env = dict(PYTHONPATH = os.pathsep.join(sys.path[1:])))
 
 if '__main__' == __name__:
     main()
