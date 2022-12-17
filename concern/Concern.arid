@@ -54,6 +54,6 @@ template
     sendblock_py = $/($(sessiondir) sendblock.py)
     screenrc = $/($(sessiondir) screenrc)
     session_vim = $/($(sessiondir) session.vim)
-    signalpath = $/($(sessiondir) signal)
+signalpath = $/($(sessiondir) signal)
 sessiondir = $(void)
 vimArgs := $list()
