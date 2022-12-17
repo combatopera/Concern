@@ -47,6 +47,8 @@ def main():
     parser.add_argument('--chdir', type = os.path.expanduser)
     parser.add_argument('--session', default = 'Concern')
     _, vimargs = parser.parse_known_args(namespace = config.cli)
+    for arg in vimargs:
+        (-config).printf("vimArgs += %s", arg)
     if config.chdir is not None:
         os.chdir(config.chdir)
     configdir.mkdir(parents = True, exist_ok = True)
@@ -54,9 +56,6 @@ def main():
         config.sessiondir = tempdir
         tempdir = Path(tempdir)
         screenrc = tempdir / 'screenrc'
-        (-config).printf('vimArgs := $list()')
-        for arg in vimargs:
-            (-config).printf("vimArgs += %s", arg)
         templateconfig = TemplateConfig(config)
         templateconfig.process('void', 'session.vim.aridt', config.session_vim)
         templateconfig.process('pystr', 'loop.py.aridt', config.loop_py)

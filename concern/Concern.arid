@@ -55,3 +55,4 @@ template
 sessiondir = $(void)
 session_vim = $/($(sessiondir) session.vim)
 loop_py = $/($(sessiondir) loop.py)
+vimArgs := $list()
