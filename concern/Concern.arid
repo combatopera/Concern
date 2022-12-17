@@ -22,9 +22,7 @@ PYTHONPATH = $pyref(concern.util PYTHONPATH)
 vimstr = $pyref(concern.util vimstr)
 interpreter = $pyref(sys executable)
 window
-    *
-        command = $(interpreter) $(T loop.py P) $(name) $(shellCommand)
-        screencmd = $join($map($,(command) $screenstr$()) $.( ))
+    * screencmd = $join($map($list($(interpreter) $(T loop.py P) $(name) $(shellCommand)) $screenstr$()) $.( ))
     consumer
         name = $($(consumerName) title)
         shellCommand = $($(consumerName) shellCommand)
