@@ -45,7 +45,7 @@ sendKey
 quitKey = q
 vim
     windowName = Vim
-    shellCommand = vim -S $shstr$(Session_vim) $join($map($(vimArgs) a $shstr$(a)) $.( ))
+    shellCommand = vim -S $shstr$(session_vim) $join($map($(vimArgs) a $shstr$(a)) $.( ))
 doubleQuoteKey = DQ
 consumerName = foxdot
 template

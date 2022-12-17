@@ -52,12 +52,12 @@ def main():
     configdir.mkdir(parents = True, exist_ok = True)
     with TemporaryDirectory(dir = configdir) as tempdir:
         tempdir = Path(tempdir)
-        session_vim = tempdir / 'Session.vim'
+        session_vim = tempdir / 'session.vim'
         looppath = tempdir / 'loop.py'
         sendblock = tempdir / 'sendblock.py'
         quit = tempdir / 'quit.py'
         screenrc = tempdir / 'screenrc'
-        config.Session_vim = str(session_vim)
+        config.session_vim = str(session_vim)
         config.looppath = str(looppath)
         config.template.sendblock = str(sendblock)
         config.template.quit = str(quit)
@@ -66,7 +66,7 @@ def main():
             (-config).printf("vimArgs += %s", arg)
         config.template.signalpath = str(tempdir / 'signal')
         templateconfig = TemplateConfig(config)
-        templateconfig.process('void', 'Session.vim.aridt', session_vim)
+        templateconfig.process('void', 'session.vim.aridt', session_vim)
         templateconfig.process('pystr', 'loop.py.aridt', looppath)
         templateconfig.process('pystr', 'sendblock.py.aridt', sendblock)
         templateconfig.process('pystr', 'quit.py.aridt', quit)
