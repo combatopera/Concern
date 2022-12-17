@@ -1,5 +1,5 @@
-nnoremap <silent> <Leader>$(quitKey) :exe 'sil !$(interpreter) $(quit) &'<CR>
-nnoremap <silent> <Leader>$(sendKey default) :exe 'sil w !$(interpreter) $(sendblock)' shellescape(bufname("%"), 1) 'default' line('.') line('.')<CR>
-nnoremap <silent> <Leader>$(sendKey alternate) :exe 'sil w !$(interpreter) $(sendblock)' shellescape(bufname("%"), 1) 'alternate' line('.') line('.')<CR>
-vnoremap <silent> <Leader>$(sendKey default) :<C-U>exe 'sil w !$(interpreter) $(sendblock)' shellescape(bufname("%"), 1) 'default' line("'<") line("'>")<CR>
-vnoremap <silent> <Leader>$(sendKey alternate) :<C-U>exe 'sil w !$(interpreter) $(sendblock)' shellescape(bufname("%"), 1) 'alternate' line("'<") line("'>")<CR>
+nnoremap <silent> <Leader>$(quitKey) :exe 'sil !$(interpreter) $(quit_py) &'<CR>
+nnoremap <silent> <Leader>$(sendKey default) :exe 'sil w !$(interpreter) $(sendblock_py)' shellescape(bufname("%"), 1) 'default' line('.') line('.')<CR>
+nnoremap <silent> <Leader>$(sendKey alternate) :exe 'sil w !$(interpreter) $(sendblock_py)' shellescape(bufname("%"), 1) 'alternate' line('.') line('.')<CR>
+vnoremap <silent> <Leader>$(sendKey default) :<C-U>exe 'sil w !$(interpreter) $(sendblock_py)' shellescape(bufname("%"), 1) 'default' line("'<") line("'>")<CR>
+vnoremap <silent> <Leader>$(sendKey alternate) :<C-U>exe 'sil w !$(interpreter) $(sendblock_py)' shellescape(bufname("%"), 1) 'alternate' line("'<") line("'>")<CR>

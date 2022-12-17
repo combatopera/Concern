@@ -49,6 +49,7 @@ vim
 doubleQuoteKey = DQ
 consumerName = foxdot
 template
-    quit = $(void)
-    sendblock = $(void)
-    signalpath = $(void)
+    quit_py = $/($(sessiondir) quit.py)
+    sendblock_py = $/($(sessiondir) sendblock.py)
+    signalpath = $/($(sessiondir) signal)
+sessiondir = $(void)

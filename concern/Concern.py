@@ -51,25 +51,21 @@ def main():
     configdir = Path.home() / '.config' / 'Concern'
     configdir.mkdir(parents = True, exist_ok = True)
     with TemporaryDirectory(dir = configdir) as tempdir:
+        config.sessiondir = tempdir
         tempdir = Path(tempdir)
         session_vim = tempdir / 'session.vim'
         looppath = tempdir / 'loop.py'
-        sendblock = tempdir / 'sendblock.py'
-        quit = tempdir / 'quit.py'
         screenrc = tempdir / 'screenrc'
         config.session_vim = str(session_vim)
         config.looppath = str(looppath)
-        config.template.sendblock = str(sendblock)
-        config.template.quit = str(quit)
         (-config).printf('vimArgs := $list()')
         for arg in vimargs:
             (-config).printf("vimArgs += %s", arg)
-        config.template.signalpath = str(tempdir / 'signal')
         templateconfig = TemplateConfig(config)
         templateconfig.process('void', 'session.vim.aridt', session_vim)
         templateconfig.process('pystr', 'loop.py.aridt', looppath)
-        templateconfig.process('pystr', 'sendblock.py.aridt', sendblock)
-        templateconfig.process('pystr', 'quit.py.aridt', quit)
+        templateconfig.process('pystr', 'sendblock.py.aridt', config.template.sendblock_py)
+        templateconfig.process('pystr', 'quit.py.aridt', config.template.quit_py)
         templateconfig.process('screenstr', 'screenrc.aridt', screenrc)
         stuffablescreen(config.doubleQuoteKey)[print]('-S', config.sessionName, '-c', screenrc, env = dict(PYTHONPATH = os.pathsep.join(sys.path[1:])))
 
