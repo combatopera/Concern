@@ -32,7 +32,7 @@ configdir = Path.home() / '.config' / 'Concern'
 class TemplateConfig:
 
     def __init__(self, config):
-        self.cc = -config.template
+        self.cc = -config.T
 
     def process(self, quotename, templatename, targetpath):
         cc = self.cc.childctrl()
@@ -55,12 +55,12 @@ def main():
     with TemporaryDirectory(dir = configdir) as tempdir:
         config.sessiondir = tempdir
         templateconfig = TemplateConfig(config)
-        templateconfig.process('void', 'session.vim.aridt', config.template.session_vim)
-        templateconfig.process('pystr', 'loop.py.aridt', config.template.loop_py)
-        templateconfig.process('pystr', 'sendblock.py.aridt', config.template.sendblock_py)
-        templateconfig.process('pystr', 'quit.py.aridt', config.template.quit_py)
-        templateconfig.process('screenstr', 'screenrc.aridt', config.template.screenrc)
-        stuffablescreen(config.doubleQuoteKey)[print]('-S', config.sessionName, '-c', config.template.screenrc, env = dict(PYTHONPATH = os.pathsep.join(sys.path[1:])))
+        templateconfig.process('void', 'session.vim.aridt', config.T.session_vim)
+        templateconfig.process('pystr', 'loop.py.aridt', config.T.loop_py)
+        templateconfig.process('pystr', 'sendblock.py.aridt', config.T.sendblock_py)
+        templateconfig.process('pystr', 'quit.py.aridt', config.T.quit_py)
+        templateconfig.process('screenstr', 'screenrc.aridt', config.T.screenrc)
+        stuffablescreen(config.doubleQuoteKey)[print]('-S', config.sessionName, '-c', config.T.screenrc, env = dict(PYTHONPATH = os.pathsep.join(sys.path[1:])))
 
 if '__main__' == __name__:
     main()
