@@ -57,8 +57,8 @@ def main():
         tempdir = Path(tempdir)
         screenrc = tempdir / 'screenrc'
         templateconfig = TemplateConfig(config)
-        templateconfig.process('void', 'session.vim.aridt', config.session_vim)
-        templateconfig.process('pystr', 'loop.py.aridt', config.loop_py)
+        templateconfig.process('void', 'session.vim.aridt', config.template.session_vim)
+        templateconfig.process('pystr', 'loop.py.aridt', config.template.loop_py)
         templateconfig.process('pystr', 'sendblock.py.aridt', config.template.sendblock_py)
         templateconfig.process('pystr', 'quit.py.aridt', config.template.quit_py)
         templateconfig.process('screenstr', 'screenrc.aridt', screenrc)
