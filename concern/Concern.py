@@ -29,17 +29,6 @@ import logging, os, sys
 log = logging.getLogger(__name__)
 configdir = Path.home() / '.config' / 'Concern'
 
-class TemplateConfig:
-
-    def __init__(self, config):
-        self.cc = -config.T
-
-    def process(self, quotename, templatename, targetpath):
-        cc = self.cc.childctrl()
-        cc.printf('" = $(%s)', quotename)
-        with openresource(templates.__name__, templatename) as f:
-            cc.processtemplate(f, targetpath)
-
 def main():
     initlogging()
     config = ConfigCtrl().loadappconfig(main, 'Concern.arid', settingsoptional = True)
@@ -54,13 +43,10 @@ def main():
     configdir.mkdir(parents = True, exist_ok = True)
     with TemporaryDirectory(dir = configdir) as tempdir:
         config.sessiondir = tempdir
-        templateconfig = TemplateConfig(config)
-        templateconfig.process('void', 'session.vim.aridt', config.T.session_vim)
-        templateconfig.process('pystr', 'loop.py.aridt', config.T.loop_py)
-        templateconfig.process('pystr', 'sendblock.py.aridt', config.T.sendblock_py)
-        templateconfig.process('pystr', 'quit.py.aridt', config.T.quit_py)
-        templateconfig.process('screenstr', 'screenrc.aridt', config.T.screenrc)
-        stuffablescreen(config.doubleQuoteKey)[print]('-S', config.sessionName, '-c', config.T.screenrc, env = dict(PYTHONPATH = os.pathsep.join(sys.path[1:])))
+        for c in config.T:
+            with openresource(templates.__name__, c.templatename) as f:
+                (-c.context).processtemplate(f, c.P)
+        stuffablescreen(config.doubleQuoteKey)[print]('-S', config.sessionName, '-c', config.T.screenrc.P, env = dict(PYTHONPATH = os.pathsep.join(sys.path[1:])))
 
 if '__main__' == __name__:
     main()

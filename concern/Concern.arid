@@ -19,7 +19,7 @@ cli := $fork()
 chdir = $(cli chdir)
 toAbsWidth = $pyref(concern.util toabswidth)
 interpreter = $pyref(sys executable)
-command = $(interpreter) $(T loop_py) $(windowName) $(shellCommand)
+command = $(interpreter) $(T loop.py P) $(windowName) $(shellCommand)
 foxdot
     title = FoxDot
     shellCommand = $shstr$(interpreter) -m FoxDot --pipe
@@ -45,15 +45,30 @@ sendKey
 quitKey = q
 vim
     windowName = Vim
-    shellCommand = vim -S $shstr$(T session_vim) $join($map($(vimArgs) a $shstr$(a)) $.( ))
+    shellCommand = vim -S $shstr$(T session.vim P) $join($map($(vimArgs) a $shstr$(a)) $.( ))
 doubleQuoteKey = DQ
 consumerName = foxdot
 T
-    loop_py = $/($(sessiondir) loop.py)
-    quit_py = $/($(sessiondir) quit.py)
-    sendblock_py = $/($(sessiondir) sendblock.py)
-    screenrc = $/($(sessiondir) screenrc)
-    session_vim = $/($(sessiondir) session.vim)
+    loop.py
+        context " = $(pystr)
+        P = $/($(sessiondir) loop.py)
+        templatename = loop.py.aridt
+    quit.py
+        context " = $(pystr)
+        P = $/($(sessiondir) quit.py)
+        templatename = quit.py.aridt
+    sendblock.py
+        context " = $(pystr)
+        P = $/($(sessiondir) sendblock.py)
+        templatename = sendblock.py.aridt
+    screenrc
+        context " = $(screenstr)
+        P = $/($(sessiondir) screenrc)
+        templatename = screenrc.aridt
+    session.vim
+        context " = $(void)
+        P = $/($(sessiondir) session.vim)
+        templatename = session.vim.aridt
 signalpath = $/($(sessiondir) signal)
 sessiondir = $(void)
 vimArgs := $list()
