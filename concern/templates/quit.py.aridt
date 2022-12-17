@@ -25,8 +25,8 @@ def main():
     Stuff(session, consumerwindow, doublequotekey).interrupt() # TODO LATER: EOF is enough for FoxDot.
 
 session = $"$(sessionName)
-consumerwindow = $"$(consumer windowName)
-vimwindow = $"$(vim windowName)
+consumerwindow = $"$(window consumer name)
+vimwindow = $"$(window vim name)
 doublequotekey = $"$(doubleQuoteKey)
 signalpath = Path($"$(signalpath))
 

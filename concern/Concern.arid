@@ -21,7 +21,14 @@ toabswidth = $pyref(concern.util toabswidth)
 PYTHONPATH = $pyref(concern.util PYTHONPATH)
 vimstr = $pyref(concern.util vimstr)
 interpreter = $pyref(sys executable)
-command = $(interpreter) $(T loop.py P) $(windowName) $(shellCommand)
+window
+    * command = $(interpreter) $(T loop.py P) $(name) $(shellCommand)
+    consumer
+        name = $($(consumerName) title)
+        shellCommand = $($(consumerName) shellCommand)
+    vim
+        name = Vim
+        shellCommand = vim -S $shstr$(T session.vim P) $join($map($(vimArgs) a $shstr$(a)) $.( ))
 foxdot
     title = FoxDot
     shellCommand = $shstr$(interpreter) -m FoxDot --pipe
@@ -35,8 +42,6 @@ consumer
     fraction = $div(1 3)
     size = $toabswidth$(fraction)
     scrollback = 10000
-    windowName = $($(consumerName) title)
-    shellCommand = $($(consumerName) shellCommand)
     interface = $($(consumerName) interface)
     bufsize = None
     port = None
@@ -45,9 +50,6 @@ sendKey
     default = <CR>
     alternate = ]
 quitKey = q
-vim
-    windowName = Vim
-    shellCommand = vim -S $shstr$(T session.vim P) $join($map($(vimArgs) a $shstr$(a)) $.( ))
 doubleQuoteKey = DQ
 consumerName = foxdot
 T

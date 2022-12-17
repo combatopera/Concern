@@ -44,7 +44,7 @@ interface = $"$(consumer interface)
 bufsize = $(consumer bufsize)
 port = $(consumer port)
 session = $"$(sessionName) # TODO LATER: Support more than one session.
-window = $"$(consumer windowName)
+window = $"$(window consumer name)
 doublequotekey = $"$(doubleQuoteKey)
 
 if '__main__' == __name__:
