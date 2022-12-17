@@ -27,6 +27,7 @@ from tempfile import TemporaryDirectory
 import logging, os, sys
 
 log = logging.getLogger(__name__)
+configdir = Path.home() / '.config' / 'Concern'
 
 class TemplateConfig:
 
@@ -48,7 +49,6 @@ def main():
     _, vimargs = parser.parse_known_args(namespace = config.cli)
     if config.chdir is not None:
         os.chdir(config.chdir)
-    configdir = Path.home() / '.config' / 'Concern'
     configdir.mkdir(parents = True, exist_ok = True)
     with TemporaryDirectory(dir = configdir) as tempdir:
         config.sessiondir = tempdir
