@@ -2,9 +2,9 @@ vbell off
 split -v
 focus
 resize $(consumer size)
-screen $join($map($,(window consumer command) $"$()) $.( ))
+screen $(window consumer screencmd)
 title $(window consumer name)
 scrollback $(consumer scrollback)
 focus
-screen $join($map($,(window vim command) $"$()) $.( ))
+screen $(window vim screencmd)
 title $(window vim name)
