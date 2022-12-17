@@ -28,13 +28,13 @@ import logging, os, sys
 
 log = logging.getLogger(__name__)
 
-class Context:
+class TemplateConfig:
 
     def __init__(self, config):
-        self.contextctrl = -config.context
+        self.cc = -config.template
 
-    def processtemplate(self, quotename, templatename, targetpath):
-        cc = self.contextctrl.childctrl()
+    def process(self, quotename, templatename, targetpath):
+        cc = self.cc.childctrl()
         cc.printf('" = $(%s)', quotename)
         with openresource(templates.__name__, templatename) as f:
             cc.processtemplate(f, targetpath)
@@ -59,18 +59,18 @@ def main():
         screenrc = tempdir / 'screenrc'
         config.Session_vim = str(session_vim)
         config.looppath = str(looppath)
-        config.context.sendblock = str(sendblock)
-        config.context.quit = str(quit)
+        config.template.sendblock = str(sendblock)
+        config.template.quit = str(quit)
         (-config).printf('vimArgs := $list()')
         for arg in vimargs:
             (-config).printf("vimArgs += %s", arg)
-        config.context.signalpath = str(tempdir / 'signal')
-        context = Context(config)
-        context.processtemplate('void', 'Session.vim.aridt', session_vim)
-        context.processtemplate('pystr', 'loop.py.aridt', looppath)
-        context.processtemplate('pystr', 'sendblock.py.aridt', sendblock)
-        context.processtemplate('pystr', 'quit.py.aridt', quit)
-        context.processtemplate('screenstr', 'screenrc.aridt', screenrc)
+        config.template.signalpath = str(tempdir / 'signal')
+        templateconfig = TemplateConfig(config)
+        templateconfig.process('void', 'Session.vim.aridt', session_vim)
+        templateconfig.process('pystr', 'loop.py.aridt', looppath)
+        templateconfig.process('pystr', 'sendblock.py.aridt', sendblock)
+        templateconfig.process('pystr', 'quit.py.aridt', quit)
+        templateconfig.process('screenstr', 'screenrc.aridt', screenrc)
         stuffablescreen(config.doubleQuoteKey)[print]('-S', config.sessionName, '-c', screenrc, env = dict(PYTHONPATH = os.pathsep.join(sys.path[1:])))
 
 if '__main__' == __name__:
