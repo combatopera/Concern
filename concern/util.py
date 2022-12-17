@@ -15,11 +15,12 @@
 # You should have received a copy of the GNU General Public License
 # along with Concern.  If not, see <http://www.gnu.org/licenses/>.
 
-from aridity.model import Number
+from aridity.model import Number, Text
 from struct import Struct
 from termios import TIOCGWINSZ
-import fcntl, logging, sys
+import fcntl, logging, os, sys
 
+PYTHONPATH = os.pathsep.join(sys.path[1:])
 winsize = Struct('HHHH')
 
 def initlogging():
@@ -28,3 +29,6 @@ def initlogging():
 def toabswidth(scope, resolvable):
     ws_col = winsize.unpack(fcntl.ioctl(sys.stdin, TIOCGWINSZ, bytes(winsize.size)))[1]
     return Number(round(resolvable.resolve(scope).scalar * (ws_col - 1))) # Take off 1 for the separator.
+
+def vimstr(scope, resolvable):
+    return Text(f"""'{resolvable.resolve(scope).cat().replace("'", "''")}'""")

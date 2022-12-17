@@ -24,7 +24,7 @@ from aridity.util import openresource
 from pathlib import Path
 from screen import stuffablescreen
 from tempfile import TemporaryDirectory
-import logging, os, sys
+import logging, os
 
 log = logging.getLogger(__name__)
 configdir = Path.home() / '.config' / 'Concern'
@@ -46,7 +46,7 @@ def main():
         for c in config.T:
             with openresource(templates.__name__, c.templatename) as f:
                 (-c.context).processtemplate(f, c.P)
-        stuffablescreen(config.doubleQuoteKey)[print]('-S', config.sessionName, '-c', config.T.screenrc.P, env = dict(PYTHONPATH = os.pathsep.join(sys.path[1:])))
+        stuffablescreen(config.doubleQuoteKey)[print]('-S', config.sessionName, '-c', config.T.screenrc.P)
 
 if '__main__' == __name__:
     main()

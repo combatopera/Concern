@@ -18,6 +18,8 @@
 cli := $fork()
 chdir = $(cli chdir)
 toabswidth = $pyref(concern.util toabswidth)
+PYTHONPATH = $pyref(concern.util PYTHONPATH)
+vimstr = $pyref(concern.util vimstr)
 interpreter = $pyref(sys executable)
 command = $(interpreter) $(T loop.py P) $(windowName) $(shellCommand)
 foxdot
