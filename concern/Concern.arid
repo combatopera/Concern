@@ -25,7 +25,7 @@ vimstr = $pyref(concern.util vimstr)
 window
     * screencmd = $join($map($list($(interpreter) $(T loop.py P) $(name) $join($map($(command) $shstr$()) $.( ))) $screenstr$()) $.( ))
     consumer
-        command = $,(consumer $(consumerName) command)
+        command = $(consumer $(consumerName) command)
         name = $(consumer $(consumerName) title)
         scrollback = 10000
         fraction = $div(1 3)
@@ -39,13 +39,13 @@ consumer
         bufsize = $(None)
         port = $(None)
     foxdot
-        command = $(interpreter) -m FoxDot --pipe
+        command = $list($(interpreter) -m FoxDot --pipe)
         interface = stuff
         title = FoxDot
     pym2149
         bufsize = 4096
         executable = lc2jack
-        command = $(executable) --config $.(pianorollenabled = false) /dev/null
+        command = $list($(executable) --config $.(pianorollenabled = false) /dev/null)
         interface = OSC
         port = 2149
         title = pym2149
