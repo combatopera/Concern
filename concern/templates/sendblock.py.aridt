@@ -40,7 +40,7 @@ def main():
     _, stroke = (sys.argv.pop(1) for _ in range(2))
     globals()[interface](ReadBlocks(stroke))
 
-interface = $"$(consumer interface)
+interface = $"$($(consumerName) interface)
 bufsize = $(consumer bufsize)
 port = $(consumer port)
 session = $"$(sessionName) # TODO LATER: Support more than one session.
