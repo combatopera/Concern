@@ -25,12 +25,12 @@ vimstr = $pyref(concern.util vimstr)
 window
     * screencmd = $join($map($list($(interpreter) $(T loop.py P) $(name) $join($map($(command) $shstr$()) $.( ))) $screenstr$()) $.( ))
     consumer
-        name = $($(consumerName) title)
         command = $,($(consumerName) command)
+        name = $($(consumerName) title)
     vim
         args := $list()
-        name = Vim
         command = $list(vim -S $(T session.vim P) $*$(args))
+        name = Vim
 foxdot
     title = FoxDot
     command = $(interpreter) -m FoxDot --pipe
