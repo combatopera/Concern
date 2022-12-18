@@ -17,10 +17,10 @@
 
 cli := $fork()
 chdir = $(cli chdir)
-toabswidth = $pyref(concern.util toabswidth)
-PYTHONPATH = $pyref(concern.util PYTHONPATH)
-vimstr = $pyref(concern.util vimstr)
 interpreter = $pyref(sys executable)
+PYTHONPATH = $pyref(concern.util PYTHONPATH)
+toabswidth = $pyref(concern.util toabswidth)
+vimstr = $pyref(concern.util vimstr)
 window
     * screencmd = $join($map($list($(interpreter) $(T loop.py P) $(name) $(shellCommand)) $screenstr$()) $.( ))
     consumer
