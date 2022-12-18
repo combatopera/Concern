@@ -22,14 +22,16 @@ PYTHONPATH = $pyref(concern.util PYTHONPATH)
 toabswidth = $pyref(concern.util toabswidth)
 vimstr = $pyref(concern.util vimstr)
 window
-    * screencmd = $join($map($list($(interpreter) $(T loop.py P) $(name) $(shellCommand)) $screenstr$()) $.( ))
+    *
+        screencmd = $join($map($list($(interpreter) $(T loop.py P) $(name) $(shellCommand)) $screenstr$()) $.( ))
+        shellCommand = $join($map($(command) $shstr$()) $.( ))
     consumer
         name = $($(consumerName) title)
-        shellCommand = $join($map($,($(consumerName) command) $shstr$()) $.( ))
+        command = $,($(consumerName) command)
     vim
         args := $list()
         name = Vim
-        shellCommand = $join($map($list(vim -S $(T session.vim P) $*$(args)) $shstr$()) $.( ))
+        command = $list(vim -S $(T session.vim P) $*$(args))
 foxdot
     title = FoxDot
     command = $(interpreter) -m FoxDot --pipe
