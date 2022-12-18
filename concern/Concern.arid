@@ -35,17 +35,18 @@ window
         command = $list(vim -S $(T session.vim P) $*$(args))
         name = Vim
 foxdot
+    bufsize = $(None)
     command = $(interpreter) -m FoxDot --pipe
     interface = stuff
+    port = $(None)
     title = FoxDot
 pym2149
+    bufsize = 4096
     executable = lc2jack
     command = $(executable) --config $.(pianorollenabled = false) /dev/null
     interface = OSC
+    port = 2149
     title = pym2149
-consumer
-    bufsize = None
-    port = None
 sendKey
     default = <CR>
     alternate = ]

@@ -41,8 +41,8 @@ def main():
     globals()[interface](ReadBlocks(stroke))
 
 interface = $"$($(consumerName) interface)
-bufsize = $(consumer bufsize)
-port = $(consumer port)
+bufsize = $($(consumerName) bufsize)
+port = $($(consumerName) port)
 session = $"$(sessionName) # TODO LATER: Support more than one session.
 window = $"$(window consumer name)
 doublequotekey = $"$(doubleQuoteKey)
