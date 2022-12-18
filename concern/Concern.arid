@@ -22,9 +22,7 @@ PYTHONPATH = $pyref(concern.util PYTHONPATH)
 toabswidth = $pyref(concern.util toabswidth)
 vimstr = $pyref(concern.util vimstr)
 window
-    *
-        screencmd = $join($map($list($(interpreter) $(T loop.py P) $(name) $(shellCommand)) $screenstr$()) $.( ))
-        shellCommand = $join($map($(command) $shstr$()) $.( ))
+    * screencmd = $join($map($list($(interpreter) $(T loop.py P) $(name) $join($map($(command) $shstr$()) $.( ))) $screenstr$()) $.( ))
     consumer
         name = $($(consumerName) title)
         command = $,($(consumerName) command)
