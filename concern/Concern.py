@@ -37,7 +37,7 @@ def main():
     parser.add_argument('--session', default = 'Concern')
     _, vimargs = parser.parse_known_args(namespace = config.cli)
     for arg in vimargs:
-        (-config).printf("vimArgs += %s", arg)
+        (-config).printf("window vim args += %s", arg)
     if config.chdir is not None:
         os.chdir(config.chdir)
     configdir.mkdir(parents = True, exist_ok = True)

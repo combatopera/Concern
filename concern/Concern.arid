@@ -27,8 +27,9 @@ window
         name = $($(consumerName) title)
         shellCommand = $join($map($,($(consumerName) command) $shstr$()) $.( ))
     vim
+        args := $list()
         name = Vim
-        shellCommand = $join($map($list(vim -S $(T session.vim P) $*$(vimArgs)) $shstr$()) $.( ))
+        shellCommand = $join($map($list(vim -S $(T session.vim P) $*$(args)) $shstr$()) $.( ))
 foxdot
     title = FoxDot
     command = $(interpreter) -m FoxDot --pipe
@@ -75,4 +76,3 @@ T
         templatename = session.vim.aridt
 signalpath = $/($(sessiondir) signal)
 sessiondir = $(void)
-vimArgs := $list()
