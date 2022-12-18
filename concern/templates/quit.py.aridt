@@ -1,4 +1,4 @@
-# Copyright 2019, 2021 Andrzej Cichocki
+# Copyright 2019, 2021, 2022 Andrzej Cichocki
 
 # This file is part of Concern.
 #
