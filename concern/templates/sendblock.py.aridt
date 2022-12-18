@@ -43,7 +43,7 @@ def main():
 interface = $"$(consumer $(consumerName) interface)
 bufsize = $"$(consumer $(consumerName) bufsize)
 port = $"$(consumer $(consumerName) port)
-session = $"$(sessionName) # TODO LATER: Support more than one session.
+session = $"$(sessionName)
 window = $"$(window consumer name)
 doublequotekey = $"$(doubleQuoteKey)
 
