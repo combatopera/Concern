@@ -17,6 +17,7 @@
 
 cli := $fork()
 chdir = $(cli chdir)
+sessionName = $(cli session)
 interpreter = $pyref(sys executable)
 PYTHONPATH = $pyref(concern.util PYTHONPATH)
 toabswidth = $pyref(concern.util toabswidth)
@@ -46,7 +47,6 @@ consumer
     interface = $($(consumerName) interface)
     bufsize = None
     port = None
-sessionName = $(cli session)
 sendKey
     default = <CR>
     alternate = ]
