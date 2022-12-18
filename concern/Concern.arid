@@ -25,8 +25,8 @@ vimstr = $pyref(concern.util vimstr)
 window
     * screencmd = $join($map($list($(interpreter) $(T loop.py P) $(name) $join($map($(command) $shstr$()) $.( ))) $screenstr$()) $.( ))
     consumer
-        command = $,($(consumerName) command)
-        name = $($(consumerName) title)
+        command = $,(consumer $(consumerName) command)
+        name = $(consumer $(consumerName) title)
         scrollback = 10000
         fraction = $div(1 3)
         size = $toabswidth$(fraction)
@@ -34,19 +34,20 @@ window
         args := $list()
         command = $list(vim -S $(T session.vim P) $*$(args))
         name = Vim
-foxdot
-    bufsize = $(None)
-    command = $(interpreter) -m FoxDot --pipe
-    interface = stuff
-    port = $(None)
-    title = FoxDot
-pym2149
-    bufsize = 4096
-    executable = lc2jack
-    command = $(executable) --config $.(pianorollenabled = false) /dev/null
-    interface = OSC
-    port = 2149
-    title = pym2149
+consumer
+    foxdot
+        bufsize = $(None)
+        command = $(interpreter) -m FoxDot --pipe
+        interface = stuff
+        port = $(None)
+        title = FoxDot
+    pym2149
+        bufsize = 4096
+        executable = lc2jack
+        command = $(executable) --config $.(pianorollenabled = false) /dev/null
+        interface = OSC
+        port = 2149
+        title = pym2149
 sendKey
     default = <CR>
     alternate = ]

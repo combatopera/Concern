@@ -40,9 +40,9 @@ def main():
     _, stroke = (sys.argv.pop(1) for _ in range(2))
     globals()[interface](ReadBlocks(stroke))
 
-interface = $"$($(consumerName) interface)
-bufsize = $"$($(consumerName) bufsize)
-port = $"$($(consumerName) port)
+interface = $"$(consumer $(consumerName) interface)
+bufsize = $"$(consumer $(consumerName) bufsize)
+port = $"$(consumer $(consumerName) port)
 session = $"$(sessionName) # TODO LATER: Support more than one session.
 window = $"$(window consumer name)
 doublequotekey = $"$(doubleQuoteKey)
