@@ -35,11 +35,12 @@ window
         command = $list(vim -S $(T session.vim P) $*$(args))
         name = Vim
 consumer
-    foxdot
+    *
         bufsize = $(None)
+        port = $(None)
+    foxdot
         command = $(interpreter) -m FoxDot --pipe
         interface = stuff
-        port = $(None)
         title = FoxDot
     pym2149
         bufsize = 4096
