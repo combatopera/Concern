@@ -28,7 +28,7 @@ window
         shellCommand = $join($map($,($(consumerName) command) $shstr$()) $.( ))
     vim
         name = Vim
-        shellCommand = vim -S $shstr$(T session.vim P) $join($map($(vimArgs) $shstr$()) $.( ))
+        shellCommand = $join($map($list(vim -S $(T session.vim P) $*$(vimArgs)) $shstr$()) $.( ))
 foxdot
     title = FoxDot
     command = $(interpreter) -m FoxDot --pipe
