@@ -1,10 +1,10 @@
 vbell off
 split -v
 focus
-resize $(consumer size)
+resize $(window consumer size)
 screen $(window consumer screencmd)
 title $(window consumer name)
-scrollback $(consumer scrollback)
+scrollback $(window consumer scrollback)
 focus
 screen $(window vim screencmd)
 title $(window vim name)

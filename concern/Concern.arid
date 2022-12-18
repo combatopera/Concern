@@ -27,6 +27,9 @@ window
     consumer
         command = $,($(consumerName) command)
         name = $($(consumerName) title)
+        scrollback = 10000
+        fraction = $div(1 3)
+        size = $toabswidth$(fraction)
     vim
         args := $list()
         command = $list(vim -S $(T session.vim P) $*$(args))
@@ -41,9 +44,6 @@ pym2149
     command = $(executable) --config $.(pianorollenabled = false) /dev/null
     interface = OSC
 consumer
-    fraction = $div(1 3)
-    size = $toabswidth$(fraction)
-    scrollback = 10000
     interface = $($(consumerName) interface)
     bufsize = None
     port = None
