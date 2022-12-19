@@ -73,7 +73,7 @@ T
         P = $/($(sessiondir) screenrc)
         templatename = screenrc.aridt
     session.vim
-        context " = $(void)
+        context " = $(vimstr)
         P = $/($(sessiondir) session.vim)
         templatename = session.vim.aridt
 signalpath = $/($(sessiondir) signal)

@@ -1,4 +1,4 @@
-let $'($PYTHONPATH) = $vimstr$(PYTHONPATH)
+let $'($PYTHONPATH) = $"$(PYTHONPATH)
 nnoremap <silent> <Leader>$(quitKey) :exe 'sil !$(interpreter) $(T quit.py P) &'<CR>
 nnoremap <silent> <Leader>$(sendKey default) :exe 'sil w !$(interpreter) $(T sendblock.py P)' shellescape(bufname("%"), 1) 'default' line('.') line('.')<CR>
 nnoremap <silent> <Leader>$(sendKey alternate) :exe 'sil w !$(interpreter) $(T sendblock.py P)' shellescape(bufname("%"), 1) 'alternate' line('.') line('.')<CR>
