@@ -23,7 +23,7 @@ import os, socket, sys, timelyOSC
 def OSC(readblocks):
     n = 1
     while True:
-        chunks = [timelyOSC.Message('/lc', [text]).ser() for text in readblocks.chunked(n)]
+        chunks = [timelyOSC.Message(addrpattern, [text]).ser() for text in readblocks.chunked(n)]
         if not chunks:
             return # Nothing to send.
         if max(len(chunk) for chunk in chunks) <= bufsize:
@@ -41,6 +41,7 @@ def main():
     globals()[interface](ReadBlocks(stroke))
 
 interface = $"$(consumer $(consumerName) interface)
+addrpattern = $"$(consumer $(consumerName) addrpattern)
 bufsize = $"$(consumer $(consumerName) bufsize)
 port = $"$(consumer $(consumerName) port)
 session = $"$(sessionName)

@@ -36,6 +36,7 @@ window
         name = Vim
 consumer
     *
+        addrpattern = $(None)
         bufsize = $(None)
         port = $(None)
     foxdot
@@ -43,6 +44,7 @@ consumer
         interface = stuff
         title = FoxDot
     pym2149
+        addrpattern = /lurlene
         bufsize = 4096
         executable = lc2jack
         command = $list($(executable) --config $.(pianorollenabled = false) /dev/null)
