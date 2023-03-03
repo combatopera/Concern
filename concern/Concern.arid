@@ -19,7 +19,7 @@ cli := $fork()
 chdir = $(cli chdir)
 sessionName = $(cli session)
 interpreter = $pyref(sys executable)
-PYTHONPATH = $pyref(diapyr.util PYTHONPATH)
+PYTHONPATH = $pyref(lagoon.util PYTHONPATH)
 toabswidth = $pyref(concern.util toabswidth)
 vimstr = $pyref(concern.util vimstr)
 window
