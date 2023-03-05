@@ -18,7 +18,7 @@
 from aridity.model import Number, Text
 from struct import Struct
 from termios import TIOCGWINSZ
-import fcntl, logging, os, sys
+import fcntl, logging, sys
 
 winsize = Struct('HHHH')
 
