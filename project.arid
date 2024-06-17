@@ -15,16 +15,18 @@
 : You should have received a copy of the GNU General Public License
 : along with Concern.  If not, see <http://www.gnu.org/licenses/>.
 
+author = Andrzej Cichocki
+buildbot enabled = true
+github account = combatopera
+name = Concern
+pypi account = combatopera
+pyversions += 3
 requires +=
     aridity>=62
     lagoon>=31
     timelyOSC>=4
-pyversions += 3
-executable = true
+tagline = Control pym2149 (via Lurlene) or FoxDot using Vim
 years +=
     2019
     2021
     2022
-author = Andrzej Cichocki
-name = Concern
-buildbot enabled = true
