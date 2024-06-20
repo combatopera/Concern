@@ -31,6 +31,7 @@ echo Concern consumerName = pym2149 | tee -a ~/.settings.arid
 If you prefer to keep .local clean, install to a virtualenv:
 ```
 python3 -m venv venvname
+venvname/bin/pip install -U pip
 venvname/bin/pip install Concern
 . venvname/bin/activate
 ```
