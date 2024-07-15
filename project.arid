@@ -19,6 +19,7 @@ author = Andrzej Cichocki
 buildbot enabled = true
 github account = combatopera
 name = Concern
+pydoc_enabled = false
 pypi account = combatopera
 pyversions += 3
 requires +=
