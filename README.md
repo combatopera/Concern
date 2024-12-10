@@ -4,38 +4,50 @@ Control pym2149 (via Lurlene) or FoxDot using Vim
 ## Install
 These are generic installation instructions.
 
-### To use, permanently
-The quickest way to get started is to install the current release from PyPI:
-```
-# Tested on Linux and Mac:
-pip3 install --user Concern
-```
-You will also need one of the following backends.
-
-#### FoxDot backend
-```
-# Simply install, and Concern will use it:
-pip3 install --user FoxDot
-```
-
-#### pym2149 backend
-```
-# Install as usual:
-pip3 install --user pym2149
-
-# Tell Concern to use it instead of foxdot:
-echo Concern consumerName = pym2149 | tee -a ~/.settings.arid
-```
-
-### To use, temporarily
-If you prefer to keep .local clean, install to a virtualenv:
+### To use, disposably
+Install the current release from PyPI to a virtual environment:
 ```
 python3 -m venv venvname
 venvname/bin/pip install -U pip
 venvname/bin/pip install Concern
 . venvname/bin/activate
 ```
-To add a backend, substitute `pip install` for `pip3 install --user` above.
+You will also need one of the following backends.
+
+#### FoxDot backend
+```
+# Simply install, and Concern will use it:
+venvname/bin/pip install FoxDot
+```
+
+#### pym2149 backend
+```
+# Install as usual:
+venvname/bin/pip install pym2149
+
+# Tell Concern to use it instead of foxdot:
+echo Concern consumerName = pym2149 | tee -a ~/.settings.arid
+```
+
+### To use, permanently
+```
+# Tested on Linux and Mac:
+pip3 install --user Concern
+```
+To add a backend, substitute `pip3 install --user` for `venvname/bin/pip install` above.
+See `~/.local/bin` for executables.
+
+### To develop
+First install venvpool to get the `motivate` command:
+```
+pip3 install --user venvpool
+```
+Get codebase and install executables:
+```
+git clone git@github.com:combatopera/Concern.git
+motivate Concern
+```
+Requirements will be satisfied just in time, using sibling projects with matching .egg-info if any.
 
 ## Commands
 
