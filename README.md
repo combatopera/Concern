@@ -59,7 +59,7 @@ Vim-based live coding environment.
 ### FoxDot
 ```
 # Any arguments are passed to vim, here we discover the FoxDot demo directory:
-Concern "$(python3 -c 'from pkg_resources import resource_filename; print(resource_filename("FoxDot", "demo"))' | tail -1)"
+Concern "$(venvname/bin/python -c 'from pkg_resources import resource_filename; print(resource_filename("FoxDot", "demo"))' | tail -1)"
 ```
 * FoxDot is running in the right hand third of the screen
 * Send code to FoxDot by typing backslash followed by `]`
