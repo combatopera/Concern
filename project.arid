@@ -16,6 +16,7 @@
 : along with Concern.  If not, see <http://www.gnu.org/licenses/>.
 
 author = Andrzej Cichocki
+author_email = 3613868+combatopera@users.noreply.github.com
 buildbot enabled = true
 github account = combatopera
 name = Concern
