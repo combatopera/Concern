@@ -22,7 +22,6 @@ github account = combatopera
 name = Concern
 pydoc_enabled = false
 pypi account = combatopera
-pyversions += 3
 requires +=
     aridity>=62
     lagoon>=31

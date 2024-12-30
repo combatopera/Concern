@@ -4,6 +4,5 @@ Concern.egg-info/*
 !Concern.egg-info/requires.txt
 /build/
 /dist/
-/setup.cfg
 /setup.py
 /pyproject.toml
