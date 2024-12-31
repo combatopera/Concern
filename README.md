@@ -71,7 +71,10 @@ Concern "$(venvname/bin/python -c 'from pkg_resources import resource_filename; 
 
 ### pym2149
 ```
+# Download some files to play with:
+git clone git@github.com:combatopera/pym2149.git
+
 # Load a non-trivial tune written in the Lurlene live coding language:
-Concern 'contrib/Lemmings 2 Tune 6.py'
+Concern 'pym2149/contrib/Lemmings 2 Tune 6.py'
 ```
 * Once pym2149 has initialised, type backslash enter at the top of the file to send the whole program
