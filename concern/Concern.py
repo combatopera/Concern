@@ -21,6 +21,7 @@ from .util import initlogging
 from argparse import ArgumentParser
 from aridity.config import ConfigCtrl
 from aridity.util import openresource
+from lagoon.util import wrappercli
 from pathlib import Path
 from screen import stuffablescreen
 from tempfile import TemporaryDirectory
@@ -35,8 +36,9 @@ def main():
     parser = ArgumentParser()
     parser.add_argument('--chdir', type = os.path.expanduser)
     parser.add_argument('--session', default = 'Concern')
-    _, vimargs = parser.parse_known_args(namespace = config.cli)
-    for arg in vimargs:
+    parser.add_argument('vimarg', nargs = '*')
+    parser.parse_args(wrappercli(), config.cli)
+    for arg in config.vimarg:
         (-config).printf("window vim args += %s", arg)
     if config.chdir is not None:
         os.chdir(config.chdir)

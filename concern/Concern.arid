@@ -20,6 +20,7 @@ cli
     session = $(void)
 chdir = $(cli chdir)
 sessionName = $(cli session)
+vimarg = $(cli vimarg)
 interpreter = $pyref(sys executable)
 PYTHONPATH = $pyref(lagoon.util PYTHONPATH)
 toabswidth = $pyref(concern.util toabswidth)
