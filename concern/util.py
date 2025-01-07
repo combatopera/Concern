@@ -18,8 +18,9 @@
 from aridity.model import Number, Text
 from struct import Struct
 from termios import TIOCGWINSZ
-import fcntl, logging, sys
+import fcntl, logging, os, sys
 
+PYTHONPATH = os.pathsep.join(sys.path[1:]) # XXX: Include first entry?
 winsize = Struct('HHHH')
 
 def initlogging():
