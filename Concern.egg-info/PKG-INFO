@@ -1,4 +1,4 @@
-Metadata-Version: 2.1
+Metadata-Version: 2.2
 Name: Concern
 Version: 30.dev0
 Summary: Control pym2149 (via Lurlene) or FoxDot using Vim
@@ -10,6 +10,13 @@ License-File: COPYING
 Requires-Dist: aridity>=73
 Requires-Dist: lagoon>=50
 Requires-Dist: timelyOSC>=4
+Dynamic: author
+Dynamic: author-email
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: requires-dist
+Dynamic: summary
 
 # Concern
 Control pym2149 (via Lurlene) or FoxDot using Vim
