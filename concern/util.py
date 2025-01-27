@@ -31,4 +31,4 @@ def toabswidth(scope, resolvable):
     return Number(round(resolvable.resolve(scope).scalar * (ws_col - 1))) # Take off 1 for the separator.
 
 def vimstr(scope, resolvable):
-    return Text(f"""'{resolvable.resolve(scope).cat().replace("'", "''")}'""")
+    return Text(f"""'{resolvable.resolve(scope).textvalue.replace("'", "''")}'""")
