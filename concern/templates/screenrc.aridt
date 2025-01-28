@@ -1,7 +1,7 @@
 vbell off
 split -v
 focus
-resize $(window consumer size)
+resize $str$(window consumer size)
 screen $(window consumer screencmd)
 title $(window consumer name)
 scrollback $(window consumer scrollback)
