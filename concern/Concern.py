@@ -39,7 +39,7 @@ def main():
     parser.add_argument('vimarg', nargs = '*')
     parser.parse_args(wrappercli(), config.cli)
     for arg in config.vimarg:
-        (-config).printf("window vim args += %s", arg)
+        (-config).w.window.vim.args += arg
     if config.chdir is not None:
         os.chdir(config.chdir)
     configdir.mkdir(parents = True, exist_ok = True)
