@@ -1,5 +1,5 @@
 # Concern
-Control pym2149 (via Lurlene) or FoxDot using Vim
+Control pym2149 (via Lurlene) or FoxDot using Vim.
 
 ## Install
 These are generic installation instructions.
