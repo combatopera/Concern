@@ -1,7 +1,6 @@
 __pycache__/
 Concern.egg-info/*
 !Concern.egg-info/PKG-INFO
-!Concern.egg-info/requires.txt
 /build/
 /dist/
 /setup.py
