@@ -18,13 +18,10 @@
 from aridity.model import Number, Text
 from struct import Struct
 from termios import TIOCGWINSZ
-import fcntl, logging, os, sys
+import fcntl, os, sys
 
 PYTHONPATH = os.pathsep.join(sys.path[1:]) # XXX: Include first entry?
 winsize = Struct('HHHH')
-
-def initlogging():
-    logging.basicConfig(format = "%(asctime)s %(levelname)s %(message)s", level = logging.DEBUG)
 
 def toabswidth(scope, resolvable):
     ws_col = winsize.unpack(fcntl.ioctl(sys.stdin, TIOCGWINSZ, bytes(winsize.size)))[1]

@@ -17,10 +17,10 @@
 
 'Vim-based live coding environment.'
 from . import templates
-from .util import initlogging
 from argparse import ArgumentParser
 from aridity.config import ConfigCtrl
 from aridity.util import openresource
+from foyndation import initlogging
 from lagoon.util import wrappercli
 from pathlib import Path
 from screen import stuffablescreen

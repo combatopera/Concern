@@ -24,6 +24,7 @@ pydoc_enabled = false
 pypi account = combatopera
 requires +=
     aridity>=84
+    foyndation>=10
     lagoon>=50
     timelyOSC>=4
 tagline = Control pym2149 (via Lurlene) or FoxDot using Vim
