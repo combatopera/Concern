@@ -19,8 +19,8 @@
 from . import templates
 from argparse import ArgumentParser
 from aridity.config import ConfigCtrl
-from aridity.util import openresource
 from foyndation import initlogging
+from importlib.resources import files
 from lagoon.util import wrappercli
 from pathlib import Path
 from screen import stuffablescreen
@@ -45,8 +45,9 @@ def main():
     configdir.mkdir(parents = True, exist_ok = True)
     with TemporaryDirectory(dir = configdir) as sessiondir:
         config.sessiondir = sessiondir
+        parent = files(templates.__spec__.parent)
         for c in config.T:
-            with openresource(templates.__name__, c.templatename) as f:
+            with (parent / c.templatename).open(encoding = 'ascii') as f:
                 (-c.context).processtemplate(f, c.P)
         stuffablescreen(config.doubleQuoteKey)[print]('-S', config.sessionName, '-c', config.T.screenrc.P)
 
