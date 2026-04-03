@@ -15,6 +15,7 @@
 : You should have received a copy of the GNU General Public License
 : along with Concern.  If not, see <http://www.gnu.org/licenses/>.
 
+
 author = Andrzej Cichocki
 author_email = 3613868+combatopera@users.noreply.github.com
 buildbot enabled = true
